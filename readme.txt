@@ -1,23 +1,26 @@
-# contrib-web-portalmp-wordpress-core
+=== Plugin Name ===
+Contributors: uvigo-atic, fernandogonzalez
+Tags: wordpress, plugin, uvigo
+Requires at least: 4.9
+Tested up to: 4.9
+Requires PHP: 7.0.0
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-El software alojado en proyectos "contrib" se ofrece tal cual, sin garantía de ningún tipo, expresa o implícita. La Universidad de Vigo no hace responsable de su uso ni de los daños u otras responsabilidades derivadas del mismo.
+Plugin UVigo with basic and common elements.
 
-En particular, la Universidad de Vigo: No se compromete a atender peticiones de actualización del software. No dará ningún tipo de soporte ni formación relativa al mismo.
+== Description ==
 
-La utilización del software implica la aceptación de las condiciones de uso.
+Plugin UVigo with basic and common elements.
 
-# Description
-
-WordPress plugin with basic and common elements for Universidade de Vigo.
-
-# Installation
+== Installation ==
 
 This section describes how to install the plugin and get it working.
 
 1. Upload the plugin files to the `/wp-content/plugins/wpcoreuvigo` directory, or install the plugin through the WordPress plugins screen directly.
-1. Activate the plugin through the 'Plugins' screen in WordPress
+2. Activate the plugin through the 'Plugins' screen in WordPress
 
-# Development
+== Development ==
 
 This plugin uses Webpack to prepare and compile frontend resources (CSS, Javascript, images, fonts, etc.)
 
@@ -34,7 +37,7 @@ The steps to compile are:
 `yarn start`
 `yarn start:admin`
 
-# How to deploy
+= How to deploy =
 
 To deploy this plugin you can use a script based in node that copy and compress all necessary files and folders. Then you can use that zip to distribute and install in WordPress.
 
@@ -42,6 +45,14 @@ Execute: `yarn deploy`
 
 This command, compilem, build and zip files and folders.
 
-# Changelog
+
+== Frequently Asked Questions ==
+
+= A question that someone might have =
+
+An answer to that question.
+
+
+== Changelog ==
 
 Please refer to CHANGELOG.md

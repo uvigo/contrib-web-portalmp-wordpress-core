@@ -1,0 +1,28 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+
+ /* stylelint-disable */
+
+i.mce-i-icon {
+  padding: 0;
+  padding-right: 2px;
+  margin-left: -2px;
+  font-family: dashicons;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  vertical-align: top;
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mce-i-uvigo-icon.uvigo-iconfont {
+  font-family: uvigo-iconfont;
+  font-size: 22px;
+  margin-left: -6px;
+  margin-top: -1px;
+  margin-right: 4px;
+}

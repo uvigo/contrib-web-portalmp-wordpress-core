@@ -1,0 +1,286 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: wpcoreuvigo\n"
+"POT-Creation-Date: 2018-09-04 20:16+0200\n"
+"PO-Revision-Date: 2018-09-04 20:18+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: gl_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.1.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: wpcoreuvigo.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: admin/class-wpcoreuvigo-admin.php:77
+msgid "Link to first child item"
+msgstr "Ligazón ao primeiro fillo"
+
+#: admin/class-wpcoreuvigo-admin.php:137
+msgid "Behaviour"
+msgstr "Comportamento"
+
+#: admin/class-wpcoreuvigo-admin.php:140
+msgid "Redirect to first child"
+msgstr "Facer redirección ao primeiro fillo"
+
+#: admin/class-wpcoreuvigo-admin.php:358
+msgid ""
+"An Unexpected HTTP Error occurred during the API request.</p> <p><a href=\"?"
+"\" onclick=\"document.location.reload(); return false;\">Try again</a>"
+msgstr ""
+
+#: admin/class-wpcoreuvigo-admin.php:363
+msgid "An unknown error occurred"
+msgstr "Aconteceu un erro descoñecido."
+
+#: admin/class-wpcoreuvigo-admin.php:380
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:109
+msgctxt "taxonomy general name"
+msgid "Spectators"
+msgstr "Tipos de públicos"
+
+#: admin/class-wpcoreuvigo-admin.php:381
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:110
+msgctxt "taxonomy singular name"
+msgid "Spectator"
+msgstr "Tipos de público"
+
+#: admin/class-wpcoreuvigo-admin.php:382
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:111
+msgid "Search Spectator"
+msgstr "Buscar Tipo de público"
+
+#: admin/class-wpcoreuvigo-admin.php:383
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:112
+msgid "All Spectators"
+msgstr "Todos os Tipos de públicos"
+
+#: admin/class-wpcoreuvigo-admin.php:384
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:113
+msgid "Parent Spectator"
+msgstr ""
+
+#: admin/class-wpcoreuvigo-admin.php:385
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:114
+msgid "Parent Spectator:"
+msgstr ""
+
+#: admin/class-wpcoreuvigo-admin.php:386
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:115
+msgid "Edit Spectator"
+msgstr "Editar Tipo de público"
+
+#: admin/class-wpcoreuvigo-admin.php:387
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:116
+msgid "Update Spectator"
+msgstr "Actualizar Tipo de público"
+
+#: admin/class-wpcoreuvigo-admin.php:388
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:117
+msgid "Add New Spectator"
+msgstr "Engadir novo tipo de público"
+
+#: admin/class-wpcoreuvigo-admin.php:389
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:118
+msgid "New Spectator Name"
+msgstr "Novo tipo de público"
+
+#: admin/class-wpcoreuvigo-admin.php:390
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:119
+msgid "Spectator"
+msgstr "Tipo de público"
+
+#: admin/class-wpcoreuvigo-admin.php:431
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:159
+msgctxt "taxonomy general name"
+msgid "Universes"
+msgstr "Tipos de universos"
+
+#: admin/class-wpcoreuvigo-admin.php:432
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:160
+msgctxt "taxonomy singular name"
+msgid "Universe"
+msgstr "Tipo de universo"
+
+#: admin/class-wpcoreuvigo-admin.php:433
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:161
+msgid "Search Universe"
+msgstr "Buscar Tipo de universo"
+
+#: admin/class-wpcoreuvigo-admin.php:434
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:162
+msgid "All Universe"
+msgstr "Todos os tipos de universo"
+
+#: admin/class-wpcoreuvigo-admin.php:435
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:163
+msgid "Parent Universe"
+msgstr ""
+
+#: admin/class-wpcoreuvigo-admin.php:436
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:164
+msgid "Parent Universe:"
+msgstr ""
+
+#: admin/class-wpcoreuvigo-admin.php:437
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:165
+msgid "Edit Universe"
+msgstr "Editar tipo de universo"
+
+#: admin/class-wpcoreuvigo-admin.php:438
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:166
+msgid "Update Universe"
+msgstr "Actualizar tipo de universo"
+
+#: admin/class-wpcoreuvigo-admin.php:439
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:167
+msgid "Add New Universe"
+msgstr "Engadir novo tipo de universo"
+
+#: admin/class-wpcoreuvigo-admin.php:440
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:168
+msgid "New Universe Name"
+msgstr "Novo tipo de universo"
+
+#: admin/class-wpcoreuvigo-admin.php:441
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:169
+msgid "Universe"
+msgstr "Tipo de universo"
+
+#: admin/class-wpcoreuvigo-admin.php:481
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:208
+msgctxt "taxonomy general name"
+msgid "Geographic"
+msgstr " Ámbitos xeográficos"
+
+#: admin/class-wpcoreuvigo-admin.php:482
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:209
+msgctxt "taxonomy singular name"
+msgid "Geographic"
+msgstr "Ámbito Xeográfico"
+
+#: admin/class-wpcoreuvigo-admin.php:483
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:210
+msgid "Search Geographic"
+msgstr "Ámbito xeográfico"
+
+#: admin/class-wpcoreuvigo-admin.php:484
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:211
+msgid "All Geographic"
+msgstr "Todos os ámbito xeográficos"
+
+#: admin/class-wpcoreuvigo-admin.php:485
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:212
+msgid "Parent Geographic"
+msgstr ""
+
+#: admin/class-wpcoreuvigo-admin.php:486
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:213
+msgid "Parent Geographic:"
+msgstr ""
+
+#: admin/class-wpcoreuvigo-admin.php:487
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:214
+msgid "Edit Geographic"
+msgstr "Editar ámbito xeográfico"
+
+#: admin/class-wpcoreuvigo-admin.php:488
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:215
+msgid "Update Geographic"
+msgstr "Actualizar ámbito xeográfico"
+
+#: admin/class-wpcoreuvigo-admin.php:489
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:216
+msgid "Add New Geographic"
+msgstr "Engadir novo ámbito xeográfico"
+
+#: admin/class-wpcoreuvigo-admin.php:490
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:217
+msgid "New Geographic Name"
+msgstr "Novo ámbito xeográfico"
+
+#: admin/class-wpcoreuvigo-admin.php:491
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:218
+msgid "Geographic"
+msgstr "Ámbito Xeográfico"
+
+#: admin/class-wpcoreuvigo-admin.php:606 admin/class-wpcoreuvigo-admin.php:629
+#: admin/class-wpcoreuvigo-admin.php:672 admin/class-wpcoreuvigo-admin.php:696
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:332
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:355
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:398
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:422
+msgid "Id"
+msgstr ""
+
+#: admin/class-wpcoreuvigo-admin.php:611 admin/class-wpcoreuvigo-admin.php:636
+#: admin/class-wpcoreuvigo-admin.php:677 admin/class-wpcoreuvigo-admin.php:703
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:337
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:362
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:403
+#: build/wpcoreuvigo-1.0.0/admin/class-wpcoreuvigo-admin.php:429
+msgid "Internal code"
+msgstr "Código interno"
+
+#: includes/class-wpcoreuvigo-widgets.php:33
+msgid "Wpcoreuvigo Widget Filter "
+msgstr ""
+
+#: includes/class-wpcoreuvigo-widgets.php:35
+msgid "Filter posts"
+msgstr "Filtrar artigos"
+
+#: includes/class-wpcoreuvigo-widgets.php:91
+msgid "Dates"
+msgstr "Datas"
+
+#: includes/class-wpcoreuvigo-widgets.php:153
+msgid "Filter"
+msgstr "Filtro"
+
+#: includes/class-wpcoreuvigo-widgets.php:160
+msgid "Title:"
+msgstr "Título:"
+
+#: includes/class-wpcoreuvigo-widgets.php:163
+msgid "Configuration"
+msgstr "Configuración"
+
+#: includes/class-wpcoreuvigo-widgets.php:168
+msgid "Search by dates"
+msgstr "Buscar por datas"
+
+#: includes/class-wpcoreuvigo-widgets.php:171
+msgid "Taxonomies used"
+msgstr ""
+
+#: public/class-wpcoreuvigo-public-shortcodes.php:324
+msgid "Index"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "wpcoreuvigo"
+msgstr "WP Core UVigo"
+
+#. Plugin URI of the plugin/theme
+#. Author URI of the plugin/theme
+msgid "info@ideit.es"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Plugin UVigo with common elements"
+msgstr "Plugin UVigo con elementos comunes"
+
+#. Author of the plugin/theme
+msgid "IdeiT"
+msgstr ""
