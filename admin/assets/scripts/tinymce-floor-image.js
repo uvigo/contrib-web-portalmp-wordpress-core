@@ -1,10 +1,6 @@
-import $ from 'jquery'
-
 /* eslint-disable */
 
-const TinyMCEFloorHeader = (($) => {
-
-  // (function () {
+(function () {
 
 	var defs = {}; // id -> {dependencies, definition, instance (possibly undefined)}
 
@@ -1018,7 +1014,4 @@ const TinyMCEFloorHeader = (($) => {
 		}
 	);
 	dem('tinymce.plugins.uvigo.floorimage.Plugin')();
-// })();
-})($)
-
-export default TinyMCEFloorHeader
+})();

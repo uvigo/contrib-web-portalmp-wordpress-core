@@ -1,10 +1,6 @@
-import $ from 'jquery'
-
 /* eslint-disable */
 
-const TinyMCEFloor = (($) => {
-
-// (function () {
+(function () {
 
   var defs = {}; // id -> {dependencies, definition, instance (possibly undefined)}
 
@@ -1046,7 +1042,4 @@ const TinyMCEFloor = (($) => {
 		}
 	);
 	dem('tinymce.plugins.uvigo.floor.Plugin')();
-// })();
-})($)
-
-export default TinyMCEFloor
+})();

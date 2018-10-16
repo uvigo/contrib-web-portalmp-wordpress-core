@@ -77,9 +77,9 @@ class Wpcoreuvigo_Tinymce {
 	 */
 	public function tinymce_register_plugin( $plugin_array ) {
 
-		$plugin_array['content_floor_button']       = plugin_dir_url( __FILE__ ) . 'dist/scripts/plugins/wpcoreuvigo-tinymce-floor.js';
-		$plugin_array['content_floor_image_button'] = plugin_dir_url( __FILE__ ) . 'dist/scripts/plugins/wpcoreuvigo-tinymce-floor-image.js';
-		$plugin_array['content_block_button']       = plugin_dir_url( __FILE__ ) . 'dist/scripts/plugins/wpcoreuvigo-tinymce-block.js';
+		$plugin_array['content_floor_button']       = wpcoreuvigo_admin_asset_path( 'scripts/tinymce-floor.js' );
+		$plugin_array['content_floor_image_button'] = wpcoreuvigo_admin_asset_path( 'scripts/tinymce-floor-image.js' );
+		$plugin_array['content_block_button']       = wpcoreuvigo_admin_asset_path( 'scripts/tinymce-block.js' );
 
 		return $plugin_array;
 	}
