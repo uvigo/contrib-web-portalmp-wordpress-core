@@ -37,5 +37,4 @@ twbsconfig.yml
 node_modules
 js/coverage
 dist
-/build
 wpcoreuvigo*.zip
