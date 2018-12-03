@@ -770,4 +770,62 @@ class Wpcoreuvigo_Admin {
 	public function widgets_init() {
 		register_widget( 'Wpcoreuvigo_Filter_Widget' );
 	}
+
+	/**
+	 * Undocumented function
+	 *
+	 * @param [type] $content
+	 * @param [type] $post_id
+	 * @return void
+	 */
+	public function add_featured_video_url( $content, $post_id ) {
+
+		// Only featured video in post type
+		if ( 'post' !== get_post_type( $post_id ) ) {
+			return $content;
+		}
+
+		$field_id    = 'uvigo_featured_video_url';
+		$field_value = esc_attr( get_post_meta( $post_id, $field_id, true ) );
+		$field_text  = esc_html__( 'Video url:', 'wpcoreuvigo' );
+
+		$field_label = sprintf(
+			'<p><label for="%1$s">%3$s</label><input type="text" name="%1$s" id="%1$s" value="%2$s" class="widefat"></p>',
+			$field_id,
+			$field_value,
+			$field_text
+		);
+
+		return $content .= $field_label;
+	}
+
+	/**
+	 * Undocumented function
+	 *
+	 * @param [type] $post_ID
+	 * @param [type] $post
+	 * @param [type] $update
+	 * @return void
+	 */
+	public function save_featured_video_url( $post_id, $post, $update ) {
+
+		// Only featured video in post type
+		if ( 'post' !== get_post_type( $post_id ) ) {
+			return;
+		}
+
+		$field_id = 'uvigo_featured_video_url';
+
+		if ( isset( $_POST[ $field_id ] ) ) {
+			$field_value = $_POST[ $field_id ];
+
+			$youtube_pattern = '#^https?://(?:www\.)?(?:youtube\.com/watch|youtu\.be/)#';
+			$vimeo_pattern   = '#^https?://(.+\.)?vimeo\.com/.*#';
+
+			if ( preg_match( $youtube_pattern, $field_value ) || preg_match( $vimeo_pattern, $field_value ) ) {
+				$field_value = esc_url( $field_value );
+				update_post_meta( $post_id, $field_id, $field_value );
+			}
+		}
+	}
 }

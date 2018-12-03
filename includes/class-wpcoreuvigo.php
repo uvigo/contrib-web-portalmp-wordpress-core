@@ -183,6 +183,10 @@ class Wpcoreuvigo {
 		$this->loader->add_filter( 'custom_menu_order', $plugin_admin, 'custom_menu_order', 10 );
 		$this->loader->add_filter( 'menu_order', $plugin_admin, 'menu_order', 10 );
 
+		// Featured Video
+		$this->loader->add_filter( 'admin_post_thumbnail_html', $plugin_admin, 'add_featured_video_url', 10, 2 );
+		$this->loader->add_action( 'save_post', $plugin_admin, 'save_featured_video_url', 10, 3 );
+
 		// New fields in menus
 		$this->loader->add_filter( 'wp_edit_nav_menu_walker', $plugin_admin, 'wp_edit_nav_menu_walker', 99 );
 		$this->loader->add_action( 'wp_nav_menu_item_custom_fields', $plugin_admin, 'wp_nav_menu_item_custom_fields', 10, 4 );
