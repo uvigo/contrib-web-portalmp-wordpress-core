@@ -165,11 +165,8 @@ class Wpcoreuvigo_Admin {
 			update_post_meta( $post_id, 'uvigo_page_redirect_child', $_POST['uvigo_page_redirect_child'] );
 		} else {
 			delete_post_meta( $post_id, 'uvigo_page_redirect_child' );
-
 		}
 	}
-
-
 
 	/**
 	 * Undocumented function
@@ -380,6 +377,13 @@ class Wpcoreuvigo_Admin {
 	 */
 	public function register_spectator_taxonomy() {
 
+		$use_spectator_taxonomy = true;
+		$use_spectator_taxonomy = apply_filters( 'wpcoreuvigo_use_spectator_taxonomy_post_types', $use_spectator_taxonomy );
+
+		if ( ! $use_spectator_taxonomy ) {
+			return false;
+		}
+
 		if ( ! taxonomy_exists( self::TAXONOMY_SPECTATOR_NAME ) ) {
 			$labels = array(
 				'name'              => _x( 'Spectators', 'taxonomy general name', 'wpcoreuvigo' ),
@@ -432,6 +436,13 @@ class Wpcoreuvigo_Admin {
 	 */
 	public function register_universe_taxonomy() {
 
+		$use_universe_taxonomy = true;
+		$use_universe_taxonomy = apply_filters( 'wpcoreuvigo_use_universe_taxonomy_post_types', $use_universe_taxonomy );
+
+		if ( ! $use_universe_taxonomy ) {
+			return false;
+		}
+
 		if ( ! taxonomy_exists( self::TAXONOMY_UNIVERSE_NAME ) ) {
 			$labels = array(
 				'name'              => _x( 'Universes', 'taxonomy general name', 'wpcoreuvigo' ),
@@ -483,6 +494,14 @@ class Wpcoreuvigo_Admin {
 	 * @since    1.0.0
 	 */
 	public function register_geographic_taxonomy() {
+
+		$use_geographic_taxonomy = true;
+		$use_geographic_taxonomy = apply_filters( 'wpcoreuvigo_use_geographic_taxonomy_post_types', $use_geographic_taxonomy );
+
+		if ( ! $use_geographic_taxonomy ) {
+			return false;
+		}
+
 		if ( ! taxonomy_exists( self::TAXONOMY_GEOGRAPHIC_NAME ) ) {
 			$labels = array(
 				'name'              => _x( 'Geographic', 'taxonomy general name', 'wpcoreuvigo' ),
@@ -534,71 +553,76 @@ class Wpcoreuvigo_Admin {
 	 * @since    1.0.0
 	 */
 	public function register_taxonomies_terms() {
-		// TAXONOMY_SPECTATOR_NAME
-		if ( term_exists( 'Estudantes', self::TAXONOMY_SPECTATOR_NAME ) === null ) {
-			wp_insert_term( 'Estudantes', self::TAXONOMY_SPECTATOR_NAME );
-			wp_insert_term( 'PAS', self::TAXONOMY_SPECTATOR_NAME );
-			wp_insert_term( 'PDI', self::TAXONOMY_SPECTATOR_NAME );
-			wp_insert_term( 'Comunidade', self::TAXONOMY_SPECTATOR_NAME );
-			wp_insert_term( 'Contratistas', self::TAXONOMY_SPECTATOR_NAME );
-			wp_insert_term( 'Entidades Colaboradoras', self::TAXONOMY_SPECTATOR_NAME );
-			wp_insert_term( 'Público externo', self::TAXONOMY_SPECTATOR_NAME );
-			wp_insert_term( 'Medios', self::TAXONOMY_SPECTATOR_NAME );
-		}
 
 		// TAXONOMY_UNIVERSE_NAME
-		if ( term_exists( 'Institucional', self::TAXONOMY_UNIVERSE_NAME ) === null ) {
-			wp_insert_term( 'Institucional', self::TAXONOMY_UNIVERSE_NAME );
-			wp_insert_term( 'Estudar', self::TAXONOMY_UNIVERSE_NAME );
-			wp_insert_term( 'Investigar', self::TAXONOMY_UNIVERSE_NAME );
-			wp_insert_term( 'No Campus', self::TAXONOMY_UNIVERSE_NAME );
-			wp_insert_term( 'Ven a UVigo', self::TAXONOMY_UNIVERSE_NAME );
+		if ( taxonomy_exists( self::TAXONOMY_UNIVERSE_NAME ) ) {
+			if ( term_exists( 'Institucional', self::TAXONOMY_UNIVERSE_NAME ) === null ) {
+				wp_insert_term( 'Institucional', self::TAXONOMY_UNIVERSE_NAME );
+				wp_insert_term( 'Estudar', self::TAXONOMY_UNIVERSE_NAME );
+				wp_insert_term( 'Investigar', self::TAXONOMY_UNIVERSE_NAME );
+				wp_insert_term( 'No Campus', self::TAXONOMY_UNIVERSE_NAME );
+				wp_insert_term( 'Ven a UVigo', self::TAXONOMY_UNIVERSE_NAME );
+			}
 		}
 
 		// TAXONOMY_SPECTATOR_NAME
-		// NOTA:  Creado a partir de la fuente de cursos : Futuro alumnado | Visitantes | Internacional | Alumni
-		$spectators = array(
-			'Estudantes'              => array( '1', 'TXN.PO.ESTUDANTES' ),
-			'Futuro alumnado'         => array( '2', 'TXN.PO.FUTURO_ALUMNADO' ),
-			'Internacional'           => array( '3', 'TXN.PO.INTERNACIONAL' ),
-			'Alumni'                  => array( '4', 'TXN.PO.ALUMNI' ),
-			'PAS'                     => array( '5', 'TXN.PO.PAS' ),
-			'PDI'                     => array( '6', 'TXN.PO.PDI' ),
-			'Contratistas'            => array( '9', 'TXN.PO.CONTRATRISTAS' ),
-			'Entidades Colaboradoras' => array( '10', 'TXN.PO.ENT_COLABORADORAS' ),
-			'Visitantes'              => array( '11', 'TXN.PO.VISITANTES' ),
-			'Medios'                  => array( '12', 'TXN.PO.MEDIOS' ),
-			'Comunidade'              => array( '', '' ),
-			'Público externo'         => array( '', '' ),
-		);
+		if ( taxonomy_exists( self::TAXONOMY_SPECTATOR_NAME ) ) {
+			if ( term_exists( 'Estudantes', self::TAXONOMY_SPECTATOR_NAME ) === null ) {
+				wp_insert_term( 'Estudantes', self::TAXONOMY_SPECTATOR_NAME );
+				wp_insert_term( 'PAS', self::TAXONOMY_SPECTATOR_NAME );
+				wp_insert_term( 'PDI', self::TAXONOMY_SPECTATOR_NAME );
+				wp_insert_term( 'Comunidade', self::TAXONOMY_SPECTATOR_NAME );
+				wp_insert_term( 'Contratistas', self::TAXONOMY_SPECTATOR_NAME );
+				wp_insert_term( 'Entidades Colaboradoras', self::TAXONOMY_SPECTATOR_NAME );
+				wp_insert_term( 'Público externo', self::TAXONOMY_SPECTATOR_NAME );
+				wp_insert_term( 'Medios', self::TAXONOMY_SPECTATOR_NAME );
+			}
+			// NOTA:  Creado a partir de la fuente de cursos : Futuro alumnado | Visitantes | Internacional | Alumni
+			$spectators = array(
+				'Estudantes'              => array( '1', 'TXN.PO.ESTUDANTES' ),
+				'Futuro alumnado'         => array( '2', 'TXN.PO.FUTURO_ALUMNADO' ),
+				'Internacional'           => array( '3', 'TXN.PO.INTERNACIONAL' ),
+				'Alumni'                  => array( '4', 'TXN.PO.ALUMNI' ),
+				'PAS'                     => array( '5', 'TXN.PO.PAS' ),
+				'PDI'                     => array( '6', 'TXN.PO.PDI' ),
+				'Contratistas'            => array( '9', 'TXN.PO.CONTRATRISTAS' ),
+				'Entidades Colaboradoras' => array( '10', 'TXN.PO.ENT_COLABORADORAS' ),
+				'Visitantes'              => array( '11', 'TXN.PO.VISITANTES' ),
+				'Medios'                  => array( '12', 'TXN.PO.MEDIOS' ),
+				'Comunidade'              => array( '', '' ),
+				'Público externo'         => array( '', '' ),
+			);
 
-		foreach ( $spectators as $d => $v ) {
-			$term = term_exists( $d, self::TAXONOMY_SPECTATOR_NAME );
-			if ( ! isset( $term ) ) {
-				$result  = wp_insert_term( $d, self::TAXONOMY_SPECTATOR_NAME );
-				$term_id = $result['term_id'];
+			foreach ( $spectators as $d => $v ) {
+				$term = term_exists( $d, self::TAXONOMY_SPECTATOR_NAME );
+				if ( ! isset( $term ) ) {
+					$result  = wp_insert_term( $d, self::TAXONOMY_SPECTATOR_NAME );
+					$term_id = $result['term_id'];
 
-				add_term_meta( $term_id, 'uvigo_spectator_id', $v[0] );
-				add_term_meta( $term_id, 'uvigo_spectator_code', $v[1] );
+					add_term_meta( $term_id, 'uvigo_spectator_id', $v[0] );
+					add_term_meta( $term_id, 'uvigo_spectator_code', $v[1] );
+				}
 			}
 		}
 
 		// TAXONOMY_GEOGRAPHIC_NAME
-		$geographics = array(
-			'Ourense'    => array( '1', 'TXN.AX.OU' ),
-			'Pontevedra' => array( '2', 'TXN.AX.PO' ),
-			'Vigo'       => array( '3', 'TXN.AX.VI' ),
-			'Outros'     => array( '', '' ),
-		);
+		if ( taxonomy_exists( self::TAXONOMY_GEOGRAPHIC_NAME ) ) {
+			$geographics = array(
+				'Ourense'    => array( '1', 'TXN.AX.OU' ),
+				'Pontevedra' => array( '2', 'TXN.AX.PO' ),
+				'Vigo'       => array( '3', 'TXN.AX.VI' ),
+				'Outros'     => array( '', '' ),
+			);
 
-		foreach ( $geographics as $d => $v ) {
-			$term = term_exists( $d, self::TAXONOMY_GEOGRAPHIC_NAME );
-			if ( ! isset( $term ) ) {
-				$result  = wp_insert_term( $d, self::TAXONOMY_GEOGRAPHIC_NAME );
-				$term_id = $result['term_id'];
+			foreach ( $geographics as $d => $v ) {
+				$term = term_exists( $d, self::TAXONOMY_GEOGRAPHIC_NAME );
+				if ( ! isset( $term ) ) {
+					$result  = wp_insert_term( $d, self::TAXONOMY_GEOGRAPHIC_NAME );
+					$term_id = $result['term_id'];
 
-				add_term_meta( $term_id, 'uvigo_geographic_id', $v[0] );
-				add_term_meta( $term_id, 'uvigo_geographic_code', $v[1] );
+					add_term_meta( $term_id, 'uvigo_geographic_id', $v[0] );
+					add_term_meta( $term_id, 'uvigo_geographic_code', $v[1] );
+				}
 			}
 		}
 	}
