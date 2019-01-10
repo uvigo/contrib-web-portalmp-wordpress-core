@@ -104,6 +104,9 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 							<label for="f_edate"><?php echo esc_html_x( 'To:', 'Widget filter news: date', 'wpcoreuvigo' ); ?></label>
 							<input type="text" class="form-control" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" placeholder="<?php echo $end_date; ?>" value="<?php echo $f_edate; ?>" name="<?php echo self::F_EDATE_FIELD_NAME; ?>">
 						</div>
+						<div class="form-group mt-2">
+							<button type="submit" style="min-width: 10px;" class="btn btn-outline-primary btn-icon btn-sm">Aplicar</button>
+						</div>
 					</div>
 				</div>
 			<?php endif; ?>
