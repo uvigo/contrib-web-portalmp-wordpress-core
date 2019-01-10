@@ -83,11 +83,12 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 		?>
 		<form action="<?php echo esc_url( $blog_url ); ?>" class="widget-filter__form" method="get">
 			<div class="widget-filter__search">
-				<input type="search" class="form-control" placeholder="<?php echo _x( 'Insert keywords...', 'Widget filter news: search input', 'wpcoreuvigo' ); ?>" value="<?php echo $f_text; ?>" name="<?php echo esc_attr( self::F_KEYWORDS_FIELD_NAME ); ?>">
+				<input type="search" class="form-control" placeholder="<?php echo _x( 'Insert text...', 'Widget filter news: search input', 'wpcoreuvigo' ); ?>" value="<?php echo $f_text; ?>" name="<?php echo esc_attr( self::F_KEYWORDS_FIELD_NAME ); ?>">
 				<button type="submit" class="btn" data-icon="U"><span class="sr-only"><?php esc_html_e( 'Search', 'wpcoreuvigo' ); ?></span></button>
 			</div>
 			<?php if ( $dates || $taxonomies ) : ?>
-				<div class="widget-filter__title"><?php echo esc_html_x( 'Filter by:', 'Widget filter news: Title', 'wpcoreuvigo' ); ?></div>
+				<h3 class="mt-8 mb-2"><?php echo esc_html_x( 'Filter', 'Widget filter news: filter titles', 'wpcoreuvigo' ); ?></h3>
+				<div class="widget-filter__title"><?php echo esc_html_x( 'Apply filters', 'Widget filter news: filter help', 'wpcoreuvigo' ); ?></div>
 			<?php endif; ?>
 			<?php do_action( 'wpcoreuvigo_filter_widget_before_filters' ); ?>
 			<?php if ( $dates ) : ?>
