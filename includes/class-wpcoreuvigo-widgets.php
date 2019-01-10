@@ -116,7 +116,7 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 				$wp_taxonomies = $this->list_taxonomies();
 				foreach ( $wp_taxonomies as $wp_taxonomy ) {
 					if ( in_array( $wp_taxonomy->name, $taxonomies ) ) {
-						$terms              = get_terms(
+						$terms = get_terms(
 							[
 								'taxonomy'   => $wp_taxonomy->name,
 								'hide_empty' => false,
@@ -310,6 +310,129 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Undocumented function
+	 *
+	 * @param [type] $atts
+	 * @param [type] $content
+	 * @return void
+	 */
+	public static function actualfilter_shortcode( $atts, $content = null ) {
+
+		$defaults = array();
+
+		$args_shortcode = shortcode_atts( $defaults, $atts, 'wpcoreuvigo_actualfilter' );
+
+		$f_categories = get_query_var( self::F_CATEGORIES_FIELD_NAME );
+		if ( ! empty( $f_categories ) ) {
+			if ( is_array( $f_categories ) ) {
+				$elements = implode( ',', $f_categories );
+				set_query_var( 'category_name', $elements );
+			}
+		}
+
+		// Busca de texto
+		$f_keywords = get_query_var( self::F_KEYWORDS_FIELD_NAME );
+
+		// Filtro por tipo de contido
+		$f_type = get_query_var( self::F_TYPE_FIELD_NAME );
+
+		// Filtro por datas
+		$date_query = [
+			'after'  => '',
+			'before' => '',
+		];
+
+		$f_sdate = get_query_var( self::F_SDATE_FIELD_NAME );
+		$f_edate = get_query_var( self::F_EDATE_FIELD_NAME );
+
+		if ( ! empty( $f_sdate ) ) {
+			$fecha = DateTime::createFromFormat( self::DATE_FORMAT, $f_sdate );
+			if ( $fecha ) {
+				$date_query['after'] = $fecha;
+			}
+		}
+		if ( ! empty( $f_edate ) ) {
+			$fecha = DateTime::createFromFormat( self::DATE_FORMAT, $f_edate );
+			if ( $fecha ) {
+				$date_query['before'] = $fecha;
+			}
+		}
+		if ( ! empty( $f_sdate ) || ! empty( $f_edate ) ) {
+			$date_query['inclusive'] = true;
+		}
+
+		$output  = '';
+		$filters = '';
+
+		if ( ! empty( $f_keywords ) ) {
+			// Indicamos o texto de busca
+			$output .= '<p class="h3 mb-4">Resultados para: <span class="font-italic font-weight-normal">' . esc_html( $f_keywords ) . '</span></p>';
+		}
+
+		if ( ! empty( $f_type ) ) {
+			$filters .= '<li>Tipo de contido: <em class="text-secondary">';
+			if ( ! is_array( $f_type ) ) {
+				$f_type = array( $f_type );
+			}
+			$types_name = [];
+			foreach ( $f_type as $type ) {
+				$o_type = get_post_type_object( $type );
+				$types_name[] = $o_type->labels->name;
+			}
+			$filters .= implode( ', ', $types_name );
+			$filters .= '</em></li>';
+		}
+
+		$string_dates = [];
+		if ( ! empty( $date_query['after'] ) ) {
+			$string_dates[] = 'desde <em class="text-secondary">' . $date_query['after']->format( get_option( 'date_format' ) ) . '</em>';
+		}
+		if ( ! empty( $date_query['before'] ) ) {
+			$string_dates[] = ' ata <em class="text-secondary">' . $date_query['before']->format( get_option( 'date_format' ) ) . '</em>';
+		}
+		if ( ! empty( $date_query['after'] ) || ! empty( $date_query['before'] ) ) {
+			$filters .= '<li>Datas: ' . implode( '', $string_dates ) . '</li>';
+		}
+
+		$taxonomies = get_taxonomies( [ 'public' => true ], 'objects' );
+		foreach ( $taxonomies as $m_taxonomy ) {
+			$query_var_terms = get_query_var( $m_taxonomy->query_var, array() );
+			if ( ! empty( $query_var_terms ) ) {
+				$terms_name = [];
+				foreach ( $query_var_terms as $term_slug ) {
+					$term = get_term_by( 'slug', $term_slug, $m_taxonomy->name );
+					if ( $term ) {
+						$terms_name[] = $term->name;
+					}
+				}
+				if ( ! empty( $terms_name ) ) {
+					$filters .= '<li>' . $m_taxonomy->label . ': ';
+					$filters .= '<em class="text-secondary">' . implode( ', ', $terms_name ) . '</em>';
+					$filters .= '</li>';
+				}
+			}
+		}
+
+		ob_start();
+
+		if ( ! empty( $output ) ) {
+			echo '<div class="search-filter p-5 bg-light mb-8">';
+			echo $output;
+			if ( empty( $filters ) ) {
+				echo '<p class="mb-0 text-secondary">Podes refinar a busca por medio do filtrado.</p>';
+			} else {
+				echo '<p class="text-secondary mb-2">Filtros aplicados:</p>';
+				echo '<ul class="list-content mb-0">';
+				echo $filters;
+				echo '</ul>';
+			}
+			echo '</div>';
+		}
+
+		return ob_get_clean();
 	}
 
 }

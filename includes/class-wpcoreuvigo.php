@@ -204,6 +204,7 @@ class Wpcoreuvigo {
 		$this->loader->add_action( 'widgets_init', $plugin_admin, 'widgets_init' );
 		$this->loader->add_filter( 'query_vars', 'Wpcoreuvigo_Filter_Widget', 'query_vars_filter' );
 		$this->loader->add_action( 'pre_get_posts', 'Wpcoreuvigo_Filter_Widget', 'pre_get_posts', 100 );
+		add_shortcode( 'wpcoreuvigo_actualfilter', array( 'Wpcoreuvigo_Filter_Widget', 'actualfilter_shortcode' ) );
 
 		// Check plugin update
 		$this->loader->add_filter( 'pre_set_site_transient_update_plugins', $plugin_admin, 'check_for_plugin_update' );
