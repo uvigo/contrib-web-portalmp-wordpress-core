@@ -1,7 +1,7 @@
 // import $ from 'jquery'
-import './tinymce-block'
-import TinyMCEFloor from './tinymce-floor'
-import TinyMCEFloorHeader from './tinymce-floor-image'
+// import './tinymce-block'
+// import TinyMCEFloor from './tinymce-floor'
+// import TinyMCEFloorHeader from './tinymce-floor-image'
 
 // (($) => {
 //   if (typeof $ === 'undefined') {
@@ -20,7 +20,7 @@ import TinyMCEFloorHeader from './tinymce-floor-image'
 //   }
 // })($)
 
-export {
-  TinyMCEFloor,
-  TinyMCEFloorHeader,
-}
+// export {
+//   TinyMCEFloor,
+//   TinyMCEFloorHeader,
+// }
