@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: wpcoreuvigo\n"
-"POT-Creation-Date: 2018-10-25 12:48+0200\n"
-"PO-Revision-Date: 2018-10-25 12:59+0200\n"
+"POT-Creation-Date: 2018-11-27 18:43+0100\n"
+"PO-Revision-Date: 2018-11-27 18:44+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: gl_ES\n"
@@ -33,213 +33,222 @@ msgstr "Comportamento"
 msgid "Redirect to first child"
 msgstr "Facer redirección ao primeiro fillo"
 
-#: admin/class-wpcoreuvigo-admin.php:363
+#: admin/class-wpcoreuvigo-admin.php:360
 msgid ""
 "An Unexpected HTTP Error occurred during the API request.</p> <p><a href=\"?"
 "\" onclick=\"document.location.reload(); return false;\">Try again</a>"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:368
+#: admin/class-wpcoreuvigo-admin.php:365
 msgid "An unknown error occurred"
-msgstr "Aconteceu un erro descoñecido."
+msgstr "Aconteceu un erro descoñecido"
 
-#: admin/class-wpcoreuvigo-admin.php:385
+#: admin/class-wpcoreuvigo-admin.php:382
 msgctxt "taxonomy general name"
 msgid "Spectators"
 msgstr "Tipos de públicos"
 
-#: admin/class-wpcoreuvigo-admin.php:386
+#: admin/class-wpcoreuvigo-admin.php:383
 msgctxt "taxonomy singular name"
 msgid "Spectator"
 msgstr "Tipos de público"
 
-#: admin/class-wpcoreuvigo-admin.php:387
+#: admin/class-wpcoreuvigo-admin.php:384
 msgid "Search Spectator"
 msgstr "Buscar Tipo de público"
 
-#: admin/class-wpcoreuvigo-admin.php:388
+#: admin/class-wpcoreuvigo-admin.php:385
 msgid "All Spectators"
 msgstr "Todos os Tipos de públicos"
 
-#: admin/class-wpcoreuvigo-admin.php:389
+#: admin/class-wpcoreuvigo-admin.php:386
 msgid "Parent Spectator"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:390
+#: admin/class-wpcoreuvigo-admin.php:387
 msgid "Parent Spectator:"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:391
+#: admin/class-wpcoreuvigo-admin.php:388
 msgid "Edit Spectator"
 msgstr "Editar Tipo de público"
 
-#: admin/class-wpcoreuvigo-admin.php:392
+#: admin/class-wpcoreuvigo-admin.php:389
 msgid "Update Spectator"
 msgstr "Actualizar Tipo de público"
 
-#: admin/class-wpcoreuvigo-admin.php:393
+#: admin/class-wpcoreuvigo-admin.php:390
 msgid "Add New Spectator"
 msgstr "Engadir novo tipo de público"
 
-#: admin/class-wpcoreuvigo-admin.php:394
+#: admin/class-wpcoreuvigo-admin.php:391
 msgid "New Spectator Name"
 msgstr "Novo tipo de público"
 
-#: admin/class-wpcoreuvigo-admin.php:395
+#: admin/class-wpcoreuvigo-admin.php:392
 msgid "Spectator"
 msgstr "Tipo de público"
 
-#: admin/class-wpcoreuvigo-admin.php:437
+#: admin/class-wpcoreuvigo-admin.php:434
 msgctxt "taxonomy general name"
 msgid "Universes"
 msgstr "Tipos de universos"
 
-#: admin/class-wpcoreuvigo-admin.php:438
+#: admin/class-wpcoreuvigo-admin.php:435
 msgctxt "taxonomy singular name"
 msgid "Universe"
 msgstr "Tipo de universo"
 
-#: admin/class-wpcoreuvigo-admin.php:439
+#: admin/class-wpcoreuvigo-admin.php:436
 msgid "Search Universe"
 msgstr "Buscar Tipo de universo"
 
-#: admin/class-wpcoreuvigo-admin.php:440
+#: admin/class-wpcoreuvigo-admin.php:437
 msgid "All Universe"
 msgstr "Todos os tipos de universo"
 
-#: admin/class-wpcoreuvigo-admin.php:441
+#: admin/class-wpcoreuvigo-admin.php:438
 msgid "Parent Universe"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:442
+#: admin/class-wpcoreuvigo-admin.php:439
 msgid "Parent Universe:"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:443
+#: admin/class-wpcoreuvigo-admin.php:440
 msgid "Edit Universe"
 msgstr "Editar tipo de universo"
 
-#: admin/class-wpcoreuvigo-admin.php:444
+#: admin/class-wpcoreuvigo-admin.php:441
 msgid "Update Universe"
 msgstr "Actualizar tipo de universo"
 
-#: admin/class-wpcoreuvigo-admin.php:445
+#: admin/class-wpcoreuvigo-admin.php:442
 msgid "Add New Universe"
 msgstr "Engadir novo tipo de universo"
 
-#: admin/class-wpcoreuvigo-admin.php:446
+#: admin/class-wpcoreuvigo-admin.php:443
 msgid "New Universe Name"
 msgstr "Novo tipo de universo"
 
-#: admin/class-wpcoreuvigo-admin.php:447
+#: admin/class-wpcoreuvigo-admin.php:444
 msgid "Universe"
 msgstr "Tipo de universo"
 
-#: admin/class-wpcoreuvigo-admin.php:488
+#: admin/class-wpcoreuvigo-admin.php:485
 msgctxt "taxonomy general name"
 msgid "Geographic"
-msgstr " Ámbitos xeográficos"
+msgstr "Ámbitos xeográficos"
 
-#: admin/class-wpcoreuvigo-admin.php:489
+#: admin/class-wpcoreuvigo-admin.php:486
 msgctxt "taxonomy singular name"
 msgid "Geographic"
 msgstr "Ámbito Xeográfico"
 
-#: admin/class-wpcoreuvigo-admin.php:490
+#: admin/class-wpcoreuvigo-admin.php:487
 msgid "Search Geographic"
 msgstr "Ámbito xeográfico"
 
-#: admin/class-wpcoreuvigo-admin.php:491
+#: admin/class-wpcoreuvigo-admin.php:488
 msgid "All Geographic"
 msgstr "Todos os ámbito xeográficos"
 
-#: admin/class-wpcoreuvigo-admin.php:492
+#: admin/class-wpcoreuvigo-admin.php:489
 msgid "Parent Geographic"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:493
+#: admin/class-wpcoreuvigo-admin.php:490
 msgid "Parent Geographic:"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:494
+#: admin/class-wpcoreuvigo-admin.php:491
 msgid "Edit Geographic"
 msgstr "Editar ámbito xeográfico"
 
-#: admin/class-wpcoreuvigo-admin.php:495
+#: admin/class-wpcoreuvigo-admin.php:492
 msgid "Update Geographic"
 msgstr "Actualizar ámbito xeográfico"
 
-#: admin/class-wpcoreuvigo-admin.php:496
+#: admin/class-wpcoreuvigo-admin.php:493
 msgid "Add New Geographic"
 msgstr "Engadir novo ámbito xeográfico"
 
-#: admin/class-wpcoreuvigo-admin.php:497
+#: admin/class-wpcoreuvigo-admin.php:494
 msgid "New Geographic Name"
 msgstr "Novo ámbito xeográfico"
 
-#: admin/class-wpcoreuvigo-admin.php:498
+#: admin/class-wpcoreuvigo-admin.php:495
 msgid "Geographic"
 msgstr "Ámbito Xeográfico"
 
-#: admin/class-wpcoreuvigo-admin.php:614 admin/class-wpcoreuvigo-admin.php:637
-#: admin/class-wpcoreuvigo-admin.php:680 admin/class-wpcoreuvigo-admin.php:704
+#: admin/class-wpcoreuvigo-admin.php:611 admin/class-wpcoreuvigo-admin.php:634
+#: admin/class-wpcoreuvigo-admin.php:677 admin/class-wpcoreuvigo-admin.php:701
 msgid "Id"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:619 admin/class-wpcoreuvigo-admin.php:644
-#: admin/class-wpcoreuvigo-admin.php:685 admin/class-wpcoreuvigo-admin.php:711
+#: admin/class-wpcoreuvigo-admin.php:616 admin/class-wpcoreuvigo-admin.php:641
+#: admin/class-wpcoreuvigo-admin.php:682 admin/class-wpcoreuvigo-admin.php:708
 msgid "Internal code"
 msgstr "Código interno"
 
-#: includes/class-wpcoreuvigo-widgets.php:33
-msgid "Wpcoreuvigo Widget Filter "
+#: admin/class-wpcoreuvigo-admin.php:787
+msgid "Video url:"
 msgstr ""
 
 #: includes/class-wpcoreuvigo-widgets.php:35
+msgid "Wpcoreuvigo Widget Filter "
+msgstr ""
+
+#: includes/class-wpcoreuvigo-widgets.php:37
 msgid "Filter posts"
 msgstr "Filtrar artigos"
 
-#: includes/class-wpcoreuvigo-widgets.php:83
+#: includes/class-wpcoreuvigo-widgets.php:86
 msgctxt "Widget filter news: search input"
-msgid "Insert keywords..."
-msgstr "Insertar palabras…"
+msgid "Insert text..."
+msgstr "Inserir texto…"
 
-#: includes/class-wpcoreuvigo-widgets.php:84
+#: includes/class-wpcoreuvigo-widgets.php:87
 msgid "Search"
 msgstr "Buscar"
 
-#: includes/class-wpcoreuvigo-widgets.php:87
-msgctxt "Widget filter news: Title"
-msgid "Filter by:"
-msgstr "Filtrar por:"
+#: includes/class-wpcoreuvigo-widgets.php:90
+msgctxt "Widget filter news: filter titles"
+msgid "Filter"
+msgstr "Filtrar"
 
 #: includes/class-wpcoreuvigo-widgets.php:91
+msgctxt "Widget filter news: filter help"
+msgid "Apply filters"
+msgstr "Aplicar os seguintes filtros"
+
+#: includes/class-wpcoreuvigo-widgets.php:96
 msgid "Dates"
 msgstr "Datas"
 
-#: includes/class-wpcoreuvigo-widgets.php:95
+#: includes/class-wpcoreuvigo-widgets.php:100
 msgctxt "Widget filter news: date"
 msgid "From:"
 msgstr "Desde:"
 
-#: includes/class-wpcoreuvigo-widgets.php:100
+#: includes/class-wpcoreuvigo-widgets.php:105
 msgctxt "Widget filter news: date"
 msgid "To:"
 msgstr "Ata:"
 
-#: includes/class-wpcoreuvigo-widgets.php:160
+#: includes/class-wpcoreuvigo-widgets.php:166
 msgid "Title:"
 msgstr "Título:"
 
-#: includes/class-wpcoreuvigo-widgets.php:163
+#: includes/class-wpcoreuvigo-widgets.php:169
 msgid "Configuration"
 msgstr "Configuración"
 
-#: includes/class-wpcoreuvigo-widgets.php:168
+#: includes/class-wpcoreuvigo-widgets.php:174
 msgid "Search by dates"
 msgstr "Buscar por datas"
 
-#: includes/class-wpcoreuvigo-widgets.php:171
+#: includes/class-wpcoreuvigo-widgets.php:177
 msgid "Taxonomies used"
 msgstr ""
 
