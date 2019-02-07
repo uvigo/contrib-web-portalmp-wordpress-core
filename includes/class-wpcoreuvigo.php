@@ -128,6 +128,11 @@ class Wpcoreuvigo {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wpcoreuvigo-admin.php';
 
 		/**
+		 * The class responsible for defining all actions that occur in the admin area.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wpcoreuvigo-admin-navmenu.php';
+
+		/**
 		 * The class responsible tinymce
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wpcoreuvigo-tinymce.php';
@@ -170,7 +175,8 @@ class Wpcoreuvigo {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Wpcoreuvigo_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin   = new Wpcoreuvigo_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_navmenu = new Wpcoreuvigo_Admin_Navmenu( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -180,18 +186,18 @@ class Wpcoreuvigo {
 		$this->loader->add_action( 'init', $plugin_admin, 'register_geographic_taxonomy', 10 );
 		$this->loader->add_action( 'wp_loaded', $plugin_admin, 'register_taxonomies_terms', 10 );
 
-		$this->loader->add_filter( 'custom_menu_order', $plugin_admin, 'custom_menu_order', 10 );
-		$this->loader->add_filter( 'menu_order', $plugin_admin, 'menu_order', 10 );
+		$this->loader->add_filter( 'custom_menu_order', $plugin_admin, 'custom_admin_menu_order', 10 );
+		$this->loader->add_filter( 'menu_order', $plugin_admin, 'admin_menu_order', 10 );
 
 		// Featured Video
 		$this->loader->add_filter( 'admin_post_thumbnail_html', $plugin_admin, 'add_featured_video_url', 10, 2 );
 		$this->loader->add_action( 'save_post', $plugin_admin, 'save_featured_video_url', 10, 3 );
 
 		// New fields in menus
-		$this->loader->add_filter( 'wp_edit_nav_menu_walker', $plugin_admin, 'wp_edit_nav_menu_walker', 99 );
-		$this->loader->add_action( 'wp_nav_menu_item_custom_fields', $plugin_admin, 'wp_nav_menu_item_custom_fields', 10, 4 );
-		$this->loader->add_action( 'wp_update_nav_menu_item', $plugin_admin, 'wp_update_nav_menu_item', 10, 3 );
-		$this->loader->add_filter( 'manage_nav-menus_columns', $plugin_admin, 'manage_nav_menus_columns', 99 );
+		$this->loader->add_filter( 'wp_edit_nav_menu_walker', $plugin_navmenu, 'wp_edit_nav_menu_walker', 99 );
+		$this->loader->add_action( 'wp_nav_menu_item_custom_fields', $plugin_navmenu, 'wp_nav_menu_item_custom_fields', 10, 4 );
+		$this->loader->add_action( 'wp_update_nav_menu_item', $plugin_navmenu, 'wp_update_nav_menu_item', 10, 3 );
+		$this->loader->add_filter( 'manage_nav-menus_columns', $plugin_navmenu, 'manage_nav_menus_columns', 99 );
 
 		// Add page field to redirect to first child
 		$this->loader->add_action( 'page_attributes_misc_attributes', $plugin_admin, 'add_page_attributes' );

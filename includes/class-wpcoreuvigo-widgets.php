@@ -65,6 +65,9 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 		$blog_url = get_option( 'page_for_posts' );
 		$blog_url = get_permalink( $blog_url );
 
+		// Tags query var
+		$f_tags = get_query_var( 'tag' );
+
 		// Filtro Fechas
 		$dates = ! empty( $instance['dates'] ) ? $instance['dates'] : false;
 		if ( $dates ) {
@@ -89,6 +92,20 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 			<?php if ( $dates || $taxonomies ) : ?>
 				<h3 class="mt-8 mb-2"><?php echo esc_html_x( 'Filter', 'Widget filter news: filter titles', 'wpcoreuvigo' ); ?></h3>
 				<div class="widget-filter__title"><?php echo esc_html_x( 'Apply filters', 'Widget filter news: filter help', 'wpcoreuvigo' ); ?></div>
+			<?php endif; ?>
+			<?php if ( ! empty( $f_tags ) ) : ?>
+				<div class="widget-filter__block">
+					<div class="widget-filter__block__title" data-icon="3"><?php esc_html_e( 'Propósito', 'ciuvigo' ); ?></div>
+					<div class="widget-filter__content widget-filter__checkbox">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" name="<?php echo esc_attr('tag'); ?>[]"
+								value="<?php echo esc_html($f_tags); ?>"
+								<?php echo true ? 'checked' : ''; ?>
+								id="widget-filter-tag">
+							<label class="form-check-label" for="widget-filter-tag"><?php echo esc_html('Divulgación'); ?></label>
+						</div>
+					</div>
+				</div>
 			<?php endif; ?>
 			<?php do_action( 'wpcoreuvigo_filter_widget_before_filters' ); ?>
 			<?php if ( $dates ) : ?>
@@ -325,6 +342,10 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 
 		$args_shortcode = shortcode_atts( $defaults, $atts, 'wpcoreuvigo_actualfilter' );
 
+		// Etiquetas
+		$f_tags = get_query_var( 'tag' );
+
+		// Categorias
 		$f_categories = get_query_var( self::F_CATEGORIES_FIELD_NAME );
 		if ( ! empty( $f_categories ) ) {
 			if ( is_array( $f_categories ) ) {
@@ -372,6 +393,25 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 			$output .= '<p class="h3 mb-4">Resultados para: <span class="font-italic font-weight-normal">' . esc_html( $f_keywords ) . '</span></p>';
 		}
 
+		if ( ! empty( $f_tags ) ) {
+			if ( ! is_array( $f_tags ) ) {
+				$f_tags = array( $f_tags );
+			}
+			$tags_name = [];
+			foreach ( $f_tags as $tag ) {
+				$o_tag = get_term_by( 'slug', $tag, 'post_tag' );
+				if ( $o_tag ) {
+					$tags_name[] = $o_tag->name;
+				}
+			}
+			if ( ! empty( $tags_name ) ) {
+				$output  .= ' ';
+				$filters .= '<li>Propósito: <em class="text-secondary">';
+				$filters .= implode( ', ', $tags_name );
+				$filters .= '</em></li>';
+			}
+		}
+
 		if ( ! empty( $f_type ) ) {
 			$filters .= '<li>Tipo de contido: <em class="text-secondary">';
 			if ( ! is_array( $f_type ) ) {
@@ -399,19 +439,24 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 
 		$taxonomies = get_taxonomies( [ 'public' => true ], 'objects' );
 		foreach ( $taxonomies as $m_taxonomy ) {
-			$query_var_terms = get_query_var( $m_taxonomy->query_var, array() );
-			if ( ! empty( $query_var_terms ) ) {
-				$terms_name = [];
-				foreach ( $query_var_terms as $term_slug ) {
-					$term = get_term_by( 'slug', $term_slug, $m_taxonomy->name );
-					if ( $term ) {
-						$terms_name[] = $term->name;
+			if ( 'post_tag' !== $m_taxonomy->name ) {
+				$query_var_terms = get_query_var( $m_taxonomy->query_var, array() );
+				if ( ! empty( $query_var_terms ) ) {
+					if ( ! is_array( $query_var_terms ) ) {
+						$query_var_terms = array( $query_var_terms );
 					}
-				}
-				if ( ! empty( $terms_name ) ) {
-					$filters .= '<li>' . $m_taxonomy->label . ': ';
-					$filters .= '<em class="text-secondary">' . implode( ', ', $terms_name ) . '</em>';
-					$filters .= '</li>';
+					$terms_name = [];
+					foreach ( $query_var_terms as $term_slug ) {
+						$term = get_term_by( 'slug', $term_slug, $m_taxonomy->name );
+						if ( $term ) {
+							$terms_name[] = $term->name;
+						}
+					}
+					if ( ! empty( $terms_name ) ) {
+						$filters .= '<li>' . $m_taxonomy->label . ': ';
+						$filters .= '<em class="text-secondary">' . implode( ', ', $terms_name ) . '</em>';
+						$filters .= '</li>';
+					}
 				}
 			}
 		}

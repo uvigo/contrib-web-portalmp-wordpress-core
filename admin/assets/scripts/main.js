@@ -2,6 +2,7 @@
 // import './tinymce-block'
 // import TinyMCEFloor from './tinymce-floor'
 // import TinyMCEFloorHeader from './tinymce-floor-image'
+// import './selectmenu'
 
 // (($) => {
 //   if (typeof $ === 'undefined') {
@@ -24,3 +25,11 @@
 //   TinyMCEFloor,
 //   TinyMCEFloorHeader,
 // }
+
+// import selectMenu from './selectmenu';
+
+// Load Events
+jQuery(document).ready(() => {
+  // selectMenu.init();
+});
+
