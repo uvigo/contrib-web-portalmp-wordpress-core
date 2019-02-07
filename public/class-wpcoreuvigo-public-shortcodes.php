@@ -56,6 +56,8 @@ class Wpcoreuvigo_Public_Shortcodes {
 		add_shortcode( 'uvigo_floor', array( $this, 'uvigo_floor_block' ) );
 		add_shortcode( 'uvigo_floor_image', array( $this, 'uvigo_floor_image_block' ) );
 		add_shortcode( 'uvigo_bloque', array( $this, 'uvigo_content_block' ) );
+
+		add_shortcode( 'uvigo_document', array( $this, 'uvigo_document' ) );
 	}
 
 	/**
@@ -326,6 +328,52 @@ class Wpcoreuvigo_Public_Shortcodes {
 		$output .= do_shortcode( $content );
 		$output .= '</div>';
 
+		return $output;
+	}
+
+	/**
+	 * Undocumented function
+	 *
+	 * @param [array] $atts Atributos
+	 * @param [string] $content Contidos
+	 * @return [string] Html output
+	 */
+	public function uvigo_document( $atts, $content = null ) {
+		$defaults['id']    = '';
+		$defaults['title'] = '';
+
+		$args_shortcode = shortcode_atts( $defaults, $atts, 'uvigo_document' );
+
+		$id    = intval( $args_shortcode['id'] );
+		$title = $args_shortcode['title'];
+
+		$output = '';
+		if ( isset( $id ) ) {
+			$document = get_post( $id );
+			if ( $document && Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE === $document->post_type ) {
+				if ( empty( $title ) ) {
+					$title = get_the_title( $document );
+				}
+				// Documento o URL
+				$origin_type = get_field( 'uvigo_document_origin_type', $document->ID );
+				$href = '#';
+				switch ( $origin_type ) {
+					case 'file':
+						$file = get_field( 'uvigo_document_file', $document->ID );
+						if ( $file ) {
+							$href = $file['url'];
+						}
+						break;
+					case 'url':
+						$href = get_field( 'uvigo_document_url', $document->ID );
+						break;
+				}
+
+				$output .= '<a target="_blank" href="' . $href . '">';
+				$output .= $title;
+				$output .= '</a>';
+			}
+		}
 		return $output;
 	}
 

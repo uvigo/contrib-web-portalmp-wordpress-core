@@ -796,6 +796,98 @@ class Wpcoreuvigo_Admin {
 	}
 
 	/**
+	 * New CPT Documents
+	 */
+
+	const UV_DOCUMENT_POST_TYPE          = 'uvigo-document';
+	const UV_TAXONOMY_DOCUMENT_TYPE_NAME = 'uvigo-tax-document';
+
+	/**
+	 * Register the custom post type document
+	 *
+	 * @since    1.0.0
+	 */
+	public function register_document_post_type() {
+		$labels = array(
+			'name'               => _x( 'Documents', 'post type general name', 'wpcoreuvigo' ),
+			'singular_name'      => _x( 'Document', 'post type singular name', 'wpcoreuvigo' ),
+			'menu_name'          => _x( 'Documents', 'admin menu', 'wpcoreuvigo' ),
+			'name_admin_bar'     => _x( 'Documents', 'add new on admin bar', 'wpcoreuvigo' ),
+			'add_new'            => _x( 'Add new', 'Document', 'wpcoreuvigo' ),
+			'add_new_item'       => __( 'Add new document', 'wpcoreuvigo' ),
+			'new_item'           => __( 'New document', 'wpcoreuvigo' ),
+			'edit_item'          => __( 'Edit document', 'wpcoreuvigo' ),
+			'view_item'          => __( 'View document', 'wpcoreuvigo' ),
+			'all_items'          => __( 'All documents', 'wpcoreuvigo' ),
+			'search_items'       => __( 'Search documents', 'wpcoreuvigo' ),
+			'parent_item_colon'  => __( 'Parent document:', 'wpcoreuvigo' ),
+			'not_found'          => __( 'Documents not found.', 'wpcoreuvigo' ),
+			'not_found_in_trash' => __( 'Documents not found in trash.', 'wpcoreuvigo' ),
+		);
+
+		$args = array(
+			'labels'             => $labels,
+			'description'        => __( 'Documents', 'wpcoreuvigo' ),
+			'public'             => true,
+			'publicly_queryable' => true,
+			'show_ui'            => true,
+			'show_in_menu'       => true,
+			'query_var'          => true,
+			'rewrite'            => array( 'slug' => 'documentos' ),
+			'capability_type'    => 'post',
+			'map_meta_cap'       => true,
+			'has_archive'        => true,
+			'hierarchical'       => false,
+			'menu_position'      => 5,
+			'menu_icon'          => 'dashicons-media-document',
+			'supports'           => array( 'title', 'editor', 'excerpt', 'custom-fields', 'author' ),
+		);
+		register_post_type( self::UV_DOCUMENT_POST_TYPE, $args );
+	}
+
+	/**
+	 * Register Document Type taxonomy.
+	 *
+	 * @since    1.0.0
+	 */
+	public function register_document_type_taxonomy() {
+		if ( ! taxonomy_exists( self::UV_TAXONOMY_DOCUMENT_TYPE_NAME ) ) {
+			$labels = array(
+				'name'              => _x( 'Documents Types', 'taxonomy general name', 'wpcoreuvigo' ),
+				'singular_name'     => _x( 'Document Type', 'taxonomy singular name', 'wpcoreuvigo' ),
+				'search_items'      => __( 'Search Document Type', 'wpcoreuvigo' ),
+				'all_items'         => __( 'All Documents Types', 'wpcoreuvigo' ),
+				'parent_item'       => __( 'Parent Document Type', 'wpcoreuvigo' ),
+				'parent_item_colon' => __( 'Parent Document Type:', 'wpcoreuvigo' ),
+				'edit_item'         => __( 'Edit Document Type', 'wpcoreuvigo' ),
+				'update_item'       => __( 'Update Document Type', 'wpcoreuvigo' ),
+				'add_new_item'      => __( 'Add New Document Type', 'wpcoreuvigo' ),
+				'new_item_name'     => __( 'New Document Type Name', 'wpcoreuvigo' ),
+				'menu_name'         => __( 'Document Type', 'wpcoreuvigo' ),
+			);
+
+			$args = array(
+				'hierarchical'      => true,
+				'labels'            => $labels,
+				'show_ui'           => true,
+				'show_in_menu'      => true,
+				'show_in_nav_menus' => true,
+				'show_admin_column' => true,
+				'query_var'         => 'taxonomy-document-type',
+				'rewrite'           => array( 'slug' => 'document-type' ),
+			);
+
+			$ob = register_taxonomy(
+				self::UV_TAXONOMY_DOCUMENT_TYPE_NAME,
+				array(
+					self::UV_DOCUMENT_POST_TYPE,
+				),
+				$args
+			);
+		}
+	}
+
+	/**
 	 * Undocumented function
 	 *
 	 * @param [type] $content

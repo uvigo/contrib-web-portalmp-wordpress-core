@@ -178,6 +178,10 @@ class Wpcoreuvigo {
 		$this->loader->add_action( 'init', $plugin_admin, 'register_spectator_taxonomy', 10 );
 		$this->loader->add_action( 'init', $plugin_admin, 'register_universe_taxonomy', 10 );
 		$this->loader->add_action( 'init', $plugin_admin, 'register_geographic_taxonomy', 10 );
+
+		$this->loader->add_action( 'init', $plugin_admin, 'register_document_post_type' );
+		$this->loader->add_action( 'init', $plugin_admin, 'register_document_type_taxonomy', 10 );
+
 		$this->loader->add_action( 'wp_loaded', $plugin_admin, 'register_taxonomies_terms', 10 );
 
 		$this->loader->add_filter( 'custom_menu_order', $plugin_admin, 'custom_menu_order', 10 );
