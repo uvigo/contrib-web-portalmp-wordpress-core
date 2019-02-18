@@ -888,6 +888,98 @@ class Wpcoreuvigo_Admin {
 	}
 
 	/**
+	 * New CPT Actas
+	 */
+
+	const UV_ACT_POST_TYPE          = 'uvigo-act';
+	const UV_TAXONOMY_ACT_TYPE_NAME = 'uvigo-tax-act';
+
+	/**
+	 * Register the custom post type act
+	 *
+	 * @since    1.0.0
+	 */
+	public function register_act_post_type() {
+		$labels = array(
+			'name'               => _x( 'Acts', 'post type general name', 'wpcoreuvigo' ),
+			'singular_name'      => _x( 'Act', 'post type singular name', 'wpcoreuvigo' ),
+			'menu_name'          => _x( 'Acts', 'admin menu', 'wpcoreuvigo' ),
+			'name_admin_bar'     => _x( 'Acts', 'add new on admin bar', 'wpcoreuvigo' ),
+			'add_new'            => _x( 'Add new', 'Act', 'wpcoreuvigo' ),
+			'add_new_item'       => __( 'Add new act', 'wpcoreuvigo' ),
+			'new_item'           => __( 'New act', 'wpcoreuvigo' ),
+			'edit_item'          => __( 'Edit act', 'wpcoreuvigo' ),
+			'view_item'          => __( 'View act', 'wpcoreuvigo' ),
+			'all_items'          => __( 'All acts', 'wpcoreuvigo' ),
+			'search_items'       => __( 'Search acts', 'wpcoreuvigo' ),
+			'parent_item_colon'  => __( 'Parent act:', 'wpcoreuvigo' ),
+			'not_found'          => __( 'Acts not found.', 'wpcoreuvigo' ),
+			'not_found_in_trash' => __( 'Acts not found in trash.', 'wpcoreuvigo' ),
+		);
+
+		$args = array(
+			'labels'             => $labels,
+			'description'        => __( 'Acts', 'wpcoreuvigo' ),
+			'public'             => true,
+			'publicly_queryable' => true,
+			'show_ui'            => true,
+			'show_in_menu'       => true,
+			'query_var'          => true,
+			'rewrite'            => array( 'slug' => 'actas' ),
+			'capability_type'    => 'post',
+			'map_meta_cap'       => true,
+			'has_archive'        => true,
+			'hierarchical'       => false,
+			'menu_position'      => 5,
+			'menu_icon'          => 'dashicons-media-document',
+			'supports'           => array( 'title', 'editor', 'excerpt', 'custom-fields', 'author' ),
+		);
+		register_post_type( self::UV_ACT_POST_TYPE, $args );
+	}
+
+	/**
+	 * Register Act Type taxonomy.
+	 *
+	 * @since    1.0.0
+	 */
+	public function register_act_type_taxonomy() {
+		if ( ! taxonomy_exists( self::UV_TAXONOMY_ACT_TYPE_NAME ) ) {
+			$labels = array(
+				'name'              => _x( 'Acts Types', 'taxonomy general name', 'wpcoreuvigo' ),
+				'singular_name'     => _x( 'Act Type', 'taxonomy singular name', 'wpcoreuvigo' ),
+				'search_items'      => __( 'Search Act Type', 'wpcoreuvigo' ),
+				'all_items'         => __( 'All Acts Types', 'wpcoreuvigo' ),
+				'parent_item'       => __( 'Parent Act Type', 'wpcoreuvigo' ),
+				'parent_item_colon' => __( 'Parent Act Type:', 'wpcoreuvigo' ),
+				'edit_item'         => __( 'Edit Act Type', 'wpcoreuvigo' ),
+				'update_item'       => __( 'Update Act Type', 'wpcoreuvigo' ),
+				'add_new_item'      => __( 'Add New Act Type', 'wpcoreuvigo' ),
+				'new_item_name'     => __( 'New Act Type Name', 'wpcoreuvigo' ),
+				'menu_name'         => __( 'Act Type', 'wpcoreuvigo' ),
+			);
+
+			$args = array(
+				'hierarchical'      => true,
+				'labels'            => $labels,
+				'show_ui'           => true,
+				'show_in_menu'      => true,
+				'show_in_nav_menus' => true,
+				'show_admin_column' => true,
+				'query_var'         => 'taxonomy-act-type',
+				'rewrite'           => array( 'slug' => 'act-type' ),
+			);
+
+			$ob = register_taxonomy(
+				self::UV_TAXONOMY_ACT_TYPE_NAME,
+				array(
+					self::UV_ACT_POST_TYPE,
+				),
+				$args
+			);
+		}
+	}
+
+	/**
 	 * Undocumented function
 	 *
 	 * @param [type] $content
