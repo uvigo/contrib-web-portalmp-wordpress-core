@@ -58,6 +58,7 @@ class Wpcoreuvigo_Public_Shortcodes {
 		add_shortcode( 'uvigo_bloque', array( $this, 'uvigo_content_block' ) );
 
 		add_shortcode( 'uvigo_document', array( $this, 'uvigo_document' ) );
+		add_shortcode( 'uvigo_acts', array( $this, 'uvigo_acts' ) );
 	}
 
 	/**
@@ -375,6 +376,90 @@ class Wpcoreuvigo_Public_Shortcodes {
 			}
 		}
 		return $output;
+	}
+
+	/**
+	 * Actas de reunión
+	 * 
+	 * Clasificadas por Años
+	 * 
+	 *
+	 * @param [array] $atts Atributos
+	 * @param [string] $content Contidos
+	 * @return [string] Html output
+	 */
+	public function uvigo_acts( $atts, $content = null ) {
+		$defaults['tax_act']    = '';
+
+		$args_shortcode = shortcode_atts( $defaults, $atts, 'uvigo_acts' );
+
+		$tax_act = $args_shortcode['tax_act'];
+
+		$output = '';
+		if ( isset( $tax_act ) ) {
+			$terms = get_terms( array(
+				'taxonomy' => Wpcoreuvigo_Admin::UV_TAXONOMY_ACT_TYPE_NAME,
+				'slug'   => $tax_act,
+			) );
+			if ( $terms ) {
+				$taxonomy = $terms[0]->name;
+				$actas = get_posts( array(
+					'post_type' => Wpcoreuvigo_Admin::UV_ACT_POST_TYPE,
+					'meta_key'  => 'uvigo_act_date',
+					'orderby'   => 'meta_value',
+					'order'     => 'ASC',
+					'posts_per_page' => -1,
+				));
+
+				if ( ! empty( $actas ) ) {
+					$last_year = '';
+					$output .= '<div class="shortcode_uvigo_acts">';
+					$output .= '[accordion allclosed="true"]';
+					foreach ( $actas as $acta ) {
+						$date = get_field( 'uvigo_act_date', $acta->ID, false );
+						$date = new DateTime( $date );
+						$year = $date->format( 'Y' );
+						$acta_date_format = $date->format( 'Y-m-d' );
+						if ( empty( $last_year ) || $last_year !== $year ) {
+							if ( ! empty( $last_year ) ) {
+								// close before year
+								$output .= '[/card-body]';
+								$output .= '[/card]';
+							}
+							$last_year = $year;
+
+							// Año
+							$output .= '[card]';
+							$output .= '[card-header]' . $year . '[/card-header]';
+							$output .= '[card-body]';
+						}
+						$output .= '<h4 class="uvigo_act_title">';
+						$output .= '<span class="uvigo_act_field_date">' . $acta_date_format . '</span>';
+
+						$title = get_the_title( $acta );
+						$output .= '<span class="uvigo_act_field_title">'.$title.'</span>';
+						$output .= '</h4>';
+
+						$documents = get_field( 'uvigo_act_documents', $acta->ID );
+						if ( $documents ) {
+							$output .= '<ul class="uvigo_act_documents">';
+							foreach ( $documents as $document ) {
+								$output .= '<li><a href="' . $document['uvigo_act_document_file'] . '" target="_blank" rel="noopener noreferrer" > ' . $document['uvigo_act_document_title'] . '</a></li>';
+							}
+							$output .= '</ul>';
+						}
+					}
+					if ( ! empty( $last_year ) ) {
+						// close before year
+						$output .= '[/card-body]';
+						$output .= '[/card]';
+					}
+					$output .= '[/accordion]';
+					$output .= '</div>';
+				}
+			}
+		}
+		return do_shortcode( $output );
 	}
 
 }
