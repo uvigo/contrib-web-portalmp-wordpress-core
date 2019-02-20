@@ -235,8 +235,10 @@ class Wpcoreuvigo {
 		// Restricciones en ACF
 		$this->loader->add_action( 'admin_footer', $plugin_admin, 'check_ACF_permissions_button', 10, 1 );
 
+		// TOOLS - UVIGO
 		// Paxina de Utilidades Desarrollo Uvigo.
-		$this->loader->add_action ('admin_menu', $plugin_admin, 'add_management_uvigo_tools_page');
+		// OCULTAR CUANDO NO NECESARIO
+		// $this->loader->add_action ('admin_menu', $plugin_admin, 'add_management_uvigo_tools_page');
 		 
 		
 	}
