@@ -1036,4 +1036,261 @@ class Wpcoreuvigo_Admin {
 			}
 		}
 	}
+
+	/**
+	 * Visualiza o no el botón de añadir documentos en Actas
+	 *
+	 * @return void
+	 */
+	function check_ACF_permissions_button() {
+
+		$post = get_post();
+		if ( $post ) {
+			$post_type = get_post_type( $post );
+			if ( $post_type == Wpcoreuvigo_Admin::UV_ACT_POST_TYPE ) {
+				$post_id = $post->ID;
+				//$terms = get_the_terms( $post->ID, Wpcoreuvigo_Admin::UV_TAXONOMY_ACT_TYPE_NAME );
+				$taxonomy = get_field('uvigo_act_taxonomy', $post_id, false);
+				$date = get_field('uvigo_act_date', $post_id, false);
+				
+				// Si no hay taxonomía seleccionada, no permite añadir documentos.
+				if ( empty($taxonomy) || empty($date) ) {
+					// Bloqueo por JavaScript
+					?><script type="text/javascript">
+					jQuery('.acf-field-repeater .acf-actions a[data-event="add-row"]').remove();
+					jQuery('.acf-field-repeater .acf-actions a[data-event="remove-row"]').remove();
+					</script><?php
+				}
+			}
+		}
+	}
+
+	/**
+	 * Change Upload Directory for Custom Post-Type
+	 *
+	 * This will change the upload directory for a custom post-type. Attachments will
+	 * now be uploaded to other directory.
+	 */
+	function custom_upload_directory( $args ) {
+		$post_type = '';
+		$post_id = '';
+		if ( isset( $_REQUEST['post'] ) ) {
+			$post_id = $_REQUEST['post'];
+			$post_type = get_post_type( $post_id );
+		} elseif ( isset( $_REQUEST['post_id'] ) ) {
+			$post_id = $_REQUEST['post_id'];
+			$post_type = get_post_type( $post_id );
+		}
+		if ( $post_id ){
+			return $this->custom_upload_directory_by_post_type($args, $post_type, $post_id);
+		} else {
+			return $args;
+		}
+	}
+
+	function handle_upload_prefilter( $file )
+	{
+		add_filter( 'upload_dir', array( $this, 'custom_upload_directory' ) );
+		return $file;
+	}
+
+	function handle_upload( $fileinfo )
+	{
+		remove_filter( 'upload_dir', array( $this, 'custom_upload_directory') );
+		return $fileinfo;
+	}
+
+	/**
+	 * Determine Directory by Custom Post-Type
+	 *
+	 * @param [type] $args
+	 * @param [type] $post_type
+	 * @return void
+	 */
+	function custom_upload_directory_by_post_type( $args, $post_type, $post_id ) {
+
+		if( $post_type ) {
+			error_log("Post-type detected es : " . $post_type);
+
+			switch ($post_type) {
+				case Wpcoreuvigo_Admin::UV_ACT_POST_TYPE:
+					$new = array_merge($args, []);
+					$label_post_type = 'actas';
+					//$terms = get_the_terms( $post_id, Wpcoreuvigo_Admin::UV_TAXONOMY_ACT_TYPE_NAME );
+					$term_id = get_field('uvigo_act_taxonomy', $post_id, false);
+					$date = get_field('uvigo_act_date', $post_id, false);
+					if ( !empty($term_id)  && !empty($date) ) {
+						$taxonomy_slugs_dir = get_term_parents_list(
+							$term_id,
+							Wpcoreuvigo_Admin::UV_TAXONOMY_ACT_TYPE_NAME,
+							array(
+								'format'    => 'slug',
+								'separator' => '/',
+								'link'      => false,
+								'inclusive' => true
+							)
+						);
+						error_log("TERM DIR " . $taxonomy_slugs_dir);
+						$date = new DateTime( $date );
+						$year = $date->format( 'Y' );
+						$month = $date->format( 'm' );
+						$dir = '/'.$taxonomy_slugs_dir.$year.'-'.$month;
+						$subdir = '/'.$label_post_type.$dir;
+					} else {
+						$subdir = '/'.$label_post_type.$new['subdir'];
+					}
+
+					$new['path'] = str_replace($new['subdir'], $subdir, $new['path']);
+					$new['url'] = str_replace($new['subdir'], $subdir, $new['url']);
+					$new['subdir'] = str_replace($new['subdir'], $subdir, $new['subdir']);
+					$args = $new;
+
+					break;
+				case Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE:
+					$new = array_merge($args, []);
+					$label_post_type = 'documentos';
+					$subdir = '/'.$label_post_type.$new['subdir'];
+
+					$new['path'] = str_replace($new['subdir'], $subdir, $new['path']);
+					$new['url'] = str_replace($new['subdir'], $subdir, $new['url']);
+					$new['subdir'] = str_replace($new['subdir'], $subdir, $new['subdir']);
+					$args = $new;
+					break;
+				default:
+					# code...
+					break;
+			}
+
+			error_log("custom_upload_directory");
+			error_log(print_r($args,true));
+		}
+		
+		return $args;
+	}
+
+	/**
+	 * Engade páxina de Utilidades
+	 *
+	 * @return void
+	 */
+	public function add_management_uvigo_tools_page(){
+		add_management_page('Uvigo Tools', 'Uvigo Tools', 'install_plugins', 'uvigo_tools', 
+		array( $this, 'uvigo_tools' ), '');
+	}
+
+	/**
+	 * Páxina de Uvigo Tools
+	 * 
+	 * Visualización de operaciones e utilidades.
+	 *
+	 * @return void
+	 */
+	public function uvigo_tools()
+	{
+		?>
+		<form method="post">
+			<?php wp_nonce_field( 'uvigo_tools_management' ); ?>
+			<h3>Operación para reubicar documentos</h3>
+			<p> Esta operación movera os documentos de uploads/dir -> uploads/documents/dir </p>
+			<button style="background-color:green;" type="submit" name="execute_test_move_documents" value="execute">
+				<span>Test : Testear Mover documentos</span>
+			</button>
+			<button style="background-color:red;" type="submit" name="execute_move_documents" value="execute">
+				<span>Executar : Mover documentos</span>
+			</button>
+		</form>
+		<?php
+		if ( isset( $_POST[ 'execute_test_move_documents' ] ) && check_admin_referer( 'uvigo_tools_management' ) ) {
+			echo '<h3>RESULTADO TEST</h3>';
+			$this->uvigo_documents_tools( false );
+		}
+		if ( isset( $_POST[ 'execute_move_documents' ] ) && check_admin_referer( 'uvigo_tools_management' ) ) {
+			echo '<h3>RESULTADO EXECUCION</h3>';
+			$this->uvigo_documents_tools( true );
+		}
+	}
+
+	/**
+	 * TOOLS : Move Documents de updloads -> uploads/documents
+	 *
+	 * @param boolean $execute : really move or only test
+	 * @return void
+	 */
+	private function uvigo_documents_tools( $execute = false)
+		{
+		$documents = get_posts( array(
+			'post_type' => Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE,
+			'orderby'   => 'id',
+			'order'     => 'ASC',
+			'posts_per_page' => -1,
+		));
+		$i = 0;
+		foreach ($documents as $document) {
+			echo '</br>';
+			$document_post_id = $document->ID;
+			$field = get_field('uvigo_document_file', $document_post_id, false);
+			// Recuperamos ID del attachment:
+			echo '['.$i.'] DOCUMENT ID ' . $document_post_id;
+			echo ' Field: ';
+			echo print_r( $field, true );
+			if ( $field ){
+				$att = get_post($field);
+				if ( $att ){
+					$attachment_id = $att->ID;
+					echo '<div style="margin-left:20px">ATT ID : ' . $attachment_id . ' Title ' . $att->post_title.'</div>';
+					$fullsize_path = get_attached_file( $attachment_id ); // Full path
+					echo '<div style="margin-left:40px">ATT fullsize : ' . $fullsize_path.'</div>';
+					
+					// Uploads Dir para Documento : Determinar cual sería la ruta para almacenar el documento
+					$date = mysql2date('Y/m',$document->post_date);
+					$uploads = _wp_upload_dir($date );
+					$uploads = $this->custom_upload_directory_by_post_type($uploads, Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE, $document_post_id);
+					
+					echo '<div style="margin-left:40px">MOVE TO : </div>';
+					foreach ($uploads as $key => $value) {
+						echo '<div style="margin-left:50px">['.$key. '] = ' .print_r($value,true).'</div>';
+					}
+					// Recuperamos nombre del fichero
+					$name = basename($fullsize_path);
+					$new_fullsize_path = $uploads['path'] . "/$name";
+
+					// Validamos si el fichero ya está en la ruta esperada
+					if ( $fullsize_path !== $new_fullsize_path ){
+						// Aseguramos que no exista conflicto por nombre
+						$filename = wp_unique_filename( $uploads['path'], $name );
+						$new_fullsize_path = $uploads['path'] . "/$filename";
+						echo '<div style="margin-left:50px">NEW PATH : ' . $new_fullsize_path.'</div>';
+						echo '</br>';
+
+						echo '<div style="margin-left:20px">FROM PATH : ' . $fullsize_path.'</div>';
+						echo '<div style="margin-left:20px">  TO PATH : ' . $new_fullsize_path.'</div>';
+
+						if ( $execute ) {
+							echo '<div style="margin-left:20px">MOVENDO .. </div>';
+
+							// Creamos directorio en disco si no existe
+							if( !is_dir( $uploads['path'] ) ) {
+								echo '<div style="margin-left:20px">Creando directorio .. </div>';
+								$mkdirok = mkdir($uploads['path'], 0777, true);
+								echo '<div style="margin-left:20px">CREADO DIR : '.$mkdirok.' </div>';
+							}
+
+							// Movemos Fichero en disco
+							$ok = rename( $fullsize_path, $new_fullsize_path );
+							echo '<div style="margin-left:20px">MOVED : '.$ok.' </div>';
+							if ( $ok === true ){
+								// Actualizamos información del post.
+								$updated = update_attached_file( $attachment_id, $new_fullsize_path );
+								echo '<div style="margin-left:20px">UPDATED : '.$updated.' </div>';
+							}
+						}
+					} else {
+						echo '<div style="margin-left:20px">Ya está en la ruta esperada.  </div>';
+					}
+				}
+			}
+			$i++;
+		}
+		echo 'FIN';
+	}
 }

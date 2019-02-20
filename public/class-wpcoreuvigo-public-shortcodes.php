@@ -407,7 +407,7 @@ class Wpcoreuvigo_Public_Shortcodes {
 					'post_type' => Wpcoreuvigo_Admin::UV_ACT_POST_TYPE,
 					'meta_key'  => 'uvigo_act_date',
 					'orderby'   => 'meta_value',
-					'order'     => 'ASC',
+					'order'     => 'DESC',
 					'posts_per_page' => -1,
 				));
 

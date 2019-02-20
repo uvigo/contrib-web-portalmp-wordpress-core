@@ -226,6 +226,21 @@ class Wpcoreuvigo {
 		// lines will need to be commented in the check_for_plugin_update function as well.
 		*/
 		// set_site_transient( 'update_plugins', null );
+
+		// Definición de rutas para subir ficheros : Aconsejable activar hook upload_dir desde handlers.
+		// $this->loader->add_filter( 'upload_dir', $plugin_admin, 'custom_upload_directory', 100 );
+		$this->loader->add_filter('wp_handle_upload_prefilter', $plugin_admin, 'handle_upload_prefilter' );
+		$this->loader->add_filter('wp_handle_upload', $plugin_admin, 'handle_upload' );
+
+		// Restricciones en ACF
+		$this->loader->add_action( 'admin_footer', $plugin_admin, 'check_ACF_permissions_button', 10, 1 );
+
+		// TOOLS - UVIGO
+		// Paxina de Utilidades Desarrollo Uvigo.
+		// OCULTAR CUANDO NO NECESARIO
+		// $this->loader->add_action ('admin_menu', $plugin_admin, 'add_management_uvigo_tools_page');
+		 
+		
 	}
 
 	/**
