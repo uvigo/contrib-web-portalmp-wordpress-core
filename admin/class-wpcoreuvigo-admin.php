@@ -1110,8 +1110,6 @@ class Wpcoreuvigo_Admin {
 	function custom_upload_directory_by_post_type( $args, $post_type, $post_id ) {
 
 		if( $post_type ) {
-			error_log("Post-type detected es : " . $post_type);
-
 			switch ($post_type) {
 				case Wpcoreuvigo_Admin::UV_ACT_POST_TYPE:
 					$new = array_merge($args, []);
@@ -1130,7 +1128,6 @@ class Wpcoreuvigo_Admin {
 								'inclusive' => true
 							)
 						);
-						error_log("TERM DIR " . $taxonomy_slugs_dir);
 						$date = new DateTime( $date );
 						$year = $date->format( 'Y' );
 						$month = $date->format( 'm' );
