@@ -235,12 +235,18 @@ class Wpcoreuvigo {
 		// Restricciones en ACF
 		$this->loader->add_action( 'admin_footer', $plugin_admin, 'check_ACF_permissions_button', 10, 1 );
 
-		// TOOLS - UVIGO
+		// TOOLS - UVIGO ( descomentar si hace falta )
 		// Paxina de Utilidades Desarrollo Uvigo.
-		// OCULTAR CUANDO NO NECESARIO
 		// $this->loader->add_action ('admin_menu', $plugin_admin, 'add_management_uvigo_tools_page');
-		 
-		
+
+		// Columnas ACTAS Wpcoreuvigo_Admin::UV_ACT_POST_TYPE
+		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Admin::UV_ACT_POST_TYPE . '_posts_columns', $plugin_admin, 'manage_uvigo_act_columns', 10, 2 );
+		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Admin::UV_ACT_POST_TYPE . '_posts_custom_column', $plugin_admin, 'manage_uvigo_act_custom_column', 10, 2 );
+		// Filtro en Actas
+		$this->loader->add_action( 'restrict_manage_posts', $plugin_admin, 'manage_posts_table_filtering_uvigo_act', 10, 2 );
+
+		// Filtros en Documentos
+		$this->loader->add_action( 'restrict_manage_posts', $plugin_admin, 'manage_posts_table_filtering_uvigo_document', 10, 2 );
 	}
 
 	/**

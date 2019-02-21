@@ -1110,8 +1110,6 @@ class Wpcoreuvigo_Admin {
 	function custom_upload_directory_by_post_type( $args, $post_type, $post_id ) {
 
 		if( $post_type ) {
-			error_log("Post-type detected es : " . $post_type);
-
 			switch ($post_type) {
 				case Wpcoreuvigo_Admin::UV_ACT_POST_TYPE:
 					$new = array_merge($args, []);
@@ -1130,11 +1128,10 @@ class Wpcoreuvigo_Admin {
 								'inclusive' => true
 							)
 						);
-						error_log("TERM DIR " . $taxonomy_slugs_dir);
 						$date = new DateTime( $date );
 						$year = $date->format( 'Y' );
 						$month = $date->format( 'm' );
-						$dir = '/'.$taxonomy_slugs_dir.$year.'-'.$month;
+						$dir = '/'.$taxonomy_slugs_dir.$year.'/'.$month;
 						$subdir = '/'.$label_post_type.$dir;
 					} else {
 						$subdir = '/'.$label_post_type.$new['subdir'];
@@ -1217,7 +1214,7 @@ class Wpcoreuvigo_Admin {
 	 * @return void
 	 */
 	private function uvigo_documents_tools( $execute = false)
-		{
+	{
 		$documents = get_posts( array(
 			'post_type' => Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE,
 			'orderby'   => 'id',
@@ -1278,7 +1275,7 @@ class Wpcoreuvigo_Admin {
 							// Movemos Fichero en disco
 							$ok = rename( $fullsize_path, $new_fullsize_path );
 							echo '<div style="margin-left:20px">MOVED : '.$ok.' </div>';
-							if ( $ok === true ){
+							if ( $ok === true ) {
 								// Actualizamos información del post.
 								$updated = update_attached_file( $attachment_id, $new_fullsize_path );
 								echo '<div style="margin-left:20px">UPDATED : '.$updated.' </div>';
@@ -1292,5 +1289,108 @@ class Wpcoreuvigo_Admin {
 			$i++;
 		}
 		echo 'FIN';
+	}
+
+	// Visualización de columnas en ACTAS : Fecha
+	function manage_uvigo_act_columns( $columns ) {
+		$start = array_slice( $columns, 0, 2 ); 
+		return array_merge(
+			$start,
+			array(
+				'uvigo_act_date' => 'Data',
+			),
+			$columns
+		);
+	}
+
+	/**
+	 * Visualización contenido de columnas en ACTAS
+	 *
+	 * @param [type] $column_name
+	 * @param [type] $post_id
+	 * @return void
+	 */
+	function manage_uvigo_act_custom_column( $column_name, $post_id ) {
+		if ( $column_name == 'uvigo_act_date' ) {
+			$date = get_field('uvigo_act_date', $post_id, false);
+			$date = new DateTime( $date );
+			echo date_i18n( get_option( 'date_format' ), $date->getTimestamp() );
+		}
+	}
+
+	/**
+	 * Filtro por taxonomia en Actas
+	 *
+	 * @param [type] $post_type
+	 * @param [type] $which
+	 * @return void
+	 */
+	function manage_posts_table_filtering_uvigo_act( $post_type, $which ) {
+ 
+		global $wpdb;
+	 
+		if ( $post_type == Wpcoreuvigo_Admin::UV_ACT_POST_TYPE ) {
+	 
+			$taxonomy_slug = Wpcoreuvigo_Admin::UV_TAXONOMY_ACT_TYPE_NAME;
+			$taxonomy = get_taxonomy( $taxonomy_slug );
+			$selected = '';
+			$request_attr = 'taxonomy-act-type'; //this will show up in the url
+	 
+			if ( isset( $_REQUEST[ $request_attr ] ) ) {
+				$selected = $_REQUEST[ $request_attr ]; //in case the current page is already filtered
+			}
+	 
+			wp_dropdown_categories(array(
+				'show_option_all' =>  __("Ver todas as {$taxonomy->label}"),
+				'taxonomy'        =>  $taxonomy_slug,
+				'name'            =>  $request_attr,
+				'value_field'     =>  'slug',
+				'orderby'         =>  'name',
+				'order'           =>  'DESC',
+				'selected'        =>  $selected,
+				'hierarchical'    =>  false,
+				'depth'           =>  0,
+				'show_count'      =>  false, // Show number of post in parent term
+				'hide_empty'      =>  false, // Don't show posts w/o terms
+			));
+		}
+	}
+
+	/**
+	 * Filtro por taxonomia en Documentos
+	 *
+	 * @param [type] $post_type
+	 * @param [type] $which
+	 * @return void
+	 */
+	function manage_posts_table_filtering_uvigo_document( $post_type, $which ) {
+ 
+		global $wpdb;
+	 
+		if ( $post_type == Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE ) {
+	 
+			$taxonomy_slug = Wpcoreuvigo_Admin::UV_TAXONOMY_DOCUMENT_TYPE_NAME;
+			$taxonomy = get_taxonomy( $taxonomy_slug );
+			$selected = '';
+			$request_attr = 'taxonomy-document-type'; //this will show up in the url
+	 
+			if ( isset( $_REQUEST[ $request_attr ] ) ) {
+				$selected = $_REQUEST[ $request_attr ]; //in case the current page is already filtered
+			}
+	 
+			wp_dropdown_categories(array(
+				'show_option_all' =>  __("Ver todas as {$taxonomy->label}"),
+				'taxonomy'        =>  $taxonomy_slug,
+				'name'            =>  $request_attr,
+				'value_field'     =>  'slug',
+				'orderby'         =>  'name',
+				'order'           =>  'DESC',
+				'selected'        =>  $selected,
+				'hierarchical'    =>  true,
+				'depth'           =>  0,
+				'show_count'      =>  false, // Show number of post in parent term
+				'hide_empty'      =>  false, // Don't show posts w/o terms
+			));
+		}
 	}
 }
