@@ -1134,7 +1134,7 @@ class Wpcoreuvigo_Admin {
 						$date = new DateTime( $date );
 						$year = $date->format( 'Y' );
 						$month = $date->format( 'm' );
-						$dir = '/'.$taxonomy_slugs_dir.$year.'-'.$month;
+						$dir = '/'.$taxonomy_slugs_dir.$year.'/'.$month;
 						$subdir = '/'.$label_post_type.$dir;
 					} else {
 						$subdir = '/'.$label_post_type.$new['subdir'];
