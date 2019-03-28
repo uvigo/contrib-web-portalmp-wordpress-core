@@ -867,14 +867,16 @@ class Wpcoreuvigo_Admin {
 			);
 
 			$args = array(
-				'hierarchical'      => true,
-				'labels'            => $labels,
-				'show_ui'           => true,
-				'show_in_menu'      => true,
-				'show_in_nav_menus' => true,
-				'show_admin_column' => true,
-				'query_var'         => 'taxonomy-document-type',
-				'rewrite'           => array( 'slug' => 'document-type' ),
+				'hierarchical'       => true,
+				'labels'             => $labels,
+				'show_ui'            => true,
+				'show_in_menu'       => true,
+				'show_in_nav_menus'  => true,
+				'show_admin_column'  => true,
+				'show_in_quick_edit' => false,
+				'meta_box_cb'        => false,
+				'query_var'          => 'taxonomy-document-type',
+				'rewrite'            => array( 'slug' => 'document-type' ),
 			);
 
 			$ob = register_taxonomy(
@@ -959,14 +961,16 @@ class Wpcoreuvigo_Admin {
 			);
 
 			$args = array(
-				'hierarchical'      => true,
-				'labels'            => $labels,
-				'show_ui'           => true,
-				'show_in_menu'      => true,
-				'show_in_nav_menus' => true,
-				'show_admin_column' => true,
-				'query_var'         => 'taxonomy-act-type',
-				'rewrite'           => array( 'slug' => 'act-type' ),
+				'hierarchical'       => true,
+				'labels'             => $labels,
+				'show_ui'            => true,
+				'show_in_menu'       => true,
+				'show_in_nav_menus'  => true,
+				'show_admin_column'  => true,
+				'show_in_quick_edit' => false,
+				'meta_box_cb'        => false,
+				'query_var'          => 'taxonomy-act-type',
+				'rewrite'            => array( 'slug' => 'act-type' ),
 			);
 
 			$ob = register_taxonomy(
@@ -1042,7 +1046,7 @@ class Wpcoreuvigo_Admin {
 	 *
 	 * @return void
 	 */
-	function check_ACF_permissions_button() {
+	function check_ACF_add_files_permissions_button() {
 
 		$post = get_post();
 		if ( $post ) {
@@ -1057,8 +1061,21 @@ class Wpcoreuvigo_Admin {
 				if ( empty($taxonomy) || empty($date) ) {
 					// Bloqueo por JavaScript
 					?><script type="text/javascript">
-					jQuery('.acf-field-repeater .acf-actions a[data-event="add-row"]').remove();
-					jQuery('.acf-field-repeater .acf-actions a[data-event="remove-row"]').remove();
+					jQuery('div[data-name="uvigo_act_documents"].acf-field-repeater .acf-actions a[data-event="add-row"]').remove();
+					jQuery('div[data-name="uvigo_act_documents"].acf-field-repeater .acf-actions a[data-event="remove-row"]').remove();
+					jQuery('div[data-name="uvigo_act_documents"].acf-field-repeater .acf-label').append( "<p>Necesario gardar antes de subir documento.</p>" )
+					</script><?php
+				}
+			}
+			if ( $post_type == Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE ) {
+				$post_id = $post->ID;
+				$taxonomy = get_field('uvigo_document_taxonomy', $post_id, false);
+				// Si no hay taxonomía seleccionada, no permite añadir documentos.
+				if ( empty($taxonomy) ) {
+					// Bloqueo por JavaScript
+					?><script type="text/javascript">
+					jQuery('div[data-name="uvigo_document_file"] .acf-file-uploader a[data-name="add"]').remove();
+					jQuery('div[data-name="uvigo_document_file"] .acf-file-uploader .hide-if-value p' ).html('Necesario gardar antes de subir documento.');
 					</script><?php
 				}
 			}
@@ -1131,7 +1148,9 @@ class Wpcoreuvigo_Admin {
 						$date = new DateTime( $date );
 						$year = $date->format( 'Y' );
 						$month = $date->format( 'm' );
-						$dir = '/'.$taxonomy_slugs_dir.$year.'/'.$month;
+
+						$taxonomy_slugs_dir = substr($taxonomy_slugs_dir, 0, -1);
+						$dir = '/'.$taxonomy_slugs_dir.'/'.$year.'/'.$month;
 						$subdir = '/'.$label_post_type.$dir;
 					} else {
 						$subdir = '/'.$label_post_type.$new['subdir'];
@@ -1146,7 +1165,25 @@ class Wpcoreuvigo_Admin {
 				case Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE:
 					$new = array_merge($args, []);
 					$label_post_type = 'documentos';
-					$subdir = '/'.$label_post_type.$new['subdir'];
+
+					$term_id = get_field('uvigo_document_taxonomy', $post_id, false);
+					error_log('TAXONOMIA ' . print_r($term_id,true));
+					if ( !empty($term_id) ) {
+						$taxonomy_slugs_dir = get_term_parents_list(
+							$term_id,
+							Wpcoreuvigo_Admin::UV_TAXONOMY_DOCUMENT_TYPE_NAME,
+							array(
+								'format'    => 'slug',
+								'separator' => '/',
+								'link'      => false,
+								'inclusive' => true
+							)
+						);
+						$taxonomy_slugs_dir = substr($taxonomy_slugs_dir, 0, -1);
+						$subdir = '/'.$label_post_type.'/'.$taxonomy_slugs_dir;
+					} else {
+						$subdir = '/'.$label_post_type.$new['subdir'];
+					}
 
 					$new['path'] = str_replace($new['subdir'], $subdir, $new['path']);
 					$new['url'] = str_replace($new['subdir'], $subdir, $new['url']);
@@ -1225,10 +1262,12 @@ class Wpcoreuvigo_Admin {
 		foreach ($documents as $document) {
 			echo '</br>';
 			$document_post_id = $document->ID;
+
 			$field = get_field('uvigo_document_file', $document_post_id, false);
+
 			// Recuperamos ID del attachment:
-			echo '['.$i.'] DOCUMENT ID ' . $document_post_id;
-			echo ' Field: ';
+			echo '</br>['.$i.'] DOCUMENT ID ' . $document_post_id;
+			echo '</br>Field: ';
 			echo print_r( $field, true );
 			if ( $field ){
 				$att = get_post($field);
@@ -1237,12 +1276,13 @@ class Wpcoreuvigo_Admin {
 					echo '<div style="margin-left:20px">ATT ID : ' . $attachment_id . ' Title ' . $att->post_title.'</div>';
 					$fullsize_path = get_attached_file( $attachment_id ); // Full path
 					echo '<div style="margin-left:40px">ATT fullsize : ' . $fullsize_path.'</div>';
-					
+
 					// Uploads Dir para Documento : Determinar cual sería la ruta para almacenar el documento
-					$date = mysql2date('Y/m',$document->post_date);
+					$date = mysql2date( 'Y/m', $document->post_date );
+
 					$uploads = _wp_upload_dir($date );
 					$uploads = $this->custom_upload_directory_by_post_type($uploads, Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE, $document_post_id);
-					
+
 					echo '<div style="margin-left:40px">MOVE TO : </div>';
 					foreach ($uploads as $key => $value) {
 						echo '<div style="margin-left:50px">['.$key. '] = ' .print_r($value,true).'</div>';

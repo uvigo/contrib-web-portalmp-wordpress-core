@@ -430,7 +430,7 @@ class Wpcoreuvigo_Public_Shortcodes {
 
 							// Año
 							$output .= '[card]';
-							$output .= '[card-header]' . $year . '[/card-header]';
+							$output .= '[card-header]Acordos ' . $year . '[/card-header]';
 							$output .= '[card-body]';
 						}
 						$output .= '<h4 class="uvigo_act_title">';
