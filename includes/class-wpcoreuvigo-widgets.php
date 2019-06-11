@@ -65,6 +65,9 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 		$blog_url = get_option( 'page_for_posts' );
 		$blog_url = get_permalink( $blog_url );
 
+		$post_type_post_object  = get_post_type_object( 'post' );
+		$post_type_event_object = get_post_type_object( 'uvigo-event' );
+
 		// Filtro Fechas
 		$dates = ! empty( $instance['dates'] ) ? $instance['dates'] : false;
 		if ( $dates ) {
@@ -76,7 +79,7 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 			$f_text  = get_query_var( self::F_KEYWORDS_FIELD_NAME, '' );
 			$f_sdate = get_query_var( self::F_SDATE_FIELD_NAME, '' );
 			$f_edate = get_query_var( self::F_EDATE_FIELD_NAME, '' );
-			$f_type  = get_query_var( self::F_TYPE_FIELD_NAME, '' );
+			$f_type  = get_query_var( self::F_TYPE_FIELD_NAME, array() );
 		}
 		// Filtro Taxonomias
 		$taxonomies = $instance['taxonomies'];
@@ -91,6 +94,31 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 				<div class="widget-filter__title"><?php echo esc_html_x( 'Apply filters', 'Widget filter news: filter help', 'wpcoreuvigo' ); ?></div>
 			<?php endif; ?>
 			<?php do_action( 'wpcoreuvigo_filter_widget_before_filters' ); ?>
+			<div class="widget-filter__block">
+				<div class="widget-filter__block__title" data-icon="3"><?php esc_html_e( 'Content type', 'wpcoreuvigo' ); ?></div>
+				<div class="widget-filter__content widget-filter__checkbox">
+					<?php /*
+					<ul class="list-peak mt-2 ml-5">
+						<li><a href="<?php echo esc_url(add_query_arg('f_type', 'post', $blog_url)); ?>"><?php echo $post_type_post_object->labels->name; ?></a></li>
+						<li><a href="<?php echo esc_url(add_query_arg('f_type', 'uvigo-event', $blog_url)); ?>"><?php echo $post_type_event_object->labels->name; ?></a></li>
+					</ul>
+					*/ ?>
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" name="<?php echo esc_attr( self::F_TYPE_FIELD_NAME ); ?>[]"
+							value="<?php echo esc_html( $post_type_post_object->name ); ?>"
+							<?php echo in_array( $post_type_post_object->name, $f_type ) ? 'checked' : ''; ?>
+							id="widget-filter-post">
+						<label class="form-check-label" for="widget-filter-post"><?php echo esc_html( $post_type_post_object->labels->name ); ?></label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" name="<?php echo esc_attr( self::F_TYPE_FIELD_NAME ); ?>[]"
+							value="<?php echo esc_html( $post_type_event_object->name ); ?>"
+							<?php echo in_array( $post_type_event_object->name, $f_type ) ? 'checked' : ''; ?>
+							id="widget-filter-uvigo-event">
+						<label class="form-check-label" for="widget-filter-uvigo-event"><?php echo esc_html( $post_type_event_object->labels->name ); ?></label>
+					</div>
+				</div>
+			</div>
 			<?php if ( $dates ) : ?>
 				<div class="widget-filter__block">
 					<div class="widget-filter__block__title" data-icon="3"><?php esc_html_e( 'Dates', 'wpcoreuvigo' ); ?></div>
