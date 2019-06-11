@@ -1042,6 +1042,64 @@ class Wpcoreuvigo_Admin {
 	}
 
 	/**
+	 * Add field to Posts to set Thumbnail visibility
+	 *
+	 * @param [type] $content
+	 * @param [type] $post_id
+	 * @return void
+	 */
+	public function add_hide_thumbnail( $content, $post_id ) {
+
+		// Only featured video in post type
+		if ( 'post' !== get_post_type( $post_id ) ) {
+			return $content;
+		}
+
+		$field_id    = 'uvigo_hide_thumbnail_in_single';
+		$field_value = esc_attr( get_post_meta( $post_id, $field_id, true ) );
+		$field_text  = esc_html__( 'Hide image in single view', 'wpcoreuvigo' );
+
+		$field_label = sprintf(
+			'<p><label for="%1$s"><input type="checkbox" name="%1$s" id="%1$s" value="1" %4$s>%3$s</label></p>',
+			$field_id,
+			$field_value,
+			$field_text,
+			checked( $field_value, 1, false )
+		);
+
+		return $content .= $field_label;
+	}
+
+	/**
+	 * Save Thumbnail visibility in Posts
+	 *
+	 * @param [type] $post_ID
+	 * @param [type] $post
+	 * @param [type] $update
+	 * @return void
+	 */
+	public function save_hide_thumbnail( $post_id, $post, $update ) {
+
+		// Only featured video in post type
+		if ( 'post' !== get_post_type( $post_id ) ) {
+			return;
+		}
+
+		$field_id = 'uvigo_hide_thumbnail_in_single';
+
+		if ( isset( $_POST[ $field_id ] ) ) {
+			$field_value = $_POST[ $field_id ];
+			if ( $field_value ) {
+				update_post_meta( $post_id, $field_id, $field_value );
+			} else {
+				delete_post_meta( $post_id, $field_id );
+			}
+		} else {
+			delete_post_meta( $post_id, $field_id );
+		}
+	}
+
+	/**
 	 * Visualiza o no el botón de añadir documentos en Actas
 	 *
 	 * @return void

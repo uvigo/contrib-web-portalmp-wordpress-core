@@ -190,6 +190,10 @@ class Wpcoreuvigo {
 		$this->loader->add_filter( 'custom_menu_order', $plugin_admin, 'custom_menu_order', 10 );
 		$this->loader->add_filter( 'menu_order', $plugin_admin, 'menu_order', 10 );
 
+		// Hide Thumbnail
+		$this->loader->add_filter( 'admin_post_thumbnail_html', $plugin_admin, 'add_hide_thumbnail', 10, 2 );
+		$this->loader->add_action( 'save_post', $plugin_admin, 'save_hide_thumbnail', 10, 3 );
+
 		// Featured Video
 		$this->loader->add_filter( 'admin_post_thumbnail_html', $plugin_admin, 'add_featured_video_url', 10, 2 );
 		$this->loader->add_action( 'save_post', $plugin_admin, 'save_featured_video_url', 10, 3 );
@@ -272,6 +276,9 @@ class Wpcoreuvigo {
 		$plugin_shortcodes = new Wpcoreuvigo_Public_Shortcodes( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'init', $plugin_shortcodes, 'register_shortcodes' );
+
+		// Ocultar imagen destacada
+		$this->loader->add_filter( 'has_post_thumbnail', $plugin_public, 'hide_post_thumbnail', 10, 3 );
 
 		// if ( self::is_active_uvigo_feedsreader() ) {
 		// Feeds readers shortcodes

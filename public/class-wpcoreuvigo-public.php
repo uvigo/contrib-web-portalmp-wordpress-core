@@ -174,7 +174,29 @@ class Wpcoreuvigo_Public {
 				}
 			}
 		}
+	}
 
+	/**
+	 * Filter to hide or show thumbnail in 'has_post_thumbnail'
+	 *
+	 * @param [type] $has_thumbnail
+	 * @param [type] $post
+	 * @param [type] $thumbnail_id
+	 * @return void
+	 */
+	public function hide_post_thumbnail( $has_thumbnail, $post, $thumbnail_id ) {
+		if ( is_single() ) {
+			if ( $has_thumbnail ) {
+				$post = get_post( $post );
+				if ( ! $post ) {
+					return $has_thumbnail;
+				}
+				$uvigo_hide_thumbnail_in_single = (bool) get_post_meta( $post->ID, 'uvigo_hide_thumbnail_in_single', true );
+				return ! $uvigo_hide_thumbnail_in_single;
+			}
+		}
+
+		return $has_thumbnail;
 	}
 
 }
