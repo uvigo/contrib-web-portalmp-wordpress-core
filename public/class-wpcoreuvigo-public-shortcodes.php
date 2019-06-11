@@ -380,9 +380,9 @@ class Wpcoreuvigo_Public_Shortcodes {
 
 	/**
 	 * Actas de reunión
-	 * 
+	 *
 	 * Clasificadas por Años
-	 * 
+	 *
 	 *
 	 * @param [array] $atts Atributos
 	 * @param [string] $content Contidos
@@ -397,19 +397,23 @@ class Wpcoreuvigo_Public_Shortcodes {
 
 		$output = '';
 		if ( isset( $tax_act ) ) {
-			$terms = get_terms( array(
-				'taxonomy' => Wpcoreuvigo_Admin::UV_TAXONOMY_ACT_TYPE_NAME,
-				'slug'   => $tax_act,
-			) );
+			$terms = get_terms(
+				array(
+					'taxonomy' => Wpcoreuvigo_Admin::UV_TAXONOMY_ACT_TYPE_NAME,
+					'slug'     => $tax_act,
+				)
+			);
 			if ( $terms ) {
 				$taxonomy = $terms[0]->name;
-				$actas = get_posts( array(
-					'post_type' => Wpcoreuvigo_Admin::UV_ACT_POST_TYPE,
-					'meta_key'  => 'uvigo_act_date',
-					'orderby'   => 'meta_value',
-					'order'     => 'DESC',
-					'posts_per_page' => -1,
-				));
+				$actas = get_posts(
+					array(
+						'post_type'      => Wpcoreuvigo_Admin::UV_ACT_POST_TYPE,
+						'meta_key'       => 'uvigo_act_date',
+						'orderby'        => 'meta_value',
+						'order'          => 'DESC',
+						'posts_per_page' => -1,
+					)
+				);
 
 				if ( ! empty( $actas ) ) {
 					$last_year = '';
@@ -433,18 +437,22 @@ class Wpcoreuvigo_Public_Shortcodes {
 							$output .= '[card-header]Acordos ' . $year . '[/card-header]';
 							$output .= '[card-body]';
 						}
-						$output .= '<h4 class="uvigo_act_title">';
-						$output .= '<span class="uvigo_act_field_date">' . $acta_date_format . '</span>';
-
-						$title = get_the_title( $acta );
-						$output .= '<span class="uvigo_act_field_title">'.$title.'</span>';
+						$output .= '<h4 class="uvigo_act_title mb-4">';
+						$output .= '<span class="uvigo_act_field_date text-secondary">' . $acta_date_format . '</span> |';
+						$output .= '<span class="uvigo_act_field_title">' . get_the_title( $acta ) . '</span>';
 						$output .= '</h4>';
 
 						$documents = get_field( 'uvigo_act_documents', $acta->ID );
 						if ( $documents ) {
-							$output .= '<ul class="uvigo_act_documents">';
+							$output .= '<ul class="list-peak uvigo_act_documents">';
 							foreach ( $documents as $document ) {
-								$output .= '<li><a href="' . $document['uvigo_act_document_file'] . '" target="_blank" rel="noopener noreferrer" > ' . $document['uvigo_act_document_title'] . '</a></li>';
+								$output .= sprintf(
+									'<li><a href="%1$s" target="_blank" rel="noopener noreferrer">%2$s (<span class="text-uppercase">%3$s</span>, %4$s)</a></li>',
+									$document['uvigo_act_document_file']['url'],
+									$document['uvigo_act_document_title'],
+									$document['uvigo_act_document_file']['subtype'],
+									size_format( $document['uvigo_act_document_file']['filesize'] )
+								);
 							}
 							$output .= '</ul>';
 						}
