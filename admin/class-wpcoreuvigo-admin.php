@@ -150,7 +150,7 @@ class Wpcoreuvigo_Admin {
 	}
 
 	/**
-	 * Undocumented function
+	 * Save attributes in Pages for redirect to first child
 	 *
 	 * @param [type] $post_id
 	 * @return void
@@ -169,7 +169,7 @@ class Wpcoreuvigo_Admin {
 	}
 
 	/**
-	 * Undocumented function
+	 * Walker for edit menu
 	 *
 	 * @param [type] $walker
 	 * @return void
@@ -177,7 +177,6 @@ class Wpcoreuvigo_Admin {
 	public function wp_edit_nav_menu_walker( $walker ) {
 		$walker = 'Menu_Item_Custom_Fields_Walker';
 		if ( ! class_exists( $walker ) ) {
-			// require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wpcoreuvigo-i18n.php';
 			require_once dirname( __FILE__ ) . '/class-wpcoreuvigo-menu-edit-walker.php';
 		}
 
@@ -984,7 +983,7 @@ class Wpcoreuvigo_Admin {
 	}
 
 	/**
-	 * Undocumented function
+	 * Add field to Posts for set video url
 	 *
 	 * @param [type] $content
 	 * @param [type] $post_id
@@ -1012,7 +1011,7 @@ class Wpcoreuvigo_Admin {
 	}
 
 	/**
-	 * Undocumented function
+	 * Save video url in Posts
 	 *
 	 * @param [type] $post_ID
 	 * @param [type] $post
@@ -1114,7 +1113,7 @@ class Wpcoreuvigo_Admin {
 				//$terms = get_the_terms( $post->ID, Wpcoreuvigo_Admin::UV_TAXONOMY_ACT_TYPE_NAME );
 				$taxonomy = get_field('uvigo_act_taxonomy', $post_id, false);
 				$date = get_field('uvigo_act_date', $post_id, false);
-				
+
 				// Si no hay taxonomía seleccionada, no permite añadir documentos.
 				if ( empty($taxonomy) || empty($date) ) {
 					// Bloqueo por JavaScript
@@ -1184,79 +1183,91 @@ class Wpcoreuvigo_Admin {
 	 */
 	function custom_upload_directory_by_post_type( $args, $post_type, $post_id ) {
 
-		if( $post_type ) {
-			switch ($post_type) {
-				case Wpcoreuvigo_Admin::UV_ACT_POST_TYPE:
-					$new = array_merge($args, []);
+		if ( $post_type ) {
+			switch ( $post_type ) {
+
+				case self::UV_ACT_POST_TYPE:
+					$new = array_merge( $args, array() );
+
 					$label_post_type = 'actas';
+
 					//$terms = get_the_terms( $post_id, Wpcoreuvigo_Admin::UV_TAXONOMY_ACT_TYPE_NAME );
-					$term_id = get_field('uvigo_act_taxonomy', $post_id, false);
-					$date = get_field('uvigo_act_date', $post_id, false);
-					if ( !empty($term_id)  && !empty($date) ) {
+					$term_id = get_field( 'uvigo_act_taxonomy', $post_id, false );
+					$date    = get_field( 'uvigo_act_date', $post_id, false );
+					if ( ! empty( $term_id ) && ! empty( $date ) ) {
 						$taxonomy_slugs_dir = get_term_parents_list(
 							$term_id,
-							Wpcoreuvigo_Admin::UV_TAXONOMY_ACT_TYPE_NAME,
+							self::UV_TAXONOMY_ACT_TYPE_NAME,
 							array(
 								'format'    => 'slug',
 								'separator' => '/',
 								'link'      => false,
-								'inclusive' => true
+								'inclusive' => true,
 							)
 						);
-						$date = new DateTime( $date );
-						$year = $date->format( 'Y' );
+
+						$date  = new DateTime( $date );
+						$year  = $date->format( 'Y' );
 						$month = $date->format( 'm' );
 
-						$taxonomy_slugs_dir = substr($taxonomy_slugs_dir, 0, -1);
-						$dir = '/'.$taxonomy_slugs_dir.'/'.$year.'/'.$month;
-						$subdir = '/'.$label_post_type.$dir;
+						$taxonomy_slugs_dir = substr( $taxonomy_slugs_dir, 0, -1 );
+
+						$dir    = '/' . $taxonomy_slugs_dir . '/' . $year . '/' . $month;
+						$subdir = '/' . $label_post_type . $dir;
 					} else {
-						$subdir = '/'.$label_post_type.$new['subdir'];
+						$subdir = '/' . $label_post_type . $new['subdir'];
 					}
 
-					$new['path'] = str_replace($new['subdir'], $subdir, $new['path']);
-					$new['url'] = str_replace($new['subdir'], $subdir, $new['url']);
-					$new['subdir'] = str_replace($new['subdir'], $subdir, $new['subdir']);
+					$new['path']   = str_replace( $new['subdir'], $subdir, $new['path'] );
+					$new['url']    = str_replace( $new['subdir'], $subdir, $new['url'] );
+					$new['subdir'] = str_replace( $new['subdir'], $subdir, $new['subdir'] );
+
 					$args = $new;
 
 					break;
-				case Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE:
-					$new = array_merge($args, []);
+
+				case self::UV_DOCUMENT_POST_TYPE:
+					$new = array_merge( $args, array() );
+
 					$label_post_type = 'documentos';
 
-					$term_id = get_field('uvigo_document_taxonomy', $post_id, false);
-					error_log('TAXONOMIA ' . print_r($term_id,true));
-					if ( !empty($term_id) ) {
+					$term_id = get_field( 'uvigo_document_taxonomy', $post_id, false );
+					// error_log('TAXONOMIA ' . print_r($term_id,true));
+					if ( ! empty( $term_id ) ) {
 						$taxonomy_slugs_dir = get_term_parents_list(
 							$term_id,
-							Wpcoreuvigo_Admin::UV_TAXONOMY_DOCUMENT_TYPE_NAME,
+							self::UV_TAXONOMY_DOCUMENT_TYPE_NAME,
 							array(
 								'format'    => 'slug',
 								'separator' => '/',
 								'link'      => false,
-								'inclusive' => true
+								'inclusive' => true,
 							)
 						);
-						$taxonomy_slugs_dir = substr($taxonomy_slugs_dir, 0, -1);
-						$subdir = '/'.$label_post_type.'/'.$taxonomy_slugs_dir;
+
+						$taxonomy_slugs_dir = substr( $taxonomy_slugs_dir, 0, -1 );
+
+						$subdir = '/' . $label_post_type . '/' . $taxonomy_slugs_dir;
 					} else {
-						$subdir = '/'.$label_post_type.$new['subdir'];
+						$subdir = '/' . $label_post_type . $new['subdir'];
 					}
 
-					$new['path'] = str_replace($new['subdir'], $subdir, $new['path']);
-					$new['url'] = str_replace($new['subdir'], $subdir, $new['url']);
-					$new['subdir'] = str_replace($new['subdir'], $subdir, $new['subdir']);
+					$new['path']   = str_replace( $new['subdir'], $subdir, $new['path'] );
+					$new['url']    = str_replace( $new['subdir'], $subdir, $new['url'] );
+					$new['subdir'] = str_replace( $new['subdir'], $subdir, $new['subdir'] );
+
 					$args = $new;
 					break;
+
 				default:
-					# code...
+					// Do nothing
 					break;
 			}
 
-			error_log("custom_upload_directory");
-			error_log(print_r($args,true));
+			// error_log("custom_upload_directory");
+			// error_log(print_r($args,true));
 		}
-		
+
 		return $args;
 	}
 
@@ -1265,20 +1276,25 @@ class Wpcoreuvigo_Admin {
 	 *
 	 * @return void
 	 */
-	public function add_management_uvigo_tools_page(){
-		add_management_page('Uvigo Tools', 'Uvigo Tools', 'install_plugins', 'uvigo_tools', 
-		array( $this, 'uvigo_tools' ), '');
+	public function add_management_uvigo_tools_page() {
+		add_management_page(
+			'Uvigo Tools',
+			'Uvigo Tools',
+			'install_plugins',
+			'uvigo_tools',
+			array( $this, 'uvigo_tools' ),
+			''
+		);
 	}
 
 	/**
 	 * Páxina de Uvigo Tools
-	 * 
+	 *
 	 * Visualización de operaciones e utilidades.
 	 *
 	 * @return void
 	 */
-	public function uvigo_tools()
-	{
+	public function uvigo_tools() {
 		?>
 		<form method="post">
 			<?php wp_nonce_field( 'uvigo_tools_management' ); ?>
@@ -1308,79 +1324,82 @@ class Wpcoreuvigo_Admin {
 	 * @param boolean $execute : really move or only test
 	 * @return void
 	 */
-	private function uvigo_documents_tools( $execute = false)
-	{
-		$documents = get_posts( array(
-			'post_type' => Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE,
-			'orderby'   => 'id',
-			'order'     => 'ASC',
-			'posts_per_page' => -1,
-		));
+	private function uvigo_documents_tools( $execute = false ) {
+		$documents = get_posts(
+			array(
+				'post_type' => self::UV_DOCUMENT_POST_TYPE,
+				'orderby'   => 'id',
+				'order'     => 'ASC',
+				'posts_per_page' => -1,
+			)
+		);
+
 		$i = 0;
-		foreach ($documents as $document) {
+
+		foreach ( $documents as $document ) {
 			echo '</br>';
 			$document_post_id = $document->ID;
 
-			$field = get_field('uvigo_document_file', $document_post_id, false);
+			$field = get_field( 'uvigo_document_file', $document_post_id, false );
 
 			// Recuperamos ID del attachment:
 			echo '</br>['.$i.'] DOCUMENT ID ' . $document_post_id;
 			echo '</br>Field: ';
 			echo print_r( $field, true );
-			if ( $field ){
-				$att = get_post($field);
-				if ( $att ){
+			if ( $field ) {
+				$att = get_post( $field );
+				if ( $att ) {
 					$attachment_id = $att->ID;
-					echo '<div style="margin-left:20px">ATT ID : ' . $attachment_id . ' Title ' . $att->post_title.'</div>';
+					echo '<div style="margin-left:20px">ATT ID : ' . $attachment_id . ' Title ' . $att->post_title . '</div>';
 					$fullsize_path = get_attached_file( $attachment_id ); // Full path
-					echo '<div style="margin-left:40px">ATT fullsize : ' . $fullsize_path.'</div>';
+					echo '<div style="margin-left:40px">ATT fullsize : ' . $fullsize_path . '</div>';
 
 					// Uploads Dir para Documento : Determinar cual sería la ruta para almacenar el documento
 					$date = mysql2date( 'Y/m', $document->post_date );
 
-					$uploads = _wp_upload_dir($date );
-					$uploads = $this->custom_upload_directory_by_post_type($uploads, Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE, $document_post_id);
+					$uploads = _wp_upload_dir( $date );
+					$uploads = $this->custom_upload_directory_by_post_type( $uploads, self::UV_DOCUMENT_POST_TYPE, $document_post_id );
 
 					echo '<div style="margin-left:40px">MOVE TO : </div>';
-					foreach ($uploads as $key => $value) {
-						echo '<div style="margin-left:50px">['.$key. '] = ' .print_r($value,true).'</div>';
+					foreach ( $uploads as $key => $value) {
+						echo '<div style="margin-left:50px">['.$key. '] = ' . print_r( $value, true ) . '</div>';
 					}
 					// Recuperamos nombre del fichero
-					$name = basename($fullsize_path);
+					$name = basename( $fullsize_path );
 					$new_fullsize_path = $uploads['path'] . "/$name";
 
 					// Validamos si el fichero ya está en la ruta esperada
-					if ( $fullsize_path !== $new_fullsize_path ){
+					if ( $fullsize_path !== $new_fullsize_path ) {
 						// Aseguramos que no exista conflicto por nombre
 						$filename = wp_unique_filename( $uploads['path'], $name );
 						$new_fullsize_path = $uploads['path'] . "/$filename";
-						echo '<div style="margin-left:50px">NEW PATH : ' . $new_fullsize_path.'</div>';
+						echo '<div style="margin-left:50px">NEW PATH : ' . $new_fullsize_path . '</div>';
 						echo '</br>';
 
-						echo '<div style="margin-left:20px">FROM PATH : ' . $fullsize_path.'</div>';
-						echo '<div style="margin-left:20px">  TO PATH : ' . $new_fullsize_path.'</div>';
+						echo '<div style="margin-left:20px">FROM PATH : ' . $fullsize_path . '</div>';
+						echo '<div style="margin-left:20px">  TO PATH : ' . $new_fullsize_path . '</div>';
 
 						if ( $execute ) {
 							echo '<div style="margin-left:20px">MOVENDO .. </div>';
 
 							// Creamos directorio en disco si no existe
-							if( !is_dir( $uploads['path'] ) ) {
+							if ( ! is_dir( $uploads['path'] ) ) {
 								echo '<div style="margin-left:20px">Creando directorio .. </div>';
-								$mkdirok = mkdir($uploads['path'], 0777, true);
-								echo '<div style="margin-left:20px">CREADO DIR : '.$mkdirok.' </div>';
+								$mkdirok = mkdir( $uploads['path'], 0777, true );
+								echo '<div style="margin-left:20px">CREADO DIR : ' . $mkdirok . ' </div>';
 							}
 
 							// Movemos Fichero en disco
 							$ok = rename( $fullsize_path, $new_fullsize_path );
-							echo '<div style="margin-left:20px">MOVED : '.$ok.' </div>';
+							echo '<div style="margin-left:20px">MOVED : ' . $ok . ' </div>';
 							if ( $ok === true ) {
 								// Actualizamos información del post.
 								$updated = update_attached_file( $attachment_id, $new_fullsize_path );
-								echo '<div style="margin-left:20px">UPDATED : '.$updated.' </div>';
+								echo '<div style="margin-left:20px">UPDATED : ' . $updated . ' </div>';
 							}
 						}
 					} else {
-						echo '<div style="margin-left:20px">Ya está en la ruta esperada.  </div>';
+						echo '<div style="margin-left:20px">Ya está en la ruta esperada.</div>';
 					}
 				}
 			}
@@ -1389,9 +1408,14 @@ class Wpcoreuvigo_Admin {
 		echo 'FIN';
 	}
 
-	// Visualización de columnas en ACTAS : Fecha
+	/**
+	 * Visualización de columnas en ACTAS : Fecha
+	 *
+	 * @param [type] $columns
+	 * @return void
+	 */
 	function manage_uvigo_act_columns( $columns ) {
-		$start = array_slice( $columns, 0, 2 ); 
+		$start = array_slice( $columns, 0, 2 );
 		return array_merge(
 			$start,
 			array(
@@ -1424,20 +1448,20 @@ class Wpcoreuvigo_Admin {
 	 * @return void
 	 */
 	function manage_posts_table_filtering_uvigo_act( $post_type, $which ) {
- 
+
 		global $wpdb;
-	 
+
 		if ( $post_type == Wpcoreuvigo_Admin::UV_ACT_POST_TYPE ) {
-	 
+
 			$taxonomy_slug = Wpcoreuvigo_Admin::UV_TAXONOMY_ACT_TYPE_NAME;
 			$taxonomy = get_taxonomy( $taxonomy_slug );
 			$selected = '';
 			$request_attr = 'taxonomy-act-type'; //this will show up in the url
-	 
+
 			if ( isset( $_REQUEST[ $request_attr ] ) ) {
 				$selected = $_REQUEST[ $request_attr ]; //in case the current page is already filtered
 			}
-	 
+
 			wp_dropdown_categories(array(
 				'show_option_all' =>  __("Ver todas as {$taxonomy->label}"),
 				'taxonomy'        =>  $taxonomy_slug,
@@ -1462,20 +1486,20 @@ class Wpcoreuvigo_Admin {
 	 * @return void
 	 */
 	function manage_posts_table_filtering_uvigo_document( $post_type, $which ) {
- 
+
 		global $wpdb;
-	 
+
 		if ( $post_type == Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE ) {
-	 
+
 			$taxonomy_slug = Wpcoreuvigo_Admin::UV_TAXONOMY_DOCUMENT_TYPE_NAME;
 			$taxonomy = get_taxonomy( $taxonomy_slug );
 			$selected = '';
 			$request_attr = 'taxonomy-document-type'; //this will show up in the url
-	 
+
 			if ( isset( $_REQUEST[ $request_attr ] ) ) {
 				$selected = $_REQUEST[ $request_attr ]; //in case the current page is already filtered
 			}
-	 
+
 			wp_dropdown_categories(array(
 				'show_option_all' =>  __("Ver todas as {$taxonomy->label}"),
 				'taxonomy'        =>  $taxonomy_slug,
