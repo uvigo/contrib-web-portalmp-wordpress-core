@@ -1272,6 +1272,24 @@ class Wpcoreuvigo_Admin {
 	}
 
 	/**
+	 * Restrinxe a edición da taxonomia de Tipo Documento
+	 *
+	 * @return void
+	 */
+	function restrict_update_taxonomy_document_type( $term_id, $taxonomy ){
+		if ($taxonomy == Wpcoreuvigo_Admin::UV_TAXONOMY_DOCUMENT_TYPE_NAME){
+			$term = get_term( $term_id, $taxonomy );
+			if ( $term->count  > 0 ){
+				wp_die(
+					'<h1>' . __( 'Non se pode modificar o tipo de documento.' ) . '</h1>' .
+					'<p>' . __( 'Sentímolo, pero non se pode modificar o tipo de documento, para evitar problemas co acceso os ficheiros en disco.' ) . '</p>',
+					403
+				);
+			}
+		}
+	}
+
+	/**
 	 * Engade páxina de Utilidades
 	 *
 	 * @return void

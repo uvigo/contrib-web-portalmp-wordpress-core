@@ -251,6 +251,10 @@ class Wpcoreuvigo {
 
 		// Filtros en Documentos
 		$this->loader->add_action( 'restrict_manage_posts', $plugin_admin, 'manage_posts_table_filtering_uvigo_document', 10, 2 );
+		// Filtros taxonomia de Documentos
+		$this->loader->add_action( 'edit_terms', $plugin_admin, 'restrict_update_taxonomy_document_type', 10, 2 );
+		$this->loader->add_action( 'pre_delete_term', $plugin_admin, 'restrict_update_taxonomy_document_type', 10, 2 );
+
 	}
 
 	/**
