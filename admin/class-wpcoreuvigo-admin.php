@@ -1483,6 +1483,37 @@ class Wpcoreuvigo_Admin {
 	}
 
 	/**
+	 * Visualización de columnas en DOCUMENTOS
+	 *
+	 * @param [type] $columns
+	 * @return void
+	 */
+	function manage_uvigo_document_columns( $columns ) {
+		$start = array_slice( $columns, 0, 4 );
+		return array_merge(
+			$start,
+			array(
+				'uvigo_document_taxonomy_hierarchy' => 'Xerarquía',
+			),
+			$columns
+		);
+	}
+
+	/**
+	 * Visualización contenido de columnas en DOCUMENTOS
+	 *
+	 * @param [type] $column_name
+	 * @param [type] $post_id
+	 * @return void
+	 */
+	function manage_uvigo_document_custom_column( $column_name, $post_id ) {
+		if ( $column_name == 'uvigo_document_taxonomy_hierarchy' ) {
+			$term_id = get_field( 'uvigo_document_taxonomy', $post_id, false );
+			echo get_term_parents_list( $term_id, Wpcoreuvigo_Admin::UV_TAXONOMY_DOCUMENT_TYPE_NAME, array( 'inclusive' => true ) );
+		}
+	}
+
+	/**
 	 * Filtro por taxonomia en Actas
 	 *
 	 * @param [type] $post_type

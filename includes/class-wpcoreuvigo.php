@@ -248,6 +248,11 @@ class Wpcoreuvigo {
 		// Columnas ACTAS Wpcoreuvigo_Admin::UV_ACT_POST_TYPE
 		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Admin::UV_ACT_POST_TYPE . '_posts_columns', $plugin_admin, 'manage_uvigo_act_columns', 10, 2 );
 		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Admin::UV_ACT_POST_TYPE . '_posts_custom_column', $plugin_admin, 'manage_uvigo_act_custom_column', 10, 2 );
+
+		// Columnas ACTAS Wpcoreuvigo_Admin::UV_ACT_POST_TYPE
+		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE . '_posts_columns', $plugin_admin, 'manage_uvigo_document_columns', 10, 2 );
+		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE . '_posts_custom_column', $plugin_admin, 'manage_uvigo_document_custom_column', 10, 2 );
+
 		// Filtro en Actas
 		$this->loader->add_action( 'restrict_manage_posts', $plugin_admin, 'manage_posts_table_filtering_uvigo_act', 10, 2 );
 
