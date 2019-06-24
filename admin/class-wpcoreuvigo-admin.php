@@ -1099,6 +1099,22 @@ class Wpcoreuvigo_Admin {
 	}
 
 	/**
+	 * Restringir edición de taxonomia en documentos y actas
+	 * 
+	 * Field name : uvigo_act_taxonomy
+	 * Field name : uvigo_document_taxonomy
+	 * 
+	 * Modify a field taxonomy before it is rendered 
+	 */
+	function prepare_field_before_render_uvigo_taxonomy( $field ) {
+		if( $field['value'] ) {
+			$field['disabled'] = true;
+			$field['add_term'] = false;
+		}
+		return $field;
+	}
+
+	/**
 	 * Visualiza o no el botón de añadir documentos en Actas
 	 *
 	 * @return void
@@ -1135,6 +1151,14 @@ class Wpcoreuvigo_Admin {
 					jQuery('div[data-name="uvigo_document_file"] .acf-file-uploader .hide-if-value p' ).html('Necesario gardar antes de subir documento.');
 					</script><?php
 				}
+				/*
+				else {
+					// Deshabilitar taxonomia por JavaScript
+					?><script type="text/javascript">
+					jQuery('div[data-name="uvigo_document_taxonomy"] select').prop( "disabled", true );
+					jQuery('div[data-name="uvigo_document_taxonomy"] a').prop( "disabled", true );
+					</script><?php
+				}*/
 			}
 		}
 	}

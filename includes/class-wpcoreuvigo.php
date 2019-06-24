@@ -237,6 +237,8 @@ class Wpcoreuvigo {
 		$this->loader->add_filter('wp_handle_upload', $plugin_admin, 'handle_upload' );
 
 		// Restricciones en ACF
+		$this->loader->add_filter( 'acf/prepare_field/name=uvigo_document_taxonomy', $plugin_admin, 'prepare_field_before_render_uvigo_taxonomy');
+		$this->loader->add_filter( 'acf/prepare_field/name=uvigo_act_taxonomy', $plugin_admin, 'prepare_field_before_render_uvigo_taxonomy');
 		$this->loader->add_action( 'admin_footer', $plugin_admin, 'check_ACF_add_files_permissions_button', 10, 1 );
 
 		// TOOLS - UVIGO ( descomentar si hace falta )
