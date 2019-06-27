@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: wpcoreuvigo\n"
-"POT-Creation-Date: 2019-02-18 13:06+0100\n"
-"PO-Revision-Date: 2019-02-18 13:12+0100\n"
+"POT-Creation-Date: 2019-06-27 14:11+0200\n"
+"PO-Revision-Date: 2019-06-27 14:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: gl_ES\n"
@@ -33,388 +33,402 @@ msgstr "Comportamento"
 msgid "Redirect to first child"
 msgstr "Facer redirección ao primeiro fillo"
 
-#: admin/class-wpcoreuvigo-admin.php:360
+#: admin/class-wpcoreuvigo-admin.php:359
 msgid ""
 "An Unexpected HTTP Error occurred during the API request.</p> <p><a href=\"?"
 "\" onclick=\"document.location.reload(); return false;\">Try again</a>"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:365
+#: admin/class-wpcoreuvigo-admin.php:364
 msgid "An unknown error occurred"
 msgstr "Aconteceu un erro descoñecido"
 
-#: admin/class-wpcoreuvigo-admin.php:389
+#: admin/class-wpcoreuvigo-admin.php:388
 msgctxt "taxonomy general name"
 msgid "Spectators"
 msgstr "Tipos de públicos"
 
-#: admin/class-wpcoreuvigo-admin.php:390
+#: admin/class-wpcoreuvigo-admin.php:389
 msgctxt "taxonomy singular name"
 msgid "Spectator"
 msgstr "Tipos de público"
 
-#: admin/class-wpcoreuvigo-admin.php:391
+#: admin/class-wpcoreuvigo-admin.php:390
 msgid "Search Spectator"
 msgstr "Buscar Tipo de público"
 
-#: admin/class-wpcoreuvigo-admin.php:392
+#: admin/class-wpcoreuvigo-admin.php:391
 msgid "All Spectators"
-msgstr "Todos os Tipos de públicos"
+msgstr "Todos os tipos de públicos"
 
-#: admin/class-wpcoreuvigo-admin.php:393
+#: admin/class-wpcoreuvigo-admin.php:392
 msgid "Parent Spectator"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:394
+#: admin/class-wpcoreuvigo-admin.php:393
 msgid "Parent Spectator:"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:395
+#: admin/class-wpcoreuvigo-admin.php:394
 msgid "Edit Spectator"
-msgstr "Editar Tipo de público"
+msgstr "Editar tipo de público"
+
+#: admin/class-wpcoreuvigo-admin.php:395
+msgid "Update Spectator"
+msgstr "Actualizar tipo de público"
 
 #: admin/class-wpcoreuvigo-admin.php:396
-msgid "Update Spectator"
-msgstr "Actualizar Tipo de público"
-
-#: admin/class-wpcoreuvigo-admin.php:397
 msgid "Add New Spectator"
 msgstr "Engadir novo tipo de público"
 
-#: admin/class-wpcoreuvigo-admin.php:398
+#: admin/class-wpcoreuvigo-admin.php:397
 msgid "New Spectator Name"
 msgstr "Novo tipo de público"
 
-#: admin/class-wpcoreuvigo-admin.php:399
+#: admin/class-wpcoreuvigo-admin.php:398
 msgid "Spectator"
 msgstr "Tipo de público"
 
-#: admin/class-wpcoreuvigo-admin.php:448
+#: admin/class-wpcoreuvigo-admin.php:447
 msgctxt "taxonomy general name"
 msgid "Universes"
 msgstr "Tipos de universos"
 
-#: admin/class-wpcoreuvigo-admin.php:449
+#: admin/class-wpcoreuvigo-admin.php:448
 msgctxt "taxonomy singular name"
 msgid "Universe"
 msgstr "Tipo de universo"
 
-#: admin/class-wpcoreuvigo-admin.php:450
+#: admin/class-wpcoreuvigo-admin.php:449
 msgid "Search Universe"
 msgstr "Buscar Tipo de universo"
 
-#: admin/class-wpcoreuvigo-admin.php:451
+#: admin/class-wpcoreuvigo-admin.php:450
 msgid "All Universe"
 msgstr "Todos os tipos de universo"
 
-#: admin/class-wpcoreuvigo-admin.php:452
+#: admin/class-wpcoreuvigo-admin.php:451
 msgid "Parent Universe"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:453
+#: admin/class-wpcoreuvigo-admin.php:452
 msgid "Parent Universe:"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:454
+#: admin/class-wpcoreuvigo-admin.php:453
 msgid "Edit Universe"
 msgstr "Editar tipo de universo"
 
-#: admin/class-wpcoreuvigo-admin.php:455
+#: admin/class-wpcoreuvigo-admin.php:454
 msgid "Update Universe"
 msgstr "Actualizar tipo de universo"
 
-#: admin/class-wpcoreuvigo-admin.php:456
+#: admin/class-wpcoreuvigo-admin.php:455
 msgid "Add New Universe"
 msgstr "Engadir novo tipo de universo"
 
-#: admin/class-wpcoreuvigo-admin.php:457
+#: admin/class-wpcoreuvigo-admin.php:456
 msgid "New Universe Name"
 msgstr "Novo tipo de universo"
 
-#: admin/class-wpcoreuvigo-admin.php:458
+#: admin/class-wpcoreuvigo-admin.php:457
 msgid "Universe"
 msgstr "Tipo de universo"
 
-#: admin/class-wpcoreuvigo-admin.php:507
+#: admin/class-wpcoreuvigo-admin.php:506
 msgctxt "taxonomy general name"
 msgid "Geographic"
 msgstr "Ámbitos xeográficos"
 
-#: admin/class-wpcoreuvigo-admin.php:508
+#: admin/class-wpcoreuvigo-admin.php:507
 msgctxt "taxonomy singular name"
 msgid "Geographic"
 msgstr "Ámbito Xeográfico"
 
-#: admin/class-wpcoreuvigo-admin.php:509
+#: admin/class-wpcoreuvigo-admin.php:508
 msgid "Search Geographic"
 msgstr "Ámbito xeográfico"
 
-#: admin/class-wpcoreuvigo-admin.php:510
+#: admin/class-wpcoreuvigo-admin.php:509
 msgid "All Geographic"
 msgstr "Todos os ámbito xeográficos"
 
-#: admin/class-wpcoreuvigo-admin.php:511
+#: admin/class-wpcoreuvigo-admin.php:510
 msgid "Parent Geographic"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:512
+#: admin/class-wpcoreuvigo-admin.php:511
 msgid "Parent Geographic:"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:513
+#: admin/class-wpcoreuvigo-admin.php:512
 msgid "Edit Geographic"
 msgstr "Editar ámbito xeográfico"
 
-#: admin/class-wpcoreuvigo-admin.php:514
+#: admin/class-wpcoreuvigo-admin.php:513
 msgid "Update Geographic"
 msgstr "Actualizar ámbito xeográfico"
 
-#: admin/class-wpcoreuvigo-admin.php:515
+#: admin/class-wpcoreuvigo-admin.php:514
 msgid "Add New Geographic"
 msgstr "Engadir novo ámbito xeográfico"
 
-#: admin/class-wpcoreuvigo-admin.php:516
+#: admin/class-wpcoreuvigo-admin.php:515
 msgid "New Geographic Name"
 msgstr "Novo ámbito xeográfico"
 
-#: admin/class-wpcoreuvigo-admin.php:517
+#: admin/class-wpcoreuvigo-admin.php:516
 msgid "Geographic"
 msgstr "Ámbito Xeográfico"
 
-#: admin/class-wpcoreuvigo-admin.php:638 admin/class-wpcoreuvigo-admin.php:661
-#: admin/class-wpcoreuvigo-admin.php:704 admin/class-wpcoreuvigo-admin.php:728
+#: admin/class-wpcoreuvigo-admin.php:637 admin/class-wpcoreuvigo-admin.php:660
+#: admin/class-wpcoreuvigo-admin.php:703 admin/class-wpcoreuvigo-admin.php:727
 msgid "Id"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:643 admin/class-wpcoreuvigo-admin.php:668
-#: admin/class-wpcoreuvigo-admin.php:709 admin/class-wpcoreuvigo-admin.php:735
+#: admin/class-wpcoreuvigo-admin.php:642 admin/class-wpcoreuvigo-admin.php:667
+#: admin/class-wpcoreuvigo-admin.php:708 admin/class-wpcoreuvigo-admin.php:734
 msgid "Internal code"
 msgstr "Código interno"
 
-#: admin/class-wpcoreuvigo-admin.php:812
+#: admin/class-wpcoreuvigo-admin.php:811
 msgctxt "post type general name"
 msgid "Documents"
 msgstr "Documentos"
 
-#: admin/class-wpcoreuvigo-admin.php:813
+#: admin/class-wpcoreuvigo-admin.php:812
 msgctxt "post type singular name"
 msgid "Document"
 msgstr "Documento"
 
-#: admin/class-wpcoreuvigo-admin.php:814
+#: admin/class-wpcoreuvigo-admin.php:813
 msgctxt "admin menu"
+msgid "Documents"
+msgstr "Documentos"
+
+#: admin/class-wpcoreuvigo-admin.php:814
+msgctxt "add new on admin bar"
 msgid "Documents"
 msgstr "Documentos"
 
 #: admin/class-wpcoreuvigo-admin.php:815
-msgctxt "add new on admin bar"
-msgid "Documents"
-msgstr "Documentos"
-
-#: admin/class-wpcoreuvigo-admin.php:816
 msgctxt "Document"
 msgid "Add new"
 msgstr "Engadir Documento"
 
-#: admin/class-wpcoreuvigo-admin.php:817
+#: admin/class-wpcoreuvigo-admin.php:816
 msgid "Add new document"
 msgstr "Engadir novo Documento"
 
-#: admin/class-wpcoreuvigo-admin.php:818
+#: admin/class-wpcoreuvigo-admin.php:817
 msgid "New document"
 msgstr "Novo Documento"
 
-#: admin/class-wpcoreuvigo-admin.php:819
+#: admin/class-wpcoreuvigo-admin.php:818
 msgid "Edit document"
 msgstr "Editar Documento"
 
-#: admin/class-wpcoreuvigo-admin.php:820
+#: admin/class-wpcoreuvigo-admin.php:819
 msgid "View document"
 msgstr "Ver Documento"
 
-#: admin/class-wpcoreuvigo-admin.php:821
+#: admin/class-wpcoreuvigo-admin.php:820
 msgid "All documents"
 msgstr "Todos os Documentos"
 
-#: admin/class-wpcoreuvigo-admin.php:822
+#: admin/class-wpcoreuvigo-admin.php:821
 msgid "Search documents"
 msgstr "Buscar documentos"
 
-#: admin/class-wpcoreuvigo-admin.php:823
+#: admin/class-wpcoreuvigo-admin.php:822
 msgid "Parent document:"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:824
+#: admin/class-wpcoreuvigo-admin.php:823
 msgid "Documents not found."
 msgstr "Documento non atopado."
 
-#: admin/class-wpcoreuvigo-admin.php:825
+#: admin/class-wpcoreuvigo-admin.php:824
 msgid "Documents not found in trash."
 msgstr "Documento non atopado."
 
-#: admin/class-wpcoreuvigo-admin.php:830
+#: admin/class-wpcoreuvigo-admin.php:829
 msgid "Documents"
 msgstr "Documentos"
 
-#: admin/class-wpcoreuvigo-admin.php:856
+#: admin/class-wpcoreuvigo-admin.php:855
 msgctxt "taxonomy general name"
 msgid "Documents Types"
 msgstr "Tipos de Documentos"
 
-#: admin/class-wpcoreuvigo-admin.php:857
+#: admin/class-wpcoreuvigo-admin.php:856
 msgctxt "taxonomy singular name"
 msgid "Document Type"
 msgstr "Tipo de Documento"
 
-#: admin/class-wpcoreuvigo-admin.php:858
+#: admin/class-wpcoreuvigo-admin.php:857
 msgid "Search Document Type"
 msgstr "Buscar Tipo de Documento"
 
-#: admin/class-wpcoreuvigo-admin.php:859
+#: admin/class-wpcoreuvigo-admin.php:858
 msgid "All Documents Types"
-msgstr "Todos os Tipos de Documentos"
+msgstr "Todos os tipos de Documentos"
 
-#: admin/class-wpcoreuvigo-admin.php:860
+#: admin/class-wpcoreuvigo-admin.php:859
 msgid "Parent Document Type"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:861
+#: admin/class-wpcoreuvigo-admin.php:860
 msgid "Parent Document Type:"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:862
+#: admin/class-wpcoreuvigo-admin.php:861
 msgid "Edit Document Type"
-msgstr "Editar Tipo de Documento"
+msgstr "Editar tipo de Documento"
+
+#: admin/class-wpcoreuvigo-admin.php:862
+msgid "Update Document Type"
+msgstr "Actualizar tipo de Documento"
 
 #: admin/class-wpcoreuvigo-admin.php:863
-msgid "Update Document Type"
-msgstr "Actualizar Tipo de Documento"
-
-#: admin/class-wpcoreuvigo-admin.php:864
 msgid "Add New Document Type"
 msgstr "Engadir Novo Tipo de Documento"
 
-#: admin/class-wpcoreuvigo-admin.php:865
+#: admin/class-wpcoreuvigo-admin.php:864
 msgid "New Document Type Name"
 msgstr "Nome"
 
-#: admin/class-wpcoreuvigo-admin.php:866
+#: admin/class-wpcoreuvigo-admin.php:865
 msgid "Document Type"
 msgstr "Tipo Documento"
 
-#: admin/class-wpcoreuvigo-admin.php:904
+#: admin/class-wpcoreuvigo-admin.php:905
 msgctxt "post type general name"
 msgid "Acts"
 msgstr "Actas"
 
-#: admin/class-wpcoreuvigo-admin.php:905
+#: admin/class-wpcoreuvigo-admin.php:906
 msgctxt "post type singular name"
 msgid "Act"
 msgstr "Acta"
 
-#: admin/class-wpcoreuvigo-admin.php:906
+#: admin/class-wpcoreuvigo-admin.php:907
 msgctxt "admin menu"
 msgid "Acts"
 msgstr "Actas"
 
-#: admin/class-wpcoreuvigo-admin.php:907
+#: admin/class-wpcoreuvigo-admin.php:908
 msgctxt "add new on admin bar"
 msgid "Acts"
 msgstr "Actas"
 
-#: admin/class-wpcoreuvigo-admin.php:908
+#: admin/class-wpcoreuvigo-admin.php:909
 msgctxt "Act"
 msgid "Add new"
-msgstr "Acta"
+msgstr "Nueva Acta"
 
-#: admin/class-wpcoreuvigo-admin.php:909
+#: admin/class-wpcoreuvigo-admin.php:910
 msgid "Add new act"
 msgstr "Engadir nova Acta"
 
-#: admin/class-wpcoreuvigo-admin.php:910
+#: admin/class-wpcoreuvigo-admin.php:911
 msgid "New act"
 msgstr "Nova Acta"
 
-#: admin/class-wpcoreuvigo-admin.php:911
+#: admin/class-wpcoreuvigo-admin.php:912
 msgid "Edit act"
 msgstr "Editar Acta"
 
-#: admin/class-wpcoreuvigo-admin.php:912
+#: admin/class-wpcoreuvigo-admin.php:913
 msgid "View act"
 msgstr "Ver Acta"
 
-#: admin/class-wpcoreuvigo-admin.php:913
+#: admin/class-wpcoreuvigo-admin.php:914
 msgid "All acts"
 msgstr "Todas as Actas"
 
-#: admin/class-wpcoreuvigo-admin.php:914
+#: admin/class-wpcoreuvigo-admin.php:915
 msgid "Search acts"
 msgstr "Buscar Actas"
 
-#: admin/class-wpcoreuvigo-admin.php:915
+#: admin/class-wpcoreuvigo-admin.php:916
 msgid "Parent act:"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:916
+#: admin/class-wpcoreuvigo-admin.php:917
 msgid "Acts not found."
 msgstr "Non se atopo Acta."
 
-#: admin/class-wpcoreuvigo-admin.php:917
+#: admin/class-wpcoreuvigo-admin.php:918
 msgid "Acts not found in trash."
 msgstr "Non se atopo Acta."
 
-#: admin/class-wpcoreuvigo-admin.php:922
+#: admin/class-wpcoreuvigo-admin.php:923
 msgid "Acts"
 msgstr "Actas"
 
-#: admin/class-wpcoreuvigo-admin.php:948
+#: admin/class-wpcoreuvigo-admin.php:949
 msgctxt "taxonomy general name"
 msgid "Acts Types"
 msgstr "Tipos de Actas"
 
-#: admin/class-wpcoreuvigo-admin.php:949
+#: admin/class-wpcoreuvigo-admin.php:950
 msgctxt "taxonomy singular name"
 msgid "Act Type"
 msgstr "Tipo de Acta"
 
-#: admin/class-wpcoreuvigo-admin.php:950
+#: admin/class-wpcoreuvigo-admin.php:951
 msgid "Search Act Type"
 msgstr "Buscar tipo de Acta"
 
-#: admin/class-wpcoreuvigo-admin.php:951
+#: admin/class-wpcoreuvigo-admin.php:952
 msgid "All Acts Types"
 msgstr "Todos os tipos de Actas"
 
-#: admin/class-wpcoreuvigo-admin.php:952
+#: admin/class-wpcoreuvigo-admin.php:953
 msgid "Parent Act Type"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:953
+#: admin/class-wpcoreuvigo-admin.php:954
 msgid "Parent Act Type:"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:954
+#: admin/class-wpcoreuvigo-admin.php:955
 msgid "Edit Act Type"
 msgstr "Editar tipo de Acta"
 
-#: admin/class-wpcoreuvigo-admin.php:955
+#: admin/class-wpcoreuvigo-admin.php:956
 msgid "Update Act Type"
 msgstr "Actualizar tipo de Acta"
 
-#: admin/class-wpcoreuvigo-admin.php:956
+#: admin/class-wpcoreuvigo-admin.php:957
 msgid "Add New Act Type"
 msgstr "Engadir novo tipo de Acta"
 
-#: admin/class-wpcoreuvigo-admin.php:957
+#: admin/class-wpcoreuvigo-admin.php:958
 msgid "New Act Type Name"
 msgstr "Novo tipo de Acta"
 
-#: admin/class-wpcoreuvigo-admin.php:958
+#: admin/class-wpcoreuvigo-admin.php:959
 msgid "Act Type"
 msgstr "Tipo de Acta"
 
-#: admin/class-wpcoreuvigo-admin.php:998
+#: admin/class-wpcoreuvigo-admin.php:1001
 msgid "Video url:"
+msgstr ""
+
+#: admin/class-wpcoreuvigo-admin.php:1059
+msgid "Hide image in single view"
+msgstr ""
+
+#: admin/class-wpcoreuvigo-admin.php:1308
+msgid "Non se pode modificar o tipo de documento."
+msgstr ""
+
+#: admin/class-wpcoreuvigo-admin.php:1309
+msgid ""
+"Sentímolo, pero non se pode modificar o tipo de documento, para evitar "
+"problemas co acceso os ficheiros en disco."
 msgstr ""
 
 #: includes/class-wpcoreuvigo-widgets.php:35
@@ -425,56 +439,60 @@ msgstr ""
 msgid "Filter posts"
 msgstr "Filtrar artigos"
 
-#: includes/class-wpcoreuvigo-widgets.php:86
+#: includes/class-wpcoreuvigo-widgets.php:89
 msgctxt "Widget filter news: search input"
 msgid "Insert text..."
 msgstr "Inserir texto…"
 
-#: includes/class-wpcoreuvigo-widgets.php:87
+#: includes/class-wpcoreuvigo-widgets.php:90
 msgid "Search"
 msgstr "Buscar"
 
-#: includes/class-wpcoreuvigo-widgets.php:90
+#: includes/class-wpcoreuvigo-widgets.php:93
 msgctxt "Widget filter news: filter titles"
 msgid "Filter"
 msgstr "Filtrar"
 
-#: includes/class-wpcoreuvigo-widgets.php:91
+#: includes/class-wpcoreuvigo-widgets.php:94
 msgctxt "Widget filter news: filter help"
 msgid "Apply filters"
 msgstr "Aplicar os seguintes filtros"
 
-#: includes/class-wpcoreuvigo-widgets.php:96
+#: includes/class-wpcoreuvigo-widgets.php:98
+msgid "Content type"
+msgstr "Tipo de Contenido"
+
+#: includes/class-wpcoreuvigo-widgets.php:124
 msgid "Dates"
 msgstr "Datas"
 
-#: includes/class-wpcoreuvigo-widgets.php:100
+#: includes/class-wpcoreuvigo-widgets.php:128
 msgctxt "Widget filter news: date"
 msgid "From:"
 msgstr "Desde:"
 
-#: includes/class-wpcoreuvigo-widgets.php:105
+#: includes/class-wpcoreuvigo-widgets.php:133
 msgctxt "Widget filter news: date"
 msgid "To:"
 msgstr "Ata:"
 
-#: includes/class-wpcoreuvigo-widgets.php:169
+#: includes/class-wpcoreuvigo-widgets.php:197
 msgid "Title:"
 msgstr "Título:"
 
-#: includes/class-wpcoreuvigo-widgets.php:172
+#: includes/class-wpcoreuvigo-widgets.php:200
 msgid "Configuration"
 msgstr "Configuración"
 
-#: includes/class-wpcoreuvigo-widgets.php:177
+#: includes/class-wpcoreuvigo-widgets.php:205
 msgid "Search by dates"
 msgstr "Buscar por datas"
 
-#: includes/class-wpcoreuvigo-widgets.php:180
+#: includes/class-wpcoreuvigo-widgets.php:208
 msgid "Taxonomies used"
 msgstr ""
 
-#: public/class-wpcoreuvigo-public-shortcodes.php:326
+#: public/class-wpcoreuvigo-public-shortcodes.php:327
 msgid "Index"
 msgstr ""
 
