@@ -1108,8 +1108,8 @@ class Wpcoreuvigo_Admin {
 	 */
 	function prepare_field_before_render_uvigo_taxonomy( $field ) {
 		if( $field['value'] ) {
-			$field['disabled'] = true;
-			$field['add_term'] = false;
+			//$field['disabled'] = true;
+			//$field['add_term'] = false;
 		}
 		return $field;
 	}
