@@ -1108,8 +1108,10 @@ class Wpcoreuvigo_Admin {
 	 */
 	function prepare_field_before_render_uvigo_taxonomy( $field ) {
 		if( $field['value'] ) {
+			//OJO: Si se deshabilita, no se envia en el form y da un error de validación despues
 			//$field['disabled'] = true;
-			//$field['add_term'] = false;
+			
+			$field['add_term'] = false;
 		}
 		return $field;
 	}
@@ -1150,13 +1152,11 @@ class Wpcoreuvigo_Admin {
 					jQuery('div[data-name="uvigo_document_file"] .acf-file-uploader a[data-name="add"]').remove();
 					jQuery('div[data-name="uvigo_document_file"] .acf-file-uploader .hide-if-value p' ).html('Necesario gardar antes de subir documento.');
 					</script><?php
-				}
-				/*
+				}/*
 				else {
-					// Deshabilitar taxonomia por JavaScript
+					// Deshabilitar taxonomia por JavaScript ( en desarrollo .. )
 					?><script type="text/javascript">
-					jQuery('div[data-name="uvigo_document_taxonomy"] select').prop( "disabled", true );
-					jQuery('div[data-name="uvigo_document_taxonomy"] a').prop( "disabled", true );
+					jQuery('div[data-name="uvigo_document_taxonomy"] select').select2("readonly", true);
 					</script><?php
 				}*/
 			}
