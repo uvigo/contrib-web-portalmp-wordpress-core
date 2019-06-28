@@ -185,6 +185,9 @@ class Wpcoreuvigo {
 		$this->loader->add_action( 'init', $plugin_admin, 'register_act_post_type' );
 		$this->loader->add_action( 'init', $plugin_admin, 'register_act_type_taxonomy', 10 );
 
+		$this->loader->add_action( 'init', $plugin_admin, 'register_form_post_type' );
+		$this->loader->add_action( 'init', $plugin_admin, 'register_form_type_taxonomy', 10 );
+
 		$this->loader->add_action( 'wp_loaded', $plugin_admin, 'register_taxonomies_terms', 10 );
 
 		$this->loader->add_filter( 'custom_menu_order', $plugin_admin, 'custom_menu_order', 10 );
@@ -262,6 +265,9 @@ class Wpcoreuvigo {
 		// Filtros taxonomia de Documentos
 		$this->loader->add_action( 'edit_terms', $plugin_admin, 'restrict_update_taxonomy_document_type', 10, 2 );
 		$this->loader->add_action( 'pre_delete_term', $plugin_admin, 'restrict_update_taxonomy_document_type', 10, 2 );
+
+		// Filtro Tipo de File
+		$this->loader->add_filter( 'wpcoreuvigo_acf_file_subtype_alias', $plugin_admin, 'wpcoreuvigo_acf_file_subtype_alias' );
 
 	}
 

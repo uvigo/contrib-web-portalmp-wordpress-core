@@ -983,6 +983,99 @@ class Wpcoreuvigo_Admin {
 	}
 
 	/**
+	 * New CPT FORMULARIO
+	 */
+	const UV_FORM_POST_TYPE          = 'uvigo-form';
+	const UV_TAXONOMY_FORM_TYPE_NAME = 'uvigo-tax-form';
+
+	/**
+	 * Register the custom post type form
+	 *
+	 * @since    1.0.0
+	 */
+	public function register_form_post_type() {
+		$labels = array(
+			'name'               => _x( 'Forms', 'post type general name', 'wpcoreuvigo' ),
+			'singular_name'      => _x( 'Form', 'post type singular name', 'wpcoreuvigo' ),
+			'menu_name'          => _x( 'Forms', 'admin menu', 'wpcoreuvigo' ),
+			'name_admin_bar'     => _x( 'Forms', 'add new on admin bar', 'wpcoreuvigo' ),
+			'add_new'            => _x( 'Add new', 'Form', 'wpcoreuvigo' ),
+			'add_new_item'       => __( 'Add new form', 'wpcoreuvigo' ),
+			'new_item'           => __( 'New form', 'wpcoreuvigo' ),
+			'edit_item'          => __( 'Edit form', 'wpcoreuvigo' ),
+			'view_item'          => __( 'View form', 'wpcoreuvigo' ),
+			'all_items'          => __( 'All forms', 'wpcoreuvigo' ),
+			'search_items'       => __( 'Search forms', 'wpcoreuvigo' ),
+			'parent_item_colon'  => __( 'Parent form:', 'wpcoreuvigo' ),
+			'not_found'          => __( 'Forms not found.', 'wpcoreuvigo' ),
+			'not_found_in_trash' => __( 'Forms not found in trash.', 'wpcoreuvigo' ),
+		);
+
+		$args = array(
+			'labels'             => $labels,
+			'description'        => __( 'Forms', 'wpcoreuvigo' ),
+			'public'             => true,
+			'publicly_queryable' => true,
+			'show_ui'            => true,
+			'show_in_menu'       => true,
+			'query_var'          => true,
+			'rewrite'            => array( 'slug' => 'formularios' ),
+			'capability_type'    => 'post',
+			'map_meta_cap'       => true,
+			'has_archive'        => true,
+			'hierarchical'       => false,
+			'menu_position'      => 5,
+			'menu_icon'          => 'dashicons-media-document',
+			'supports'           => array( 'title', 'editor', 'excerpt', 'custom-fields', 'author' ),
+		);
+		register_post_type( self::UV_FORM_POST_TYPE, $args );
+	}
+
+	/**
+	 * Register Form Type taxonomy.
+	 *
+	 * @since    1.0.0
+	 */
+	public function register_form_type_taxonomy() {
+		if ( ! taxonomy_exists( self::UV_TAXONOMY_FORM_TYPE_NAME ) ) {
+			$labels = array(
+				'name'              => _x( 'Forms Types', 'taxonomy general name', 'wpcoreuvigo' ),
+				'singular_name'     => _x( 'Form Type', 'taxonomy singular name', 'wpcoreuvigo' ),
+				'search_items'      => __( 'Search Form Type', 'wpcoreuvigo' ),
+				'all_items'         => __( 'All Forms Types', 'wpcoreuvigo' ),
+				'parent_item'       => __( 'Parent Form Type', 'wpcoreuvigo' ),
+				'parent_item_colon' => __( 'Parent Form Type:', 'wpcoreuvigo' ),
+				'edit_item'         => __( 'Edit Form Type', 'wpcoreuvigo' ),
+				'update_item'       => __( 'Update Form Type', 'wpcoreuvigo' ),
+				'add_new_item'      => __( 'Add New Form Type', 'wpcoreuvigo' ),
+				'new_item_name'     => __( 'New Form Type Name', 'wpcoreuvigo' ),
+				'menu_name'         => __( 'Form Type', 'wpcoreuvigo' ),
+			);
+
+			$args = array(
+				'hierarchical'       => true,
+				'labels'             => $labels,
+				'show_ui'            => true,
+				'show_in_menu'       => true,
+				'show_in_nav_menus'  => true,
+				'show_admin_column'  => true,
+				'show_in_quick_edit' => false,
+				'meta_box_cb'        => false,
+				'query_var'          => 'taxonomy-form-type',
+				'rewrite'            => array( 'slug' => 'form-type' ),
+			);
+
+			$ob = register_taxonomy(
+				self::UV_TAXONOMY_FORM_TYPE_NAME,
+				array(
+					self::UV_FORM_POST_TYPE,
+				),
+				$args
+			);
+		}
+	}
+
+	/**
 	 * Add field to Posts for set video url
 	 *
 	 * @param [type] $content
@@ -1132,7 +1225,7 @@ class Wpcoreuvigo_Admin {
 				$taxonomy = get_field('uvigo_act_taxonomy', $post_id, false);
 				$date = get_field('uvigo_act_date', $post_id, false);
 
-				// Si no hay taxonomía seleccionada, no permite añadir documentos.
+				// Si no hay taxonomía seleccionada, no permite añadir actas.
 				if ( empty($taxonomy) || empty($date) ) {
 					// Bloqueo por JavaScript
 					?><script type="text/javascript">
@@ -1159,6 +1252,24 @@ class Wpcoreuvigo_Admin {
 					jQuery('div[data-name="uvigo_document_taxonomy"] select').select2("readonly", true);
 					</script><?php
 				}*/
+			}
+			if ( $post_type == Wpcoreuvigo_Admin::UV_FORM_POST_TYPE ) {
+				$post_id = $post->ID;
+				$taxonomy = get_field('uvigo_form_taxonomy', $post_id, false);
+				// Si no hay taxonomía seleccionada, no permite añadir formularios.
+				if ( empty($taxonomy) ) {
+					// Bloqueo por JavaScript
+					?><script type="text/javascript">
+					jQuery('div[data-name="uvigo_form_document_doc"] .acf-file-uploader a[data-name="add"]').remove();
+					jQuery('div[data-name="uvigo_form_document_doc"] .acf-file-uploader .hide-if-value p' ).html('Necesario gardar antes de subir formulario.');
+
+					jQuery('div[data-name="uvigo_form_document_pdf"] .acf-file-uploader a[data-name="add"]').remove();
+					jQuery('div[data-name="uvigo_form_document_pdf"] .acf-file-uploader .hide-if-value p' ).html('Necesario gardar antes de subir formulario.');
+
+					jQuery('div[data-name="uvigo_form_document_odt"] .acf-file-uploader a[data-name="add"]').remove();
+					jQuery('div[data-name="uvigo_form_document_odt"] .acf-file-uploader .hide-if-value p' ).html('Necesario gardar antes de subir formulario.');
+					</script><?php
+				}
 			}
 		}
 	}
@@ -1215,7 +1326,6 @@ class Wpcoreuvigo_Admin {
 
 					$label_post_type = 'actas';
 
-					//$terms = get_the_terms( $post_id, Wpcoreuvigo_Admin::UV_TAXONOMY_ACT_TYPE_NAME );
 					$term_id = get_field( 'uvigo_act_taxonomy', $post_id, false );
 					$date    = get_field( 'uvigo_act_date', $post_id, false );
 					if ( ! empty( $term_id ) && ! empty( $date ) ) {
@@ -1256,11 +1366,42 @@ class Wpcoreuvigo_Admin {
 					$label_post_type = 'documentos';
 
 					$term_id = get_field( 'uvigo_document_taxonomy', $post_id, false );
-					// error_log('TAXONOMIA ' . print_r($term_id,true));
 					if ( ! empty( $term_id ) ) {
 						$taxonomy_slugs_dir = get_term_parents_list(
 							$term_id,
 							self::UV_TAXONOMY_DOCUMENT_TYPE_NAME,
+							array(
+								'format'    => 'slug',
+								'separator' => '/',
+								'link'      => false,
+								'inclusive' => true,
+							)
+						);
+
+						$taxonomy_slugs_dir = substr( $taxonomy_slugs_dir, 0, -1 );
+
+						$subdir = '/' . $label_post_type . '/' . $taxonomy_slugs_dir;
+					} else {
+						$subdir = '/' . $label_post_type . $new['subdir'];
+					}
+
+					$new['path']   = str_replace( $new['subdir'], $subdir, $new['path'] );
+					$new['url']    = str_replace( $new['subdir'], $subdir, $new['url'] );
+					$new['subdir'] = str_replace( $new['subdir'], $subdir, $new['subdir'] );
+
+					$args = $new;
+					break;
+
+				case self::UV_FORM_POST_TYPE:
+					$new = array_merge( $args, array() );
+
+					$label_post_type = 'formularios';
+
+					$term_id = get_field( 'uvigo_form_taxonomy', $post_id, false );
+					if ( ! empty( $term_id ) ) {
+						$taxonomy_slugs_dir = get_term_parents_list(
+							$term_id,
+							self::UV_TAXONOMY_FORM_TYPE_NAME,
 							array(
 								'format'    => 'slug',
 								'separator' => '/',
@@ -1588,4 +1729,27 @@ class Wpcoreuvigo_Admin {
 			));
 		}
 	}
+
+	/**
+	 * Asigna un Alias al tipo de fichero
+	 *
+	 * @param [type] $file_type
+	 * @return void
+	 */
+	function wpcoreuvigo_acf_file_subtype_alias( $file_type ) {
+		$file_type_alias = $file_type;
+		switch ( $file_type ) {
+			case 'msword':
+				$file_type_alias = 'doc';
+				break;
+			case 'vnd.oasis.opendocument.text':
+				$file_type_alias = 'odt';
+				break;
+			default:
+				$file_type_alias = $file_type;
+				break;
+		}
+		return $file_type_alias;
+	}
+
 }

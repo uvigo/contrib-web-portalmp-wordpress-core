@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: wpcoreuvigo\n"
-"POT-Creation-Date: 2019-06-27 14:14+0200\n"
-"PO-Revision-Date: 2019-06-27 14:26+0200\n"
+"POT-Creation-Date: 2019-06-28 10:26+0200\n"
+"PO-Revision-Date: 2019-06-28 10:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -292,7 +292,7 @@ msgstr "Actualizar tipo de Documento"
 
 #: admin/class-wpcoreuvigo-admin.php:863
 msgid "Add New Document Type"
-msgstr "Añadir nuevo Tipo de Documento"
+msgstr "Añadir nuevo tipo de Documento"
 
 #: admin/class-wpcoreuvigo-admin.php:864
 msgid "New Document Type Name"
@@ -413,19 +413,130 @@ msgstr "Nuevo tipo de Acta"
 msgid "Act Type"
 msgstr "Tipo de Acta"
 
+#: admin/class-wpcoreuvigo-admin.php:998
+msgctxt "post type general name"
+msgid "Forms"
+msgstr "Formularios"
+
+#: admin/class-wpcoreuvigo-admin.php:999
+msgctxt "post type singular name"
+msgid "Form"
+msgstr "Formulario"
+
+#: admin/class-wpcoreuvigo-admin.php:1000
+msgctxt "admin menu"
+msgid "Forms"
+msgstr "Formularios"
+
 #: admin/class-wpcoreuvigo-admin.php:1001
+msgctxt "add new on admin bar"
+msgid "Forms"
+msgstr "Formulario"
+
+#: admin/class-wpcoreuvigo-admin.php:1002
+msgctxt "Form"
+msgid "Add new"
+msgstr "Nuevo Formulario"
+
+#: admin/class-wpcoreuvigo-admin.php:1003
+msgid "Add new form"
+msgstr "Nuevo Formulario"
+
+#: admin/class-wpcoreuvigo-admin.php:1004
+msgid "New form"
+msgstr "Nuevo Formulario"
+
+#: admin/class-wpcoreuvigo-admin.php:1005
+msgid "Edit form"
+msgstr "Editar Formulario"
+
+#: admin/class-wpcoreuvigo-admin.php:1006
+msgid "View form"
+msgstr "Ver Formulario"
+
+#: admin/class-wpcoreuvigo-admin.php:1007
+msgid "All forms"
+msgstr "Todos los Formularios"
+
+#: admin/class-wpcoreuvigo-admin.php:1008
+msgid "Search forms"
+msgstr "Buscar formularios"
+
+#: admin/class-wpcoreuvigo-admin.php:1009
+msgid "Parent form:"
+msgstr ""
+
+#: admin/class-wpcoreuvigo-admin.php:1010
+msgid "Forms not found."
+msgstr "No se encontraron formularios"
+
+#: admin/class-wpcoreuvigo-admin.php:1011
+msgid "Forms not found in trash."
+msgstr "No se encontraron formularios."
+
+#: admin/class-wpcoreuvigo-admin.php:1016
+msgid "Forms"
+msgstr "Formulario"
+
+#: admin/class-wpcoreuvigo-admin.php:1042
+msgctxt "taxonomy general name"
+msgid "Forms Types"
+msgstr "Tipos de Formularios"
+
+#: admin/class-wpcoreuvigo-admin.php:1043
+msgctxt "taxonomy singular name"
+msgid "Form Type"
+msgstr "Tipo de Formulario"
+
+#: admin/class-wpcoreuvigo-admin.php:1044
+msgid "Search Form Type"
+msgstr "Buscar Tipo de Formulario"
+
+#: admin/class-wpcoreuvigo-admin.php:1045
+msgid "All Forms Types"
+msgstr "Todos los tipos de Formularios"
+
+#: admin/class-wpcoreuvigo-admin.php:1046
+msgid "Parent Form Type"
+msgstr ""
+
+#: admin/class-wpcoreuvigo-admin.php:1047
+msgid "Parent Form Type:"
+msgstr ""
+
+#: admin/class-wpcoreuvigo-admin.php:1048
+msgid "Edit Form Type"
+msgstr "Editar tipo de Formulario"
+
+#: admin/class-wpcoreuvigo-admin.php:1049
+msgid "Update Form Type"
+msgstr "Actualizar tipo de Formulario"
+
+#: admin/class-wpcoreuvigo-admin.php:1050
+msgid "Add New Form Type"
+msgstr "Añadir nuevo tipo de Formulario"
+
+#: admin/class-wpcoreuvigo-admin.php:1051
+msgid "New Form Type Name"
+msgstr "Nombre"
+
+#: admin/class-wpcoreuvigo-admin.php:1052
+msgid "Form Type"
+msgstr "Tipo Formulario"
+
+#: admin/class-wpcoreuvigo-admin.php:1094
 msgid "Video url:"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:1059
+#: admin/class-wpcoreuvigo-admin.php:1152
 msgid "Hide image in single view"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:1308
+#: admin/class-wpcoreuvigo-admin.php:1401
 msgid "Non se pode modificar o tipo de documento."
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:1309
+#: admin/class-wpcoreuvigo-admin.php:1402
 msgid ""
 "Sentímolo, pero non se pode modificar o tipo de documento, para evitar "
 "problemas co acceso os ficheiros en disco."
