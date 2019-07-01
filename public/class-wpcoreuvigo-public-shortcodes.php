@@ -568,19 +568,19 @@ class Wpcoreuvigo_Public_Shortcodes {
 				$uvigo_form_document_odt = get_field( 'uvigo_form_document_odt', $form->ID );
 				$uvigo_form_document_pdf = get_field( 'uvigo_form_document_pdf', $form->ID );
 
-				$output .= '<a class="list-feed-item-link" href="' . get_permalink( $form->ID ) . '">' . get_the_title( $form->ID ) . '</a>';
+				$output .= '<span class="list-feed-item-link">' . get_the_title( $form->ID ) . '</span>';
 				$output .= '<ul class="list-inline">';
 				if ( $uvigo_form_document_doc ) {
 					$file_type_alias = apply_filters( 'wpcoreuvigo_acf_file_subtype_alias', $uvigo_form_document_doc['subtype'] );
-					$output .= '<li><a target="_blank" href="' . $uvigo_form_document_doc['url'] . '">(<span class="text-lowercase">' . $file_type_alias . '</span>)</a></li>';
+					$output .= '<li><a target="_blank" title="' . get_the_title( $form->ID ) . '" href="' . $uvigo_form_document_doc['url'] . '">(<span class="text-lowercase">' . $file_type_alias . '</span>)</a></li>';
 				}
 				if ( $uvigo_form_document_odt ) {
 					$file_type_alias = apply_filters( 'wpcoreuvigo_acf_file_subtype_alias', $uvigo_form_document_odt['subtype'] );
-					$output .= '<li><a target="_blank" href="' . $uvigo_form_document_odt['url'] . '">(<span class="text-lowercase">' . $file_type_alias . '</span>)</a></li>';
+					$output .= '<li><a target="_blank" title="' . get_the_title( $form->ID ) . '" href="' . $uvigo_form_document_odt['url'] . '">(<span class="text-lowercase">' . $file_type_alias . '</span>)</a></li>';
 				}
 				if ( $uvigo_form_document_pdf ) {
 					$file_type_alias = apply_filters( 'wpcoreuvigo_acf_file_subtype_alias', $uvigo_form_document_pdf['subtype'] );
-					$output .= '<li><a target="_blank" href="' . $uvigo_form_document_pdf['url'] . '">(<span class="text-lowercase">' . $file_type_alias . '</span>)</a></li>';
+					$output .= '<li><a target="_blank" title="' . get_the_title( $form->ID ) . '" href="' . $uvigo_form_document_pdf['url'] . '">(<span class="text-lowercase">' . $file_type_alias . '</span>)</a></li>';
 				}
 				$output .= '</ul>';
 				$output .= '</article>';
