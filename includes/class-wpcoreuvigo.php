@@ -240,6 +240,7 @@ class Wpcoreuvigo {
 		$this->loader->add_filter('wp_handle_upload', $plugin_admin, 'handle_upload' );
 
 		// Restricciones en ACF
+		$this->loader->add_action( 'acf/init', $plugin_admin, 'wpcoreuvigo_acf_add_local_field_groups');
 		$this->loader->add_filter( 'acf/prepare_field/name=uvigo_document_taxonomy', $plugin_admin, 'prepare_field_before_render_uvigo_taxonomy');
 		$this->loader->add_filter( 'acf/prepare_field/name=uvigo_act_taxonomy', $plugin_admin, 'prepare_field_before_render_uvigo_taxonomy');
 
