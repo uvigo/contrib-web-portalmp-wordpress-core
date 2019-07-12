@@ -185,6 +185,9 @@ class Wpcoreuvigo {
 		$this->loader->add_action( 'init', $plugin_admin, 'register_act_post_type' );
 		$this->loader->add_action( 'init', $plugin_admin, 'register_act_type_taxonomy', 10 );
 
+		$this->loader->add_action( 'init', $plugin_admin, 'register_form_post_type' );
+		$this->loader->add_action( 'init', $plugin_admin, 'register_form_type_taxonomy', 10 );
+
 		$this->loader->add_action( 'wp_loaded', $plugin_admin, 'register_taxonomies_terms', 10 );
 
 		$this->loader->add_filter( 'custom_menu_order', $plugin_admin, 'custom_menu_order', 10 );
@@ -237,6 +240,10 @@ class Wpcoreuvigo {
 		$this->loader->add_filter('wp_handle_upload', $plugin_admin, 'handle_upload' );
 
 		// Restricciones en ACF
+		$this->loader->add_action( 'acf/init', $plugin_admin, 'wpcoreuvigo_acf_add_local_field_groups');
+		$this->loader->add_filter( 'acf/prepare_field/name=uvigo_document_taxonomy', $plugin_admin, 'prepare_field_before_render_uvigo_taxonomy');
+		$this->loader->add_filter( 'acf/prepare_field/name=uvigo_act_taxonomy', $plugin_admin, 'prepare_field_before_render_uvigo_taxonomy');
+
 		$this->loader->add_action( 'admin_footer', $plugin_admin, 'check_ACF_add_files_permissions_button', 10, 1 );
 
 		// TOOLS - UVIGO ( descomentar si hace falta )
@@ -246,11 +253,23 @@ class Wpcoreuvigo {
 		// Columnas ACTAS Wpcoreuvigo_Admin::UV_ACT_POST_TYPE
 		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Admin::UV_ACT_POST_TYPE . '_posts_columns', $plugin_admin, 'manage_uvigo_act_columns', 10, 2 );
 		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Admin::UV_ACT_POST_TYPE . '_posts_custom_column', $plugin_admin, 'manage_uvigo_act_custom_column', 10, 2 );
+
+		// Columnas ACTAS Wpcoreuvigo_Admin::UV_ACT_POST_TYPE
+		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE . '_posts_columns', $plugin_admin, 'manage_uvigo_document_columns', 10, 2 );
+		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE . '_posts_custom_column', $plugin_admin, 'manage_uvigo_document_custom_column', 10, 2 );
+
 		// Filtro en Actas
 		$this->loader->add_action( 'restrict_manage_posts', $plugin_admin, 'manage_posts_table_filtering_uvigo_act', 10, 2 );
 
 		// Filtros en Documentos
 		$this->loader->add_action( 'restrict_manage_posts', $plugin_admin, 'manage_posts_table_filtering_uvigo_document', 10, 2 );
+		// Filtros taxonomia de Documentos
+		$this->loader->add_action( 'edit_terms', $plugin_admin, 'restrict_update_taxonomy_document_type', 10, 2 );
+		$this->loader->add_action( 'pre_delete_term', $plugin_admin, 'restrict_update_taxonomy_document_type', 10, 2 );
+
+		// Filtro Tipo de File
+		$this->loader->add_filter( 'wpcoreuvigo_acf_file_subtype_alias', $plugin_admin, 'wpcoreuvigo_acf_file_subtype_alias' );
+
 	}
 
 	/**
