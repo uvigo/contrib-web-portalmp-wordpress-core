@@ -868,9 +868,10 @@ class Wpcoreuvigo_Admin {
 			$args = array(
 				'hierarchical'       => true,
 				'labels'             => $labels,
+				'public'             => false,
 				'show_ui'            => true,
 				'show_in_menu'       => true,
-				'show_in_nav_menus'  => true,
+				'show_in_nav_menus'  => false,
 				'show_admin_column'  => true,
 				'show_in_quick_edit' => false,
 				'meta_box_cb'        => false,
