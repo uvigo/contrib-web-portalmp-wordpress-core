@@ -185,7 +185,7 @@ class Wpcoreuvigo_Public {
 	 * @return void
 	 */
 	public function hide_post_thumbnail( $has_thumbnail, $post, $thumbnail_id ) {
-		if ( is_single() ) {
+		if ( is_single() || is_page() ) {
 			if ( $has_thumbnail ) {
 				$post = get_post( $post );
 				if ( ! $post ) {

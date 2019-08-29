@@ -1143,7 +1143,7 @@ class Wpcoreuvigo_Admin {
 	public function add_hide_thumbnail( $content, $post_id ) {
 
 		// Only featured video in post type
-		if ( 'post' !== get_post_type( $post_id ) ) {
+		if ( ! in_array( get_post_type( $post_id ), [ 'post', 'page' ], true ) ) {
 			return $content;
 		}
 
@@ -1173,7 +1173,7 @@ class Wpcoreuvigo_Admin {
 	public function save_hide_thumbnail( $post_id, $post, $update ) {
 
 		// Only featured video in post type
-		if ( 'post' !== get_post_type( $post_id ) ) {
+		if ( ! in_array( get_post_type( $post_id ), [ 'post', 'page' ], true ) ) {
 			return;
 		}
 
@@ -1193,17 +1193,17 @@ class Wpcoreuvigo_Admin {
 
 	/**
 	 * Restringir edición de taxonomia en documentos y actas
-	 * 
+	 *
 	 * Field name : uvigo_act_taxonomy
 	 * Field name : uvigo_document_taxonomy
-	 * 
-	 * Modify a field taxonomy before it is rendered 
+	 *
+	 * Modify a field taxonomy before it is rendered
 	 */
 	function prepare_field_before_render_uvigo_taxonomy( $field ) {
 		if( $field['value'] ) {
 			//OJO: Si se deshabilita, no se envia en el form y da un error de validación despues
 			//$field['disabled'] = true;
-			
+
 			$field['add_term'] = false;
 		}
 		return $field;
@@ -1754,7 +1754,7 @@ class Wpcoreuvigo_Admin {
 
 	/**
 	 * ACF
-	 * 
+	 *
 	 * Add a Act, Document, Forms field group
 	 *
 	 * @return void
@@ -1883,7 +1883,7 @@ class Wpcoreuvigo_Admin {
 			'active' => true,
 			'description' => '',
 		));
-	
+
 		// Documentos
 		acf_add_local_field_group(array(
 			'key' => 'group_5b8e42f3be05a',
@@ -2007,7 +2007,7 @@ class Wpcoreuvigo_Admin {
 			'active' => true,
 			'description' => '',
 		));
-		
+
 		// Formularios
 		acf_add_local_field_group(array(
 			'key' => 'group_5d15d1458734e',
