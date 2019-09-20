@@ -1411,8 +1411,9 @@ class Wpcoreuvigo_Admin {
 						);
 
 						$taxonomy_slugs_dir = substr( $taxonomy_slugs_dir, 0, -1 );
+						$form_slug_dir = get_post_field('post_name', $post_id);
 
-						$subdir = '/' . $label_post_type . '/' . $taxonomy_slugs_dir;
+						$subdir = '/' . $label_post_type . '/' . $taxonomy_slugs_dir . '/' . $form_slug_dir;
 					} else {
 						$subdir = '/' . $label_post_type . $new['subdir'];
 					}
