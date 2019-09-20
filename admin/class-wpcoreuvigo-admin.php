@@ -1657,6 +1657,37 @@ class Wpcoreuvigo_Admin {
 	}
 
 	/**
+	 * Visualización de columnas en FORMULARIOS
+	 *
+	 * @param [type] $columns
+	 * @return void
+	 */
+	function manage_uvigo_form_columns( $columns ) {
+		$start = array_slice( $columns, 0, 4 );
+		return array_merge(
+			$start,
+			array(
+				'uvigo_form_taxonomy_hierarchy' => 'Xerarquía',
+			),
+			$columns
+		);
+	}
+
+	/**
+	 * Visualización contenido de columnas en FORMULARIOS
+	 *
+	 * @param [type] $column_name
+	 * @param [type] $post_id
+	 * @return void
+	 */
+	function manage_uvigo_form_custom_column( $column_name, $post_id ) {
+		if ( $column_name == 'uvigo_form_taxonomy_hierarchy' ) {
+			$term_id = get_field( 'uvigo_form_taxonomy', $post_id, false );
+			echo get_term_parents_list( $term_id, Wpcoreuvigo_Admin::UV_TAXONOMY_FORM_TYPE_NAME, array( 'inclusive' => true ) );
+		}
+	}
+
+	/**
 	 * Filtro por taxonomia en Actas
 	 *
 	 * @param [type] $post_type
@@ -1711,6 +1742,44 @@ class Wpcoreuvigo_Admin {
 			$taxonomy = get_taxonomy( $taxonomy_slug );
 			$selected = '';
 			$request_attr = 'taxonomy-document-type'; //this will show up in the url
+
+			if ( isset( $_REQUEST[ $request_attr ] ) ) {
+				$selected = $_REQUEST[ $request_attr ]; //in case the current page is already filtered
+			}
+
+			wp_dropdown_categories(array(
+				'show_option_all' =>  __("Ver todas as {$taxonomy->label}"),
+				'taxonomy'        =>  $taxonomy_slug,
+				'name'            =>  $request_attr,
+				'value_field'     =>  'slug',
+				'orderby'         =>  'name',
+				'order'           =>  'DESC',
+				'selected'        =>  $selected,
+				'hierarchical'    =>  true,
+				'depth'           =>  0,
+				'show_count'      =>  false, // Show number of post in parent term
+				'hide_empty'      =>  false, // Don't show posts w/o terms
+			));
+		}
+	}
+
+	/**
+	 * Filtro por taxonomia en Formularios
+	 *
+	 * @param [type] $post_type
+	 * @param [type] $which
+	 * @return void
+	 */
+	function manage_posts_table_filtering_uvigo_form( $post_type, $which ) {
+
+		global $wpdb;
+
+		if ( $post_type == Wpcoreuvigo_Admin::UV_FORM_POST_TYPE ) {
+
+			$taxonomy_slug = Wpcoreuvigo_Admin::UV_TAXONOMY_FORM_TYPE_NAME;
+			$taxonomy = get_taxonomy( $taxonomy_slug );
+			$selected = '';
+			$request_attr = 'taxonomy-form-type'; //this will show up in the url
 
 			if ( isset( $_REQUEST[ $request_attr ] ) ) {
 				$selected = $_REQUEST[ $request_attr ]; //in case the current page is already filtered
