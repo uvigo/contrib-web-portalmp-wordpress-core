@@ -1789,8 +1789,9 @@ class Wpcoreuvigo_Admin {
 				'taxonomy'        =>  $taxonomy_slug,
 				'name'            =>  $request_attr,
 				'value_field'     =>  'slug',
-				'orderby'         =>  'name',
-				'order'           =>  'DESC',
+				'meta_key'        =>  'uvigo_tax_form_order',
+				'orderby'         =>  'meta_value',
+				'order'           =>  'ASC',
 				'selected'        =>  $selected,
 				'hierarchical'    =>  true,
 				'depth'           =>  0,
@@ -2166,6 +2167,45 @@ class Wpcoreuvigo_Admin {
 					'mime_types' => '',
 					'wpml_cf_preferences' => 0,
 				),
+				array(
+					'key' => 'field_5d8507b8ea6c1',
+					'label' => 'Url',
+					'name' => 'uvigo_form_url',
+					'type' => 'url',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => ''
+					),
+					'wpml_cf_preferences' => 0,
+					'default_value' => '',
+					'placeholder' => ''
+				),
+				array(
+					'key' => 'field_5d8507d1ea6c2',
+					'label' => 'Orden',
+					'name' => 'uvigo_form_order',
+					'type' => 'number',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => ''
+					),
+					'wpml_cf_preferences' => 0,
+					'default_value' => 1,
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'min' => 0,
+					'max' => 100,
+					'step' => ''
+				)
 			),
 			'location' => array(
 				array(

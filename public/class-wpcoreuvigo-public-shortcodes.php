@@ -518,6 +518,11 @@ class Wpcoreuvigo_Public_Shortcodes {
 				$output .= '[card]';
 				$output .= '[card-header]' . $tax_form_type_term->name . '[/card-header]';
 				$output .= '[card-body]';
+
+				$term_description = get_term_field( 'description', $tax_form_type_term->term_id );
+				if ( !empty($term_description) ) {
+					$output .= '<p class="uvigo_tax_form_term__description">' . $term_description . '</p>';
+				}
 			} else {
 				$tag_heading = ( $level < 4 ? 'h' . ( $level + 2 ) : 'h6' );
 
@@ -532,7 +537,12 @@ class Wpcoreuvigo_Public_Shortcodes {
 			$output .= $this->uvigo_forms_list( $tax_form_type_term );
 
 			// Recursive
-			$childs_terms = $this->get_terms_child_of( $tax_form_type_term->term_id, Wpcoreuvigo_Admin::UV_TAXONOMY_FORM_TYPE_NAME );
+			$arguments = array(
+				'meta_key'       =>  'uvigo_tax_form_order',
+				'orderby'        =>  'meta_value_num',
+				'order'          =>  'ASC',
+			);
+			$childs_terms = $this->get_terms_child_of( $tax_form_type_term->term_id, Wpcoreuvigo_Admin::UV_TAXONOMY_FORM_TYPE_NAME, $arguments );
 			$output .= $this->uvigo_tax_forms_type_list( $childs_terms, $level + 1 );
 
 			if ( $level === 0 ) {
@@ -566,8 +576,9 @@ class Wpcoreuvigo_Public_Shortcodes {
 			$forms = get_posts(
 				array(
 					'post_type'      => Wpcoreuvigo_Admin::UV_FORM_POST_TYPE,
-					'orderby'        => 'title',
-					'order'          => 'ASC',
+					'meta_key'       =>  'uvigo_form_order',
+					'orderby'        =>  'meta_value_num',
+					'order'          =>  'ASC',
 					'tax_query'      => $tax_query,
 					'posts_per_page' => -1,
 				)
@@ -580,20 +591,28 @@ class Wpcoreuvigo_Public_Shortcodes {
 				$uvigo_form_document_doc = get_field( 'uvigo_form_document_doc', $form->ID );
 				$uvigo_form_document_odt = get_field( 'uvigo_form_document_odt', $form->ID );
 				$uvigo_form_document_pdf = get_field( 'uvigo_form_document_pdf', $form->ID );
+				$uvigo_form_url = get_field( 'uvigo_form_url', $form->ID );
 
-				$output .= '<span class="list-feed-item-link">' . get_the_title( $form->ID ) . '</span>';
+				$excerpt = get_the_excerpt($form->ID);
+				$form_name_to_display = ( empty($excerpt) ? get_the_title( $form->ID ) : $excerpt );
+
+				$output .= '<span class="list-feed-item-link">' . $form_name_to_display . '</span>';
 				$output .= '<ul class="list-inline">';
 				if ( $uvigo_form_document_doc ) {
 					$file_type_alias = apply_filters( 'wpcoreuvigo_acf_file_subtype_alias', $uvigo_form_document_doc['subtype'] );
-					$output .= '<li><a target="_blank" title="' . get_the_title( $form->ID ) . '" href="' . $uvigo_form_document_doc['url'] . '">(<span class="text-lowercase">' . $file_type_alias . '</span>)</a></li>';
+					$output .= '<li><a target="_blank" title="' . $form_name_to_display . '" href="' . $uvigo_form_document_doc['url'] . '">(<span class="text-lowercase">' . $file_type_alias . '</span>)</a></li>';
 				}
 				if ( $uvigo_form_document_odt ) {
 					$file_type_alias = apply_filters( 'wpcoreuvigo_acf_file_subtype_alias', $uvigo_form_document_odt['subtype'] );
-					$output .= '<li><a target="_blank" title="' . get_the_title( $form->ID ) . '" href="' . $uvigo_form_document_odt['url'] . '">(<span class="text-lowercase">' . $file_type_alias . '</span>)</a></li>';
+					$output .= '<li><a target="_blank" title="' . $form_name_to_display . '" href="' . $uvigo_form_document_odt['url'] . '">(<span class="text-lowercase">' . $file_type_alias . '</span>)</a></li>';
 				}
 				if ( $uvigo_form_document_pdf ) {
 					$file_type_alias = apply_filters( 'wpcoreuvigo_acf_file_subtype_alias', $uvigo_form_document_pdf['subtype'] );
-					$output .= '<li><a target="_blank" title="' . get_the_title( $form->ID ) . '" href="' . $uvigo_form_document_pdf['url'] . '">(<span class="text-lowercase">' . $file_type_alias . '</span>)</a></li>';
+					$output .= '<li><a target="_blank" title="' . $form_name_to_display . '" href="' . $uvigo_form_document_pdf['url'] . '">(<span class="text-lowercase">' . $file_type_alias . '</span>)</a></li>';
+				}
+				if ( $uvigo_form_url ) {
+					$file_type_alias = apply_filters( 'wpcoreuvigo_acf_file_subtype_alias', $uvigo_form_document_pdf['subtype'] );
+					$output .= '<li><a target="_blank" title="' . $form_name_to_display . '" href="' . $uvigo_form_url . '">(<span class="text-lowercase">' . 'Enlace' . '</span>)</a></li>';
 				}
 				$output .= '</ul>';
 				$output .= '</article>';
@@ -609,7 +628,7 @@ class Wpcoreuvigo_Public_Shortcodes {
 	 * @param [type] $taxonomy
 	 * @return void
 	 */
-	private function get_terms_child_of( $parent, $taxonomy ) {
+	private function get_terms_child_of( $parent, $taxonomy, $arguments = array()) {
 		$args = array(
 			'orderby'      => 'name',
 			'order'        => 'ASC',
@@ -619,6 +638,7 @@ class Wpcoreuvigo_Public_Shortcodes {
 			'hierarchical' => true,
 			'child_of'     => 0,
 		);
+		$args = array_merge($args, $arguments);
 		return get_terms( $taxonomy, $args );
 	}
 
