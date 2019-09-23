@@ -492,13 +492,14 @@ class Wpcoreuvigo_Public_Shortcodes {
 		$tax_form = $args_shortcode['tax_form'];
 		$output = '';
 
+		if ( isset( $content ) ) {
+			$output .= '<p class="shortcode_uvigo_forms__content">' . $content . '</p>';
+		}
+
 		if ( ! empty( $tax_form ) ) {
 			$tax_form_term = get_term_by( 'slug', $tax_form, Wpcoreuvigo_Admin::UV_TAXONOMY_FORM_TYPE_NAME );
-			$output .= $this->uvigo_tax_forms_type_list( array( $tax_form_term ), 0, $content );
+			$output .= $this->uvigo_tax_forms_type_list( array( $tax_form_term ), 0 );
 		} else {
-			if ( isset( $content ) ) {
-				$output .= $content;
-			}
 			$tax_form_terms = $this->get_terms_child_of( 0, Wpcoreuvigo_Admin::UV_TAXONOMY_FORM_TYPE_NAME );
 			$output .= $this->uvigo_tax_forms_type_list( $tax_form_terms );
 		}
@@ -510,31 +511,34 @@ class Wpcoreuvigo_Public_Shortcodes {
 	 * @param [array] $tax_form_type_terms
 	 * @return string
 	 */
-	private function uvigo_tax_forms_type_list( $tax_form_type_terms, $level = 0, $content = null ) {
+	private function uvigo_tax_forms_type_list( $tax_form_type_terms, $level = 0 ) {
 		$output = '';
-		$output .= '[accordion allclosed="true" class="uvigo_tax_forms__accordion"]';
+
 		foreach ( $tax_form_type_terms as $tax_form_type_term ) {
+			// Nivel 0 : Acordeon
 			if ( $level === 0 ) {
+				$output .= '[accordion allclosed="true" class="uvigo_tax_forms__accordion"]';
 				$output .= '[card]';
 				$output .= '[card-header]' . $tax_form_type_term->name . '[/card-header]';
 				$output .= '[card-body]';
 
-				$term_description = get_term_field( 'description', $tax_form_type_term->term_id );
-				if ( !empty($term_description) ) {
-					$output .= '<p class="uvigo_tax_form_term__description">' . $term_description . '</p>';
-				}
 			} else {
-				$tag_heading = ( $level < 4 ? 'h' . ( $level + 2 ) : 'h6' );
+				$output .= '<div class="uvigo_tax_forms__term level_' . $level . '" >';
 
+				$tag_heading = ( $level < 4 ? 'h' . ( $level + 2 ) : 'h6' );
 				$output .= '<' . $tag_heading . '>' . $tax_form_type_term->name . '</' . $tag_heading . '>';
 			}
 
-			if ( isset( $content ) ) {
-				$output .= $content;
+			$term_description = get_term_field( 'description', $tax_form_type_term->term_id );
+			if ( !empty($term_description) ) {
+				$output .= $term_description;
 			}
 
 			// Forms of term
-			$output .= $this->uvigo_forms_list( $tax_form_type_term );
+			$forms_of_type_term = $this->uvigo_forms_list( $tax_form_type_term );
+			if ( !empty($forms_of_type_term) ) {
+				$output .= '<div class="uvigo_tax_forms__forms_list" >' . $forms_of_type_term . '</div>';
+			}
 
 			// Recursive
 			$arguments = array(
@@ -548,9 +552,11 @@ class Wpcoreuvigo_Public_Shortcodes {
 			if ( $level === 0 ) {
 				$output .= '[/card-body]';
 				$output .= '[/card]';
+				$output .= '[/accordion]';
+			} else {
+				$output .= '</div>';
 			}
 		}
-		$output .= '[/accordion]';
 		return do_shortcode( $output );
 	}
 
@@ -562,13 +568,13 @@ class Wpcoreuvigo_Public_Shortcodes {
 	 */
 	private function uvigo_forms_list( $tax_form_type_term ) {
 		$output = '';
-		if ( $tax_form_type_term ){
+		if ( $tax_form_type_term ) {
 			// Query Forms
 			$tax_query = array(
 				array(
 					'taxonomy' => Wpcoreuvigo_Admin::UV_TAXONOMY_FORM_TYPE_NAME,
-					'field' => 'slug',
-					'terms' => $tax_form_type_term,
+					'field' => 'term_id',
+					'terms' => $tax_form_type_term->term_id,
 					'include_children' => false,
 				),
 			);
@@ -576,13 +582,13 @@ class Wpcoreuvigo_Public_Shortcodes {
 			$forms = get_posts(
 				array(
 					'post_type'      => Wpcoreuvigo_Admin::UV_FORM_POST_TYPE,
-					'meta_key'       =>  'uvigo_form_order',
-					'orderby'        =>  'meta_value_num',
-					'order'          =>  'ASC',
+					'orderby'        => 'menu_order',
+					'order'          => 'ASC',
 					'tax_query'      => $tax_query,
 					'posts_per_page' => -1,
 				)
 			);
+
 
 			// Template Forms
 			foreach ( $forms as $form ) {
@@ -620,7 +626,7 @@ class Wpcoreuvigo_Public_Shortcodes {
 		}
 		return $output;
 	}
-	
+
 	/**
 	 * Get First level of Terms Child of
 	 *
