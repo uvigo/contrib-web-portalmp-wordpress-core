@@ -1456,17 +1456,17 @@ class Wpcoreuvigo_Admin {
 	}
 
 	/**
-	 * Restrinxe a edición da taxonomia de Tipo Formulario
+	 * Restrinxe a edición da taxonomia de Tipo Acta
 	 *
 	 * @return void
 	 */
 	function restrict_update_taxonomy_act_type( $term_id, $taxonomy ){
-		if ($taxonomy == Wpcoreuvigo_Admin::UV_TAXONOMY_FORM_TYPE_NAME){
+		if ($taxonomy == Wpcoreuvigo_Admin::UV_TAXONOMY_ACT_TYPE_NAME){
 			$term = get_term( $term_id, $taxonomy );
 			if ( $term->count  > 0 ){
 				wp_die(
-					'<h1>' . __( 'Non se pode modificar o tipo de formulario.' ) . '</h1>' .
-					'<p>' . __( 'Sentímolo, pero non se pode modificar o tipo de formulario, para evitar problemas co acceso os ficheiros en disco.' ) . '</p>',
+					'<h1>' . __( 'Non se pode modificar o tipo de acta.' ) . '</h1>' .
+					'<p>' . __( 'Sentímolo, pero non se pode modificar o tipo de acta, para evitar problemas co acceso os ficheiros en disco.' ) . '</p>',
 					403
 				);
 			}
@@ -1474,17 +1474,17 @@ class Wpcoreuvigo_Admin {
 	}
 
 	/**
-	 * Restrinxe a edición da taxonomia de Tipo Acta
+	 * Restrinxe a edición da taxonomia de Tipo Formulario
 	 *
 	 * @return void
 	 */
 	function restrict_update_taxonomy_form_type( $term_id, $taxonomy ){
-		if ($taxonomy == Wpcoreuvigo_Admin::UV_TAXONOMY_ACT_TYPE_NAME){
+		if ($taxonomy == Wpcoreuvigo_Admin::UV_TAXONOMY_FORM_TYPE_NAME){
 			$term = get_term( $term_id, $taxonomy );
 			if ( $term->count  > 0 ){
 				wp_die(
-					'<h1>' . __( 'Non se pode modificar o tipo de acta.' ) . '</h1>' .
-					'<p>' . __( 'Sentímolo, pero non se pode modificar o tipo de acta, para evitar problemas co acceso os ficheiros en disco.' ) . '</p>',
+					'<h1>' . __( 'Non se pode modificar o tipo de formulario.' ) . '</h1>' .
+					'<p>' . __( 'Sentímolo, pero non se pode modificar o tipo de formulario, para evitar problemas co acceso os ficheiros en disco.' ) . '</p>',
 					403
 				);
 			}
