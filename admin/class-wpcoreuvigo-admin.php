@@ -1026,7 +1026,7 @@ class Wpcoreuvigo_Admin {
 			'hierarchical'       => false,
 			'menu_position'      => 5,
 			'menu_icon'          => 'dashicons-media-document',
-			'supports'           => array( 'title', 'editor', 'excerpt', 'custom-fields', 'author' ),
+			'supports'           => array( 'title', 'editor', 'excerpt', 'custom-fields', 'page-attributes', 'author' ),
 		);
 		register_post_type( self::UV_FORM_POST_TYPE, $args );
 	}
@@ -1456,6 +1456,42 @@ class Wpcoreuvigo_Admin {
 	}
 
 	/**
+	 * Restrinxe a edición da taxonomia de Tipo Formulario
+	 *
+	 * @return void
+	 */
+	function restrict_update_taxonomy_act_type( $term_id, $taxonomy ){
+		if ($taxonomy == Wpcoreuvigo_Admin::UV_TAXONOMY_FORM_TYPE_NAME){
+			$term = get_term( $term_id, $taxonomy );
+			if ( $term->count  > 0 ){
+				wp_die(
+					'<h1>' . __( 'Non se pode modificar o tipo de formulario.' ) . '</h1>' .
+					'<p>' . __( 'Sentímolo, pero non se pode modificar o tipo de formulario, para evitar problemas co acceso os ficheiros en disco.' ) . '</p>',
+					403
+				);
+			}
+		}
+	}
+
+	/**
+	 * Restrinxe a edición da taxonomia de Tipo Acta
+	 *
+	 * @return void
+	 */
+	function restrict_update_taxonomy_form_type( $term_id, $taxonomy ){
+		if ($taxonomy == Wpcoreuvigo_Admin::UV_TAXONOMY_ACT_TYPE_NAME){
+			$term = get_term( $term_id, $taxonomy );
+			if ( $term->count  > 0 ){
+				wp_die(
+					'<h1>' . __( 'Non se pode modificar o tipo de acta.' ) . '</h1>' .
+					'<p>' . __( 'Sentímolo, pero non se pode modificar o tipo de acta, para evitar problemas co acceso os ficheiros en disco.' ) . '</p>',
+					403
+				);
+			}
+		}
+	}
+
+	/**
 	 * Engade páxina de Utilidades
 	 *
 	 * @return void
@@ -1812,6 +1848,9 @@ class Wpcoreuvigo_Admin {
 		switch ( $file_type ) {
 			case 'msword':
 				$file_type_alias = 'doc';
+				break;
+			case 'vnd.openxmlformats-officedocument.wordprocessingml.document':
+				$file_type_alias = 'docx';
 				break;
 			case 'vnd.oasis.opendocument.text':
 				$file_type_alias = 'odt';
@@ -2183,28 +2222,6 @@ class Wpcoreuvigo_Admin {
 					'wpml_cf_preferences' => 0,
 					'default_value' => '',
 					'placeholder' => ''
-				),
-				array(
-					'key' => 'field_5d8507d1ea6c2',
-					'label' => 'Orden',
-					'name' => 'uvigo_form_order',
-					'type' => 'number',
-					'instructions' => '',
-					'required' => 0,
-					'conditional_logic' => 0,
-					'wrapper' => array(
-						'width' => '',
-						'class' => '',
-						'id' => ''
-					),
-					'wpml_cf_preferences' => 0,
-					'default_value' => 1,
-					'placeholder' => '',
-					'prepend' => '',
-					'append' => '',
-					'min' => 0,
-					'max' => 100,
-					'step' => ''
 				)
 			),
 			'location' => array(
@@ -2225,6 +2242,56 @@ class Wpcoreuvigo_Admin {
 			'active' => true,
 			'description' => '',
 		));
+
+		//Tipo Taxonomia Formulario
+		acf_add_local_field_group( array(
+			array(
+				'key' => 'group_5d8503137dbe1',
+				'title' => 'Taxonomia Tipos de Formularios',
+				'fields' => array(
+					array(
+						'key' => 'field_5d85035589ea2',
+						'label' => 'Orden',
+						'name' => 'uvigo_tax_form_order',
+						'type' => 'number',
+						'instructions' => '',
+						'required' => 0,
+						'conditional_logic' => 0,
+						'wrapper' => array(
+							'width' => '',
+							'class' => '',
+							'id' => ''
+						),
+						'wpml_cf_preferences' => 0,
+						'default_value' => 0,
+						'placeholder' => '',
+						'prepend' => '',
+						'append' => '',
+						'min' => 0,
+						'max' => 100,
+						'step' => ''
+					)
+				),
+				'location' => array(
+					array(
+						array(
+							'param' => 'taxonomy',
+							'operator' => '==',
+							'value' => 'uvigo-tax-form'
+						)
+					)
+				),
+				'menu_order' => 0,
+				'position' => 'normal',
+				'style' => 'default',
+				'label_placement' => 'top',
+				'instruction_placement' => 'label',
+				'hide_on_screen' => '',
+				'active' => true,
+				'description' => ''
+			)
+		));
+
 	}
 
 }
