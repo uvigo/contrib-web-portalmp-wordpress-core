@@ -269,12 +269,20 @@ class Wpcoreuvigo {
 		// Filtros en Documentos
 		$this->loader->add_action( 'restrict_manage_posts', $plugin_admin, 'manage_posts_table_filtering_uvigo_document', 10, 2 );
 		
-		// Filtros en Documentos
+		// Filtros en Formularios
 		$this->loader->add_action( 'restrict_manage_posts', $plugin_admin, 'manage_posts_table_filtering_uvigo_form', 10, 2 );
 
-		// Filtros taxonomia de Documentos
+		// Filtros taxonomia de Documentos ( restricción en edición )
 		$this->loader->add_action( 'edit_terms', $plugin_admin, 'restrict_update_taxonomy_document_type', 10, 2 );
 		$this->loader->add_action( 'pre_delete_term', $plugin_admin, 'restrict_update_taxonomy_document_type', 10, 2 );
+
+		// Filtros taxonomia de Actas ( restricción en edición )
+		$this->loader->add_action( 'edit_terms', $plugin_admin, 'restrict_update_taxonomy_act_type', 10, 2 );
+		$this->loader->add_action( 'pre_delete_term', $plugin_admin, 'restrict_update_taxonomy_act_type', 10, 2 );
+
+		// Filtros taxonomia de Formularios ( restricción en edición )
+		$this->loader->add_action( 'edit_terms', $plugin_admin, 'restrict_update_taxonomy_form_type', 10, 2 );
+		$this->loader->add_action( 'pre_delete_term', $plugin_admin, 'restrict_update_taxonomy_form_type', 10, 2 );
 
 		// Filtro Tipo de File
 		$this->loader->add_filter( 'wpcoreuvigo_acf_file_subtype_alias', $plugin_admin, 'wpcoreuvigo_acf_file_subtype_alias' );
