@@ -513,15 +513,13 @@ class Wpcoreuvigo_Public_Shortcodes {
 	 */
 	private function uvigo_tax_forms_type_list( $tax_form_type_terms, $level = 0 ) {
 		$output = '';
-
+		if ( $level === 0 ) {
+			$output .= '[tabs type="tabs"]';
+		}
 		foreach ( $tax_form_type_terms as $tax_form_type_term ) {
 			// Nivel 0 : Acordeon
 			if ( $level === 0 ) {
-				$output .= '[accordion allclosed="true" class="uvigo_tax_forms__accordion"]';
-				$output .= '[card]';
-				$output .= '[card-header]' . $tax_form_type_term->name . '[/card-header]';
-				$output .= '[card-body]';
-
+				$output .= '[tab title="' . $tax_form_type_term->name . '" fade ]';
 			} else {
 				$output .= '<div class="uvigo_tax_forms__term level_' . $level . '" >';
 
@@ -550,12 +548,13 @@ class Wpcoreuvigo_Public_Shortcodes {
 			$output .= $this->uvigo_tax_forms_type_list( $childs_terms, $level + 1 );
 
 			if ( $level === 0 ) {
-				$output .= '[/card-body]';
-				$output .= '[/card]';
-				$output .= '[/accordion]';
+				$output .= '[/tab]';
 			} else {
 				$output .= '</div>';
 			}
+		}
+		if ( $level === 0 ) {
+			$output .= '[/tabs]';
 		}
 		return do_shortcode( $output );
 	}
