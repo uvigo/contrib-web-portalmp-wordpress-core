@@ -146,6 +146,19 @@ class Wpcoreuvigo_Admin {
 				</label>
 			</p>
 			<?php
+			$uvigo_page_hide_title = get_post_meta( $post->ID, 'uvigo_page_hide_title', true );
+			if ( empty( $uvigo_page_hide_title ) ) {
+				$uvigo_page_hide_title = 'none';
+			}
+			?>
+			<p class="post-attributes-label-wrapper">
+				<label class="post-attributes-label"><?php esc_html_e( 'Page header', 'wpcoreuvigo' ); ?></label>
+				<br>
+				<label for="uvigo_page_hide_title">
+					<input type="checkbox" name="uvigo_page_hide_title" id="uvigo_page_hide_title"<?php checked( $uvigo_page_hide_title, 'hide_page_title' ); ?> value="hide_page_title"> <?php esc_html_e( 'Hide page title', 'wpcoreuvigo' ); ?>
+				</label>
+			</p>
+			<?php
 		}
 	}
 
@@ -165,6 +178,13 @@ class Wpcoreuvigo_Admin {
 			update_post_meta( $post_id, 'uvigo_page_redirect_child', $_POST['uvigo_page_redirect_child'] );
 		} else {
 			delete_post_meta( $post_id, 'uvigo_page_redirect_child' );
+		}
+
+		if ( array_key_exists( 'uvigo_page_hide_title', $_POST ) ) {
+			$uvigo_page_hide_title = sanitize_text_field( wp_unslash( $_POST['uvigo_page_hide_title'] ) );
+			update_post_meta( $post_id, 'uvigo_page_hide_title', $uvigo_page_hide_title );
+		} else {
+			delete_post_meta( $post_id, 'uvigo_page_hide_title' );
 		}
 	}
 
