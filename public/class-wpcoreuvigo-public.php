@@ -162,6 +162,7 @@ class Wpcoreuvigo_Public {
 				$pages = get_children([
 					'posts_per_page' => 1,
 					'order'          => 'ASC',
+					'orderby'        => 'menu_order',
 					'post_parent'    => $page_id,
 					'post_type'      => 'page',
 				]);
