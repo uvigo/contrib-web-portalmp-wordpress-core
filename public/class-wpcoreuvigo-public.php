@@ -159,12 +159,15 @@ class Wpcoreuvigo_Public {
 			$page_id     = get_queried_object_id();
 			$do_redirect = get_post_meta( $page_id, 'uvigo_page_redirect_child', true );
 			if ( $do_redirect ) {
-				$pages = get_children([
-					'posts_per_page' => 1,
-					'order'          => 'ASC',
-					'post_parent'    => $page_id,
-					'post_type'      => 'page',
-				]);
+				$pages = get_children(
+					[
+						'posts_per_page' => 1,
+						'order'          => 'ASC',
+						'orderby'        => 'menu_order',
+						'post_parent'    => $page_id,
+						'post_type'      => 'page',
+					]
+				);
 
 				if ( $pages ) {
 					$url = get_permalink( current( $pages )->ID );
@@ -185,7 +188,7 @@ class Wpcoreuvigo_Public {
 	 * @return void
 	 */
 	public function hide_post_thumbnail( $has_thumbnail, $post, $thumbnail_id ) {
-		if ( is_single() ) {
+		if ( is_single() || is_page() ) {
 			if ( $has_thumbnail ) {
 				$post = get_post( $post );
 				if ( ! $post ) {

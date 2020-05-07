@@ -1,0 +1,6 @@
+{
+    "require-dev": {
+        "wp-coding-standards/wpcs": "^2.2",
+        "php-stubs/wordpress-stubs": "^5.4"
+    }
+}
