@@ -159,13 +159,15 @@ class Wpcoreuvigo_Public {
 			$page_id     = get_queried_object_id();
 			$do_redirect = get_post_meta( $page_id, 'uvigo_page_redirect_child', true );
 			if ( $do_redirect ) {
-				$pages = get_children([
-					'posts_per_page' => 1,
-					'order'          => 'ASC',
-					'orderby'        => 'menu_order',
-					'post_parent'    => $page_id,
-					'post_type'      => 'page',
-				]);
+				$pages = get_children(
+					[
+						'posts_per_page' => 1,
+						'order'          => 'ASC',
+						'orderby'        => 'menu_order',
+						'post_parent'    => $page_id,
+						'post_type'      => 'page',
+					]
+				);
 
 				if ( $pages ) {
 					$url = get_permalink( current( $pages )->ID );

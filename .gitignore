@@ -35,6 +35,11 @@ twbsconfig.yml
 
 # Folders to ignore
 node_modules
+vendor
 js/coverage
 dist
 wpcoreuvigo*.zip
+
+##### Composer
+composer.phar
+/vendor/
