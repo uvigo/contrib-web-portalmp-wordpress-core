@@ -2313,6 +2313,51 @@ class Wpcoreuvigo_Admin {
 			)
 		));
 
+		// Campos para mensajes durante el desarrollo
+		acf_add_local_field_group(array(
+			'key' => 'group_5c5dcb2fb102d',
+			'title' => 'Desarrollo',
+			'fields' => array(
+				array(
+					'key' => 'field_5c5dcb40373b1',
+					'label' => 'Revisión',
+					'name' => 'dev_revision',
+					'type' => 'wysiwyg',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'wpml_cf_preferences' => 0,
+					'default_value' => '',
+					'tabs' => 'all',
+					'toolbar' => 'basic',
+					'media_upload' => 0,
+					'delay' => 0,
+				),
+			),
+			'location' => array(
+				array(
+					array(
+						'param' => 'post_type',
+						'operator' => '==',
+						'value' => 'page',
+					),
+				),
+			),
+			'menu_order' => 0,
+			'position' => 'side',
+			'style' => 'default',
+			'label_placement' => 'top',
+			'instruction_placement' => 'label',
+			'hide_on_screen' => '',
+			'active' => true,
+			'description' => '',
+		));
+
 	}
 
 }
