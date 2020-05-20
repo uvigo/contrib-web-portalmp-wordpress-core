@@ -1,3 +1,6 @@
+# 1.4.0: May 20th, 2020
+
+* Incorporar nuevo sistema de actualización desde GitHub
 
 # 1.3.0: May 7th, 2020
 

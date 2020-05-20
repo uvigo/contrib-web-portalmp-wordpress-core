@@ -15,7 +15,7 @@
  * Plugin Name:       UVigo WordPress Core
  * Plugin URI:        https://github.com/uvigo/contrib-web-portalmp-wordpress-core
  * Description:       Common funcionalities to use with other Plugins and Themes from Universidade de Vigo.
- * Version:           1.3.0
+ * Version:           1.4.0
  * Author:            IdeiT
  * Author URI:        https://ideit.es
  * License:           GPL-2.0+
@@ -34,7 +34,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'WPCOREUVIGO_VERSION', '1.3.0' );
+define( 'WPCOREUVIGO_VERSION', '1.4.0' );
 
 /**
  * The code that runs during plugin activation.
