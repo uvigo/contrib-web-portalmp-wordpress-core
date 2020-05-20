@@ -40,6 +40,10 @@
 	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"/>
 	<rule ref="Generic.Commenting.Todo"/>
 
+	<rule ref="Generic.Arrays.DisallowShortArraySyntax">
+		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
+	</rule>
+
 	<!--
 	To get the optimal benefits of using WPCS, we should add a couple of
 	custom properties.
