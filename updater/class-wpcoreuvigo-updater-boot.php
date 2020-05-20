@@ -133,7 +133,7 @@ class WpcoreuvigoBoot {
 			if ( rename( $source, $correctSource ) ) {
 				return $correctSource;
 			} else {
-				$upgrader->skin->feedback( __( 'Unable to rename downloaded theme or plugin.', 'wp-updater' ) );
+				$upgrader->skin->feedback( __( 'Unable to rename downloaded theme or plugin.', 'wpcoreuvigo' ) );
 				return new WP_Error();
 			}
 		}
@@ -151,15 +151,15 @@ class WpcoreuvigoBoot {
 	private function checkParameters() {
 
 		if ( 'theme' !== $this->config['type'] && 'plugin' !== $this->config['type'] ) {
-			return new WP_Error( 'wrong', __( 'Your updater type is not theme or plugin!', 'wp-updater' ) );
+			return new WP_Error( 'wrong', __( 'Your updater type is not theme or plugin!', 'wpcoreuvigo' ) );
 		}
 
 		if ( empty( $this->config['type'] ) ) {
-			return new WP_Error( 'missing', __( 'You are missing what to update, either theme or plugin.', 'wp-updater' ) );
+			return new WP_Error( 'missing', __( 'You are missing what to update, either theme or plugin.', 'wpcoreuvigo' ) );
 		}
 
 		if ( empty( $this->config['source'] ) ) {
-			return new WP_Error( 'missing', __( 'You are missing the url where to update from.', 'wp-updater' ) );
+			return new WP_Error( 'missing', __( 'You are missing the url where to update from.', 'wpcoreuvigo' ) );
 		}
 
 		return true;

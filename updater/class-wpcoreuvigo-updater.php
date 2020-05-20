@@ -81,11 +81,12 @@ abstract class WpcoreuvigoUpdater
 			preg_match( '/http(s)?:\/\/github.com\/(?<username>[\w-]+)\/(?<repo>[\w-]+)$/', $this->config['source'], $matches );
 
 			if ( ! isset( $matches['username'] ) || ! isset( $matches['repo'] ) ) {
-				return new WP_Error( 'wrong', __( 'Your GitHub Repo is not properly formatted!', 'wp-updater' ) );
+				return new WP_Error( 'wrong', __( 'Your GitHub Repo is not properly formatted!', 'wpcoreuvigo' ) );
 			}
 
 			// Reformat source to the API
-			$this->source = sprintf( 'https://api.github.com/repos/%s/%s/tags', urlencode($matches['username']), urlencode($matches['repo']) );
+			// $this->source = sprintf( 'https://api.github.com/repos/%s/%s/tags', urlencode($matches['username']), urlencode($matches['repo']) );
+			$this->source = sprintf( 'https://api.github.com/repos/%s/%s/releases/latest', urlencode($matches['username']), urlencode($matches['repo']) );
 
 			return 'github';
 
@@ -153,18 +154,28 @@ abstract class WpcoreuvigoUpdater
 					$response = json_decode( $request['body'] );
 
 					// We don't have any tags
-					if ( ! is_array( $response ) || count( $response ) === 0 ) {
+					// if ( ! is_array( $response ) || count( $response ) === 0 ) {
+					// 	return false;
+					// }
+					if ( ! is_object( $response ) ) {
 						return false;
 					}
 
-					usort( $response, function( $a, $b ) {
-							return strcmp( $a->name, $b->name );
-					} );
+					if ( ! is_array( $response->assets ) || count( $response->assets ) === 0 ) {
+						return false;
+					}
 
-					$newest             = array_pop( $response ); // Retrieves the latest release from Github
+					// usort( $response, function( $a, $b ) {
+					// 		return strcmp( $a->name, $b->name );
+					// } );
+
+					// $newest             = array_pop( $response ); // Retrieves the latest release from Github
+
 					$data               = new stdClass();
-					$data->new_version  = $newest->name;
-					$data->package      = $newest->zipball_url;
+					// $data->new_version  = $newest->name;
+					// $data->package      = $newest->zipball_url;
+					$data->new_version  = $response->tag_name;
+					$data->package      = $response->assets[0]->browser_download_url;
 					$data->plugin       = $this->config['type'] == 'plugin' ? $this->slug . '/' . $this->slug . '.php' : '';// Assumes that the plugin folder and plugin file have a similar name!
 					$data->slug         = $this->slug;
 					$data->url          = $this->config['source'];

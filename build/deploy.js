@@ -26,6 +26,7 @@ const sources = [
   'includes',
   'languages',
   'public',
+  'updater',
 ];
 
 const excludedFolders = ['admin/assets', 'public/assets'];
