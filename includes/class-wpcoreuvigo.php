@@ -76,6 +76,7 @@ class Wpcoreuvigo {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->load_updater();
 
 	}
 
@@ -110,6 +111,14 @@ class Wpcoreuvigo {
 		 * core plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wpcoreuvigo-loader.php';
+
+		/**
+		 * Updater
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'updater/class-wpcoreuvigo-updater.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'updater/class-wpcoreuvigo-updater-boot.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'updater/class-wpcoreuvigo-updater-plugin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'updater/class-wpcoreuvigo-updater-theme.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
@@ -221,9 +230,9 @@ class Wpcoreuvigo {
 		add_shortcode( 'wpcoreuvigo_actualfilter', array( 'Wpcoreuvigo_Filter_Widget', 'actualfilter_shortcode' ) );
 
 		// Check plugin update
-		$this->loader->add_filter( 'pre_set_site_transient_update_plugins', $plugin_admin, 'check_for_plugin_update' );
+		// $this->loader->add_filter( 'pre_set_site_transient_update_plugins', $plugin_admin, 'check_for_plugin_update' );
 		// Retrive plugin information
-		$this->loader->add_filter( 'plugins_api', $plugin_admin, 'plugin_api_call', 10, 3 );
+		// $this->loader->add_filter( 'plugins_api', $plugin_admin, 'plugin_api_call', 10, 3 );
 
 		/*
 		// TEMP: Enable update check on every request. Normally you don't need this! This is for testing only!
@@ -257,7 +266,7 @@ class Wpcoreuvigo {
 		// Columnas ACTAS Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE
 		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE . '_posts_columns', $plugin_admin, 'manage_uvigo_document_columns', 10, 2 );
 		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE . '_posts_custom_column', $plugin_admin, 'manage_uvigo_document_custom_column', 10, 2 );
-		
+
 		// Columnas ACTAS Wpcoreuvigo_Admin::UV_FORM_POST_TYPE
 		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Admin::UV_FORM_POST_TYPE . '_posts_columns', $plugin_admin, 'manage_uvigo_form_columns', 10, 2 );
 		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Admin::UV_FORM_POST_TYPE . '_posts_custom_column', $plugin_admin, 'manage_uvigo_form_custom_column', 10, 2 );
@@ -268,7 +277,7 @@ class Wpcoreuvigo {
 
 		// Filtros en Documentos
 		$this->loader->add_action( 'restrict_manage_posts', $plugin_admin, 'manage_posts_table_filtering_uvigo_document', 10, 2 );
-		
+
 		// Filtros en Formularios
 		$this->loader->add_action( 'restrict_manage_posts', $plugin_admin, 'manage_posts_table_filtering_uvigo_form', 10, 2 );
 
@@ -319,6 +328,15 @@ class Wpcoreuvigo {
 		// if ( self::is_active_uvigo_feedsreader() ) {
 		// Feeds readers shortcodes
 		// }
+	}
+
+	private function load_updater() {
+		$plugin_updater = new WpcoreuvigoBoot(
+			[
+				'type'   => 'plugin',
+				'source' => 'https://github.com/uvigo/contrib-web-portalmp-wordpress-core',
+			]
+		);
 	}
 
 	/**
