@@ -30,6 +30,8 @@ class Wpcoreuvigo_Activator {
 	 */
 	public static function activate() {
 
+
+
 	}
 
 }

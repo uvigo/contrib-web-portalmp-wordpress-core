@@ -74,6 +74,7 @@ class Wpcoreuvigo {
 
 		$this->load_dependencies();
 		$this->set_locale();
+		$this->define_data_hooks();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		$this->load_updater();
@@ -121,6 +122,11 @@ class Wpcoreuvigo {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'updater/class-wpcoreuvigo-updater-theme.php';
 
 		/**
+		 * The class responsible for defining data custom post
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wpcoreuvigo-data.php';
+
+		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
@@ -165,9 +171,40 @@ class Wpcoreuvigo {
 	 * @access   private
 	 */
 	private function set_locale() {
+
 		$plugin_i18n = new Wpcoreuvigo_I18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+	}
+
+	/**
+	 * Register all of the hooks related to the custom data post types
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_data_hooks() {
+
+		$plugin_data = new Wpcoreuvigo_Data( $this->get_plugin_name(), $this->get_version() );
+
+		$this->loader->add_action( 'init', $plugin_data, 'register_spectator_taxonomy', 10 );
+		$this->loader->add_action( 'init', $plugin_data, 'register_universe_taxonomy', 10 );
+		$this->loader->add_action( 'init', $plugin_data, 'register_geographic_taxonomy', 10 );
+
+		$this->loader->add_action( 'init', $plugin_data, 'register_document_post_type' );
+		$this->loader->add_action( 'init', $plugin_data, 'register_document_type_taxonomy', 10 );
+
+		$this->loader->add_action( 'init', $plugin_data, 'register_act_post_type' );
+		$this->loader->add_action( 'init', $plugin_data, 'register_act_type_taxonomy', 10 );
+
+		$this->loader->add_action( 'init', $plugin_data, 'register_form_post_type' );
+		$this->loader->add_action( 'init', $plugin_data, 'register_form_type_taxonomy', 10 );
+
+		$this->loader->add_action( 'wp_loaded', $plugin_data, 'register_taxonomies_terms', 10 );
+
+		// Creación de campos ACF (NOTA: No funciona con las versiones actuales de WPML y ACF)
+		// $this->loader->add_action( 'acf/init', $plugin_data, 'wpcoreuvigo_acf_add_local_field_groups' );
+
 	}
 
 	/**
@@ -183,21 +220,6 @@ class Wpcoreuvigo {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
-		$this->loader->add_action( 'init', $plugin_admin, 'register_spectator_taxonomy', 10 );
-		$this->loader->add_action( 'init', $plugin_admin, 'register_universe_taxonomy', 10 );
-		$this->loader->add_action( 'init', $plugin_admin, 'register_geographic_taxonomy', 10 );
-
-		$this->loader->add_action( 'init', $plugin_admin, 'register_document_post_type' );
-		$this->loader->add_action( 'init', $plugin_admin, 'register_document_type_taxonomy', 10 );
-
-		$this->loader->add_action( 'init', $plugin_admin, 'register_act_post_type' );
-		$this->loader->add_action( 'init', $plugin_admin, 'register_act_type_taxonomy', 10 );
-
-		$this->loader->add_action( 'init', $plugin_admin, 'register_form_post_type' );
-		$this->loader->add_action( 'init', $plugin_admin, 'register_form_type_taxonomy', 10 );
-
-		$this->loader->add_action( 'wp_loaded', $plugin_admin, 'register_taxonomies_terms', 10 );
 
 		$this->loader->add_filter( 'custom_menu_order', $plugin_admin, 'custom_menu_order', 10 );
 		$this->loader->add_filter( 'menu_order', $plugin_admin, 'menu_order', 10 );
@@ -229,11 +251,6 @@ class Wpcoreuvigo {
 		$this->loader->add_action( 'pre_get_posts', 'Wpcoreuvigo_Filter_Widget', 'pre_get_posts', 100 );
 		add_shortcode( 'wpcoreuvigo_actualfilter', array( 'Wpcoreuvigo_Filter_Widget', 'actualfilter_shortcode' ) );
 
-		// Check plugin update
-		// $this->loader->add_filter( 'pre_set_site_transient_update_plugins', $plugin_admin, 'check_for_plugin_update' );
-		// Retrive plugin information
-		// $this->loader->add_filter( 'plugins_api', $plugin_admin, 'plugin_api_call', 10, 3 );
-
 		/*
 		// TEMP: Enable update check on every request. Normally you don't need this! This is for testing only!
 		// NOTE: The
@@ -249,7 +266,6 @@ class Wpcoreuvigo {
 		$this->loader->add_filter('wp_handle_upload', $plugin_admin, 'handle_upload' );
 
 		// Restricciones en ACF
-		$this->loader->add_action( 'acf/init', $plugin_admin, 'wpcoreuvigo_acf_add_local_field_groups');
 		$this->loader->add_filter( 'acf/prepare_field/name=uvigo_document_taxonomy', $plugin_admin, 'prepare_field_before_render_uvigo_taxonomy');
 		$this->loader->add_filter( 'acf/prepare_field/name=uvigo_act_taxonomy', $plugin_admin, 'prepare_field_before_render_uvigo_taxonomy');
 
@@ -260,16 +276,16 @@ class Wpcoreuvigo {
 		// $this->loader->add_action ('admin_menu', $plugin_admin, 'add_management_uvigo_tools_page');
 
 		// Columnas ACTAS Wpcoreuvigo_Admin::UV_ACT_POST_TYPE
-		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Admin::UV_ACT_POST_TYPE . '_posts_columns', $plugin_admin, 'manage_uvigo_act_columns', 10, 2 );
-		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Admin::UV_ACT_POST_TYPE . '_posts_custom_column', $plugin_admin, 'manage_uvigo_act_custom_column', 10, 2 );
+		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Data::UV_ACT_POST_TYPE . '_posts_columns', $plugin_admin, 'manage_uvigo_act_columns', 10, 2 );
+		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Data::UV_ACT_POST_TYPE . '_posts_custom_column', $plugin_admin, 'manage_uvigo_act_custom_column', 10, 2 );
 
 		// Columnas ACTAS Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE
-		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE . '_posts_columns', $plugin_admin, 'manage_uvigo_document_columns', 10, 2 );
-		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE . '_posts_custom_column', $plugin_admin, 'manage_uvigo_document_custom_column', 10, 2 );
+		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Data::UV_DOCUMENT_POST_TYPE . '_posts_columns', $plugin_admin, 'manage_uvigo_document_columns', 10, 2 );
+		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Data::UV_DOCUMENT_POST_TYPE . '_posts_custom_column', $plugin_admin, 'manage_uvigo_document_custom_column', 10, 2 );
 
 		// Columnas ACTAS Wpcoreuvigo_Admin::UV_FORM_POST_TYPE
-		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Admin::UV_FORM_POST_TYPE . '_posts_columns', $plugin_admin, 'manage_uvigo_form_columns', 10, 2 );
-		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Admin::UV_FORM_POST_TYPE . '_posts_custom_column', $plugin_admin, 'manage_uvigo_form_custom_column', 10, 2 );
+		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Data::UV_FORM_POST_TYPE . '_posts_columns', $plugin_admin, 'manage_uvigo_form_columns', 10, 2 );
+		$this->loader->add_filter( 'manage_' . Wpcoreuvigo_Data::UV_FORM_POST_TYPE . '_posts_custom_column', $plugin_admin, 'manage_uvigo_form_custom_column', 10, 2 );
 
 
 		// Filtro en Actas

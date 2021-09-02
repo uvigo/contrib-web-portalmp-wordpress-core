@@ -21,12 +21,6 @@
  */
 class Wpcoreuvigo_Admin {
 
-	const TAXONOMY_SPECTATOR_NAME  = 'spectator';
-	const TAXONOMY_UNIVERSE_NAME   = 'universe';
-	const TAXONOMY_GEOGRAPHIC_NAME = 'geographic';
-
-	const UPDATEAPI_URL = 'https://ideit.software/wpapi/packages/';
-
 	/**
 	 * The ID of this plugin.
 	 *
@@ -63,7 +57,7 @@ class Wpcoreuvigo_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 
-		/*
+		/**
 		 * Code example to create custom fields in menus
 		 * 	'field-01' => array(
 		 * 		'type'  => 'text', or 'checkbox'
@@ -792,7 +786,7 @@ class Wpcoreuvigo_Admin {
 	/**
 	 * Order menu
 	 *
-	 * @param [array] $menu Menú elments
+	 * @param array $menu Menú elments
 	 * @return array
 	 */
 	public function menu_order( $menu ) {
@@ -812,288 +806,6 @@ class Wpcoreuvigo_Admin {
 	 */
 	public function widgets_init() {
 		register_widget( 'Wpcoreuvigo_Filter_Widget' );
-	}
-
-	/**
-	 * New CPT Documents
-	 */
-
-	const UV_DOCUMENT_POST_TYPE          = 'uvigo-document';
-	const UV_TAXONOMY_DOCUMENT_TYPE_NAME = 'uvigo-tax-document';
-
-	/**
-	 * Register the custom post type document
-	 *
-	 * @since    1.0.0
-	 */
-	public function register_document_post_type() {
-		$labels = array(
-			'name'               => _x( 'Documents', 'post type general name', 'wpcoreuvigo' ),
-			'singular_name'      => _x( 'Document', 'post type singular name', 'wpcoreuvigo' ),
-			'menu_name'          => _x( 'Documents', 'admin menu', 'wpcoreuvigo' ),
-			'name_admin_bar'     => _x( 'Documents', 'add new on admin bar', 'wpcoreuvigo' ),
-			'add_new'            => _x( 'Add new', 'Document', 'wpcoreuvigo' ),
-			'add_new_item'       => __( 'Add new document', 'wpcoreuvigo' ),
-			'new_item'           => __( 'New document', 'wpcoreuvigo' ),
-			'edit_item'          => __( 'Edit document', 'wpcoreuvigo' ),
-			'view_item'          => __( 'View document', 'wpcoreuvigo' ),
-			'all_items'          => __( 'All documents', 'wpcoreuvigo' ),
-			'search_items'       => __( 'Search documents', 'wpcoreuvigo' ),
-			'parent_item_colon'  => __( 'Parent document:', 'wpcoreuvigo' ),
-			'not_found'          => __( 'Documents not found.', 'wpcoreuvigo' ),
-			'not_found_in_trash' => __( 'Documents not found in trash.', 'wpcoreuvigo' ),
-		);
-
-		$args = array(
-			'labels'             => $labels,
-			'description'        => __( 'Documents', 'wpcoreuvigo' ),
-			'public'             => true,
-			'publicly_queryable' => true,
-			'show_ui'            => true,
-			'show_in_menu'       => true,
-			'query_var'          => true,
-			'rewrite'            => array( 'slug' => 'documentos' ),
-			'capability_type'    => 'post',
-			'map_meta_cap'       => true,
-			'has_archive'        => true,
-			'hierarchical'       => false,
-			'menu_position'      => 5,
-			'menu_icon'          => 'dashicons-media-document',
-			'supports'           => array( 'title', 'editor', 'excerpt', 'custom-fields', 'author' ),
-		);
-		register_post_type( self::UV_DOCUMENT_POST_TYPE, $args );
-	}
-
-	/**
-	 * Register Document Type taxonomy.
-	 *
-	 * @since    1.0.0
-	 */
-	public function register_document_type_taxonomy() {
-		if ( ! taxonomy_exists( self::UV_TAXONOMY_DOCUMENT_TYPE_NAME ) ) {
-			$labels = array(
-				'name'              => _x( 'Documents Types', 'taxonomy general name', 'wpcoreuvigo' ),
-				'singular_name'     => _x( 'Document Type', 'taxonomy singular name', 'wpcoreuvigo' ),
-				'search_items'      => __( 'Search Document Type', 'wpcoreuvigo' ),
-				'all_items'         => __( 'All Documents Types', 'wpcoreuvigo' ),
-				'parent_item'       => __( 'Parent Document Type', 'wpcoreuvigo' ),
-				'parent_item_colon' => __( 'Parent Document Type:', 'wpcoreuvigo' ),
-				'edit_item'         => __( 'Edit Document Type', 'wpcoreuvigo' ),
-				'update_item'       => __( 'Update Document Type', 'wpcoreuvigo' ),
-				'add_new_item'      => __( 'Add New Document Type', 'wpcoreuvigo' ),
-				'new_item_name'     => __( 'New Document Type Name', 'wpcoreuvigo' ),
-				'menu_name'         => __( 'Document Type', 'wpcoreuvigo' ),
-			);
-
-			$args = array(
-				'hierarchical'       => true,
-				'labels'             => $labels,
-				'public'             => false,
-				'show_ui'            => true,
-				'show_in_menu'       => true,
-				'show_in_nav_menus'  => false,
-				'show_admin_column'  => true,
-				'show_in_quick_edit' => false,
-				'meta_box_cb'        => false,
-				'query_var'          => 'taxonomy-document-type',
-				'rewrite'            => array( 'slug' => 'document-type' ),
-			);
-
-			$ob = register_taxonomy(
-				self::UV_TAXONOMY_DOCUMENT_TYPE_NAME,
-				array(
-					self::UV_DOCUMENT_POST_TYPE,
-				),
-				$args
-			);
-		}
-	}
-
-	/**
-	 * New CPT Actas
-	 */
-
-	const UV_ACT_POST_TYPE          = 'uvigo-act';
-	const UV_TAXONOMY_ACT_TYPE_NAME = 'uvigo-tax-act';
-
-	/**
-	 * Register the custom post type act
-	 *
-	 * @since    1.0.0
-	 */
-	public function register_act_post_type() {
-		$labels = array(
-			'name'               => _x( 'Acts', 'post type general name', 'wpcoreuvigo' ),
-			'singular_name'      => _x( 'Act', 'post type singular name', 'wpcoreuvigo' ),
-			'menu_name'          => _x( 'Acts', 'admin menu', 'wpcoreuvigo' ),
-			'name_admin_bar'     => _x( 'Acts', 'add new on admin bar', 'wpcoreuvigo' ),
-			'add_new'            => _x( 'Add new', 'Act', 'wpcoreuvigo' ),
-			'add_new_item'       => __( 'Add new act', 'wpcoreuvigo' ),
-			'new_item'           => __( 'New act', 'wpcoreuvigo' ),
-			'edit_item'          => __( 'Edit act', 'wpcoreuvigo' ),
-			'view_item'          => __( 'View act', 'wpcoreuvigo' ),
-			'all_items'          => __( 'All acts', 'wpcoreuvigo' ),
-			'search_items'       => __( 'Search acts', 'wpcoreuvigo' ),
-			'parent_item_colon'  => __( 'Parent act:', 'wpcoreuvigo' ),
-			'not_found'          => __( 'Acts not found.', 'wpcoreuvigo' ),
-			'not_found_in_trash' => __( 'Acts not found in trash.', 'wpcoreuvigo' ),
-		);
-
-		$args = array(
-			'labels'             => $labels,
-			'description'        => __( 'Acts', 'wpcoreuvigo' ),
-			'public'             => true,
-			'publicly_queryable' => true,
-			'show_ui'            => true,
-			'show_in_menu'       => true,
-			'query_var'          => true,
-			'rewrite'            => array( 'slug' => 'actas' ),
-			'capability_type'    => 'post',
-			'map_meta_cap'       => true,
-			'has_archive'        => true,
-			'hierarchical'       => false,
-			'menu_position'      => 5,
-			'menu_icon'          => 'dashicons-media-document',
-			'supports'           => array( 'title', 'editor', 'excerpt', 'custom-fields', 'author' ),
-		);
-		register_post_type( self::UV_ACT_POST_TYPE, $args );
-	}
-
-	/**
-	 * Register Act Type taxonomy.
-	 *
-	 * @since    1.0.0
-	 */
-	public function register_act_type_taxonomy() {
-		if ( ! taxonomy_exists( self::UV_TAXONOMY_ACT_TYPE_NAME ) ) {
-			$labels = array(
-				'name'              => _x( 'Acts Types', 'taxonomy general name', 'wpcoreuvigo' ),
-				'singular_name'     => _x( 'Act Type', 'taxonomy singular name', 'wpcoreuvigo' ),
-				'search_items'      => __( 'Search Act Type', 'wpcoreuvigo' ),
-				'all_items'         => __( 'All Acts Types', 'wpcoreuvigo' ),
-				'parent_item'       => __( 'Parent Act Type', 'wpcoreuvigo' ),
-				'parent_item_colon' => __( 'Parent Act Type:', 'wpcoreuvigo' ),
-				'edit_item'         => __( 'Edit Act Type', 'wpcoreuvigo' ),
-				'update_item'       => __( 'Update Act Type', 'wpcoreuvigo' ),
-				'add_new_item'      => __( 'Add New Act Type', 'wpcoreuvigo' ),
-				'new_item_name'     => __( 'New Act Type Name', 'wpcoreuvigo' ),
-				'menu_name'         => __( 'Act Type', 'wpcoreuvigo' ),
-			);
-
-			$args = array(
-				'hierarchical'       => true,
-				'labels'             => $labels,
-				'show_ui'            => true,
-				'show_in_menu'       => true,
-				'show_in_nav_menus'  => true,
-				'show_admin_column'  => true,
-				'show_in_quick_edit' => false,
-				'meta_box_cb'        => false,
-				'query_var'          => 'taxonomy-act-type',
-				'rewrite'            => array( 'slug' => 'act-type' ),
-			);
-
-			$ob = register_taxonomy(
-				self::UV_TAXONOMY_ACT_TYPE_NAME,
-				array(
-					self::UV_ACT_POST_TYPE,
-				),
-				$args
-			);
-		}
-	}
-
-	/**
-	 * New CPT FORMULARIO
-	 */
-	const UV_FORM_POST_TYPE          = 'uvigo-form';
-	const UV_TAXONOMY_FORM_TYPE_NAME = 'uvigo-tax-form';
-
-	/**
-	 * Register the custom post type form
-	 *
-	 * @since    1.0.0
-	 */
-	public function register_form_post_type() {
-		$labels = array(
-			'name'               => _x( 'Forms', 'post type general name', 'wpcoreuvigo' ),
-			'singular_name'      => _x( 'Form', 'post type singular name', 'wpcoreuvigo' ),
-			'menu_name'          => _x( 'Forms', 'admin menu', 'wpcoreuvigo' ),
-			'name_admin_bar'     => _x( 'Forms', 'add new on admin bar', 'wpcoreuvigo' ),
-			'add_new'            => _x( 'Add new', 'Form', 'wpcoreuvigo' ),
-			'add_new_item'       => __( 'Add new form', 'wpcoreuvigo' ),
-			'new_item'           => __( 'New form', 'wpcoreuvigo' ),
-			'edit_item'          => __( 'Edit form', 'wpcoreuvigo' ),
-			'view_item'          => __( 'View form', 'wpcoreuvigo' ),
-			'all_items'          => __( 'All forms', 'wpcoreuvigo' ),
-			'search_items'       => __( 'Search forms', 'wpcoreuvigo' ),
-			'parent_item_colon'  => __( 'Parent form:', 'wpcoreuvigo' ),
-			'not_found'          => __( 'Forms not found.', 'wpcoreuvigo' ),
-			'not_found_in_trash' => __( 'Forms not found in trash.', 'wpcoreuvigo' ),
-		);
-
-		$args = array(
-			'labels'             => $labels,
-			'description'        => __( 'Forms', 'wpcoreuvigo' ),
-			'public'             => true,
-			'publicly_queryable' => true,
-			'show_ui'            => true,
-			'show_in_menu'       => true,
-			'query_var'          => true,
-			'rewrite'            => array( 'slug' => 'formularios' ),
-			'capability_type'    => 'post',
-			'map_meta_cap'       => true,
-			'has_archive'        => true,
-			'hierarchical'       => false,
-			'menu_position'      => 5,
-			'menu_icon'          => 'dashicons-media-document',
-			'supports'           => array( 'title', 'editor', 'excerpt', 'custom-fields', 'page-attributes', 'author' ),
-		);
-		register_post_type( self::UV_FORM_POST_TYPE, $args );
-	}
-
-	/**
-	 * Register Form Type taxonomy.
-	 *
-	 * @since    1.0.0
-	 */
-	public function register_form_type_taxonomy() {
-		if ( ! taxonomy_exists( self::UV_TAXONOMY_FORM_TYPE_NAME ) ) {
-			$labels = array(
-				'name'              => _x( 'Forms Types', 'taxonomy general name', 'wpcoreuvigo' ),
-				'singular_name'     => _x( 'Form Type', 'taxonomy singular name', 'wpcoreuvigo' ),
-				'search_items'      => __( 'Search Form Type', 'wpcoreuvigo' ),
-				'all_items'         => __( 'All Forms Types', 'wpcoreuvigo' ),
-				'parent_item'       => __( 'Parent Form Type', 'wpcoreuvigo' ),
-				'parent_item_colon' => __( 'Parent Form Type:', 'wpcoreuvigo' ),
-				'edit_item'         => __( 'Edit Form Type', 'wpcoreuvigo' ),
-				'update_item'       => __( 'Update Form Type', 'wpcoreuvigo' ),
-				'add_new_item'      => __( 'Add New Form Type', 'wpcoreuvigo' ),
-				'new_item_name'     => __( 'New Form Type Name', 'wpcoreuvigo' ),
-				'menu_name'         => __( 'Form Type', 'wpcoreuvigo' ),
-			);
-
-			$args = array(
-				'hierarchical'       => true,
-				'labels'             => $labels,
-				'show_ui'            => true,
-				'show_in_menu'       => true,
-				'show_in_nav_menus'  => true,
-				'show_admin_column'  => true,
-				'show_in_quick_edit' => false,
-				'meta_box_cb'        => false,
-				'query_var'          => 'taxonomy-form-type',
-				'rewrite'            => array( 'slug' => 'form-type' ),
-			);
-
-			$ob = register_taxonomy(
-				self::UV_TAXONOMY_FORM_TYPE_NAME,
-				array(
-					self::UV_FORM_POST_TYPE,
-				),
-				$args
-			);
-		}
 	}
 
 	/**
@@ -1240,7 +952,7 @@ class Wpcoreuvigo_Admin {
 		$post = get_post();
 		if ( $post ) {
 			$post_type = get_post_type( $post );
-			if ( $post_type == Wpcoreuvigo_Admin::UV_ACT_POST_TYPE ) {
+			if ( $post_type == Wpcoreuvigo_Data::UV_ACT_POST_TYPE ) {
 				$post_id = $post->ID;
 				//$terms = get_the_terms( $post->ID, Wpcoreuvigo_Admin::UV_TAXONOMY_ACT_TYPE_NAME );
 				$taxonomy = get_field('uvigo_act_taxonomy', $post_id, false);
@@ -1256,7 +968,7 @@ class Wpcoreuvigo_Admin {
 					</script><?php
 				}
 			}
-			if ( $post_type == Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE ) {
+			if ( $post_type == Wpcoreuvigo_Data::UV_DOCUMENT_POST_TYPE ) {
 				$post_id = $post->ID;
 				$taxonomy = get_field('uvigo_document_taxonomy', $post_id, false);
 				// Si no hay taxonomía seleccionada, no permite añadir documentos.
@@ -1274,7 +986,7 @@ class Wpcoreuvigo_Admin {
 					</script><?php
 				}*/
 			}
-			if ( $post_type == Wpcoreuvigo_Admin::UV_FORM_POST_TYPE ) {
+			if ( $post_type == Wpcoreuvigo_Data::UV_FORM_POST_TYPE ) {
 				$post_id = $post->ID;
 				$taxonomy = get_field('uvigo_form_taxonomy', $post_id, false);
 				// Si no hay taxonomía seleccionada, no permite añadir formularios.
@@ -1335,14 +1047,14 @@ class Wpcoreuvigo_Admin {
 	 *
 	 * @param [type] $args
 	 * @param [type] $post_type
-	 * @return void
+	 * @return array
 	 */
 	function custom_upload_directory_by_post_type( $args, $post_type, $post_id ) {
 
 		if ( $post_type ) {
 			switch ( $post_type ) {
 
-				case self::UV_ACT_POST_TYPE:
+				case Wpcoreuvigo_Data::UV_ACT_POST_TYPE:
 					$new = array_merge( $args, array() );
 
 					$label_post_type = 'actas';
@@ -1352,7 +1064,7 @@ class Wpcoreuvigo_Admin {
 					if ( ! empty( $term_id ) && ! empty( $date ) ) {
 						$taxonomy_slugs_dir = get_term_parents_list(
 							$term_id,
-							self::UV_TAXONOMY_ACT_TYPE_NAME,
+							Wpcoreuvigo_Data::UV_TAXONOMY_ACT_TYPE_NAME,
 							array(
 								'format'    => 'slug',
 								'separator' => '/',
@@ -1381,7 +1093,7 @@ class Wpcoreuvigo_Admin {
 
 					break;
 
-				case self::UV_DOCUMENT_POST_TYPE:
+				case Wpcoreuvigo_Data::UV_DOCUMENT_POST_TYPE:
 					$new = array_merge( $args, array() );
 
 					$label_post_type = 'documentos';
@@ -1390,7 +1102,7 @@ class Wpcoreuvigo_Admin {
 					if ( ! empty( $term_id ) ) {
 						$taxonomy_slugs_dir = get_term_parents_list(
 							$term_id,
-							self::UV_TAXONOMY_DOCUMENT_TYPE_NAME,
+							Wpcoreuvigo_Data::UV_TAXONOMY_DOCUMENT_TYPE_NAME,
 							array(
 								'format'    => 'slug',
 								'separator' => '/',
@@ -1413,7 +1125,7 @@ class Wpcoreuvigo_Admin {
 					$args = $new;
 					break;
 
-				case self::UV_FORM_POST_TYPE:
+				case Wpcoreuvigo_Data::UV_FORM_POST_TYPE:
 					$new = array_merge( $args, array() );
 
 					$label_post_type = 'formularios';
@@ -1422,7 +1134,7 @@ class Wpcoreuvigo_Admin {
 					if ( ! empty( $term_id ) ) {
 						$taxonomy_slugs_dir = get_term_parents_list(
 							$term_id,
-							self::UV_TAXONOMY_FORM_TYPE_NAME,
+							Wpcoreuvigo_Data::UV_TAXONOMY_FORM_TYPE_NAME,
 							array(
 								'format'    => 'slug',
 								'separator' => '/',
@@ -1464,7 +1176,7 @@ class Wpcoreuvigo_Admin {
 	 * @return void
 	 */
 	function restrict_update_taxonomy_document_type( $term_id, $taxonomy ){
-		if ($taxonomy == Wpcoreuvigo_Admin::UV_TAXONOMY_DOCUMENT_TYPE_NAME){
+		if ($taxonomy == Wpcoreuvigo_Data::UV_TAXONOMY_DOCUMENT_TYPE_NAME){
 			$term = get_term( $term_id, $taxonomy );
 			if ( $term->count  > 0 ){
 				wp_die(
@@ -1482,7 +1194,7 @@ class Wpcoreuvigo_Admin {
 	 * @return void
 	 */
 	function restrict_update_taxonomy_act_type( $term_id, $taxonomy ){
-		if ($taxonomy == Wpcoreuvigo_Admin::UV_TAXONOMY_ACT_TYPE_NAME){
+		if ($taxonomy == Wpcoreuvigo_Data::UV_TAXONOMY_ACT_TYPE_NAME){
 			$term = get_term( $term_id, $taxonomy );
 			if ( $term->count  > 0 ){
 				wp_die(
@@ -1500,7 +1212,7 @@ class Wpcoreuvigo_Admin {
 	 * @return void
 	 */
 	function restrict_update_taxonomy_form_type( $term_id, $taxonomy ){
-		if ($taxonomy == Wpcoreuvigo_Admin::UV_TAXONOMY_FORM_TYPE_NAME){
+		if ($taxonomy == Wpcoreuvigo_Data::UV_TAXONOMY_FORM_TYPE_NAME){
 			$term = get_term( $term_id, $taxonomy );
 			if ( $term->count  > 0 ){
 				wp_die(
@@ -1568,7 +1280,7 @@ class Wpcoreuvigo_Admin {
 	private function uvigo_documents_tools( $execute = false ) {
 		$documents = get_posts(
 			array(
-				'post_type' => self::UV_DOCUMENT_POST_TYPE,
+				'post_type' => Wpcoreuvigo_Data::UV_DOCUMENT_POST_TYPE,
 				'orderby'   => 'id',
 				'order'     => 'ASC',
 				'posts_per_page' => -1,
@@ -1599,7 +1311,7 @@ class Wpcoreuvigo_Admin {
 					$date = mysql2date( 'Y/m', $document->post_date );
 
 					$uploads = _wp_upload_dir( $date );
-					$uploads = $this->custom_upload_directory_by_post_type( $uploads, self::UV_DOCUMENT_POST_TYPE, $document_post_id );
+					$uploads = $this->custom_upload_directory_by_post_type( $uploads, Wpcoreuvigo_Data::UV_DOCUMENT_POST_TYPE, $document_post_id );
 
 					echo '<div style="margin-left:40px">MOVE TO : </div>';
 					foreach ( $uploads as $key => $value) {
@@ -1652,7 +1364,7 @@ class Wpcoreuvigo_Admin {
 	/**
 	 * Visualización de columnas en ACTAS : Fecha
 	 *
-	 * @param [type] $columns
+	 * @param array $columns
 	 * @return void
 	 */
 	function manage_uvigo_act_columns( $columns ) {
@@ -1684,7 +1396,7 @@ class Wpcoreuvigo_Admin {
 	/**
 	 * Visualización de columnas en DOCUMENTOS
 	 *
-	 * @param [type] $columns
+	 * @param array $columns
 	 * @return void
 	 */
 	function manage_uvigo_document_columns( $columns ) {
@@ -1708,14 +1420,14 @@ class Wpcoreuvigo_Admin {
 	function manage_uvigo_document_custom_column( $column_name, $post_id ) {
 		if ( $column_name == 'uvigo_document_taxonomy_hierarchy' ) {
 			$term_id = get_field( 'uvigo_document_taxonomy', $post_id, false );
-			echo get_term_parents_list( $term_id, Wpcoreuvigo_Admin::UV_TAXONOMY_DOCUMENT_TYPE_NAME, array( 'inclusive' => true ) );
+			echo get_term_parents_list( $term_id, Wpcoreuvigo_Data::UV_TAXONOMY_DOCUMENT_TYPE_NAME, array( 'inclusive' => true ) );
 		}
 	}
 
 	/**
 	 * Visualización de columnas en FORMULARIOS
 	 *
-	 * @param [type] $columns
+	 * @param array $columns
 	 * @return void
 	 */
 	function manage_uvigo_form_columns( $columns ) {
@@ -1739,7 +1451,7 @@ class Wpcoreuvigo_Admin {
 	function manage_uvigo_form_custom_column( $column_name, $post_id ) {
 		if ( $column_name == 'uvigo_form_taxonomy_hierarchy' ) {
 			$term_id = get_field( 'uvigo_form_taxonomy', $post_id, false );
-			echo get_term_parents_list( $term_id, Wpcoreuvigo_Admin::UV_TAXONOMY_FORM_TYPE_NAME, array( 'inclusive' => true ) );
+			echo get_term_parents_list( $term_id, Wpcoreuvigo_Data::UV_TAXONOMY_FORM_TYPE_NAME, array( 'inclusive' => true ) );
 		}
 	}
 
@@ -1754,9 +1466,9 @@ class Wpcoreuvigo_Admin {
 
 		global $wpdb;
 
-		if ( $post_type == Wpcoreuvigo_Admin::UV_ACT_POST_TYPE ) {
+		if ( $post_type == Wpcoreuvigo_Data::UV_ACT_POST_TYPE ) {
 
-			$taxonomy_slug = Wpcoreuvigo_Admin::UV_TAXONOMY_ACT_TYPE_NAME;
+			$taxonomy_slug = Wpcoreuvigo_Data::UV_TAXONOMY_ACT_TYPE_NAME;
 			$taxonomy = get_taxonomy( $taxonomy_slug );
 			$selected = '';
 			$request_attr = 'taxonomy-act-type'; //this will show up in the url
@@ -1792,9 +1504,9 @@ class Wpcoreuvigo_Admin {
 
 		global $wpdb;
 
-		if ( $post_type == Wpcoreuvigo_Admin::UV_DOCUMENT_POST_TYPE ) {
+		if ( $post_type == Wpcoreuvigo_Data::UV_DOCUMENT_POST_TYPE ) {
 
-			$taxonomy_slug = Wpcoreuvigo_Admin::UV_TAXONOMY_DOCUMENT_TYPE_NAME;
+			$taxonomy_slug = Wpcoreuvigo_Data::UV_TAXONOMY_DOCUMENT_TYPE_NAME;
 			$taxonomy = get_taxonomy( $taxonomy_slug );
 			$selected = '';
 			$request_attr = 'taxonomy-document-type'; //this will show up in the url
@@ -1830,9 +1542,9 @@ class Wpcoreuvigo_Admin {
 
 		global $wpdb;
 
-		if ( $post_type == Wpcoreuvigo_Admin::UV_FORM_POST_TYPE ) {
+		if ( $post_type == Wpcoreuvigo_Data::UV_FORM_POST_TYPE ) {
 
-			$taxonomy_slug = Wpcoreuvigo_Admin::UV_TAXONOMY_FORM_TYPE_NAME;
+			$taxonomy_slug = Wpcoreuvigo_Data::UV_TAXONOMY_FORM_TYPE_NAME;
 			$taxonomy = get_taxonomy( $taxonomy_slug );
 			$selected = '';
 			$request_attr = 'taxonomy-form-type'; //this will show up in the url

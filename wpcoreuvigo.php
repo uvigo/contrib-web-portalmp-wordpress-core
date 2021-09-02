@@ -58,11 +58,9 @@ register_activation_hook( __FILE__, 'activate_wpcoreuvigo' );
 register_deactivation_hook( __FILE__, 'deactivate_wpcoreuvigo' );
 
 /**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
+ * A clase utilizada para recuperar os arquivos de assets
  */
 require plugin_dir_path( __FILE__ ) . 'includes/class-wpcoreuvigo-json-manifest.php';
-
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -87,7 +85,7 @@ run_wpcoreuvigo();
 
 
 /**
- * Undocumented function
+ * Recupera o arquivo de asset da carpeta public
  *
  * @param [type] $asset
  * @param string $env
@@ -106,7 +104,7 @@ function wpcoreuvigo_public_asset_path( $asset ) {
 }
 
 /**
- * Undocumented function
+ * Recupera o arquivo de asset da carpeta admin
  *
  * @param [type] $asset
  * @param string $env
