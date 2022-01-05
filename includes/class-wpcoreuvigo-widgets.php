@@ -149,7 +149,7 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 						$terms = get_terms(
 							[
 								'taxonomy'   => $wp_taxonomy->name,
-								'hide_empty' => false,
+								'hide_empty' => true,
 							]
 						);
 						$query_var_tax_name = $wp_taxonomy->query_var;

@@ -207,6 +207,9 @@ class Wpcoreuvigo {
 
 		$this->loader->add_action( 'wp_loaded', $plugin_data, 'register_taxonomies_terms', 10 );
 
+		$this->loader->add_action( 'init', $plugin_data, 'register_milestone_post_type' );
+		$this->loader->add_action( 'init', $plugin_data, 'register_milestone_category_taxonomy', 10 );
+
 		// Creación de campos ACF (NOTA: No funciona con las versiones actuales de WPML y ACF)
 		// $this->loader->add_action( 'acf/init', $plugin_data, 'wpcoreuvigo_acf_add_local_field_groups' );
 

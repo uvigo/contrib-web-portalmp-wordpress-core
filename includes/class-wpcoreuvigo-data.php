@@ -40,6 +40,10 @@ class Wpcoreuvigo_Data
 	const UV_FORM_POST_TYPE          = 'uvigo-form';
 	const UV_TAXONOMY_FORM_TYPE_NAME = 'uvigo-tax-form';
 
+	// CPT Fitos Históricos
+	const UV_POST_TYPE_MILESTONE         = 'uvigo-milestone';
+	const UV_TAXONOMY_MILESTONE_CATEGORY = 'uvigo-tax-milestone';
+
 	/**
 	 * The ID of this plugin.
 	 *
@@ -369,14 +373,15 @@ class Wpcoreuvigo_Data
 			'show_ui'            => true,
 			'show_in_menu'       => true,
 			'query_var'          => true,
-			'rewrite'            => array('slug' => 'documentos'),
+			'rewrite'            => array( 'slug' => 'documentos', 'with_front' => false ),
 			'capability_type'    => 'post',
 			'map_meta_cap'       => true,
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => 5,
 			'menu_icon'          => 'dashicons-media-document',
-			'supports'           => array('title', 'editor', 'excerpt', 'custom-fields', 'author'),
+			'supports'           => array('title', 'excerpt', 'custom-fields', 'author'),
+			'show_in_rest'       => true,
 		);
 		register_post_type(self::UV_DOCUMENT_POST_TYPE, $args);
 	}
@@ -414,7 +419,7 @@ class Wpcoreuvigo_Data
 				'show_in_quick_edit' => false,
 				'meta_box_cb'        => false,
 				'query_var'          => 'taxonomy-document-type',
-				'rewrite'            => array('slug' => 'document-type'),
+				'rewrite'            => array( 'slug' => 'document-type', 'with_front' => false ),
 			);
 
 			$ob = register_taxonomy(
@@ -463,14 +468,15 @@ class Wpcoreuvigo_Data
 			'show_ui'            => true,
 			'show_in_menu'       => true,
 			'query_var'          => true,
-			'rewrite'            => array('slug' => 'actas'),
+			'rewrite'            => array( 'slug' => 'actas', 'with_front' => false ),
 			'capability_type'    => 'post',
 			'map_meta_cap'       => true,
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => 5,
 			'menu_icon'          => 'dashicons-media-document',
-			'supports'           => array('title', 'editor', 'excerpt', 'custom-fields', 'author'),
+			'supports'           => array('title', 'excerpt', 'custom-fields', 'author'),
+			'show_in_rest'       => true,
 		);
 		register_post_type(self::UV_ACT_POST_TYPE, $args);
 	}
@@ -556,14 +562,15 @@ class Wpcoreuvigo_Data
 			'show_ui'            => true,
 			'show_in_menu'       => true,
 			'query_var'          => true,
-			'rewrite'            => array('slug' => 'formularios'),
+			'rewrite'            => array('slug' => 'formularios', 'with_front' => false),
 			'capability_type'    => 'post',
 			'map_meta_cap'       => true,
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => 5,
 			'menu_icon'          => 'dashicons-media-document',
-			'supports'           => array('title', 'editor', 'excerpt', 'custom-fields', 'page-attributes', 'author'),
+			'supports'           => array('title', 'excerpt', 'custom-fields', 'page-attributes', 'author'),
+			'show_in_rest'       => true,
 		);
 		register_post_type(self::UV_FORM_POST_TYPE, $args);
 	}
@@ -613,6 +620,97 @@ class Wpcoreuvigo_Data
 		}
 	}
 
+	/**
+	 * Register the custom post type document
+	 *
+	 * @since    1.0.0
+	 */
+	public function register_milestone_post_type()
+	{
+		$labels = array(
+			'name'               => _x('Milestones', 'post type general name', 'wpcoreuvigo'),
+			'singular_name'      => _x('Milestone', 'post type singular name', 'wpcoreuvigo'),
+			'menu_name'          => _x('Milestones', 'admin menu', 'wpcoreuvigo'),
+			'name_admin_bar'     => _x('Milestones', 'add new on admin bar', 'wpcoreuvigo'),
+			'add_new'            => _x('Add new', 'Milestone', 'wpcoreuvigo'),
+			'add_new_item'       => __('Add new milestone', 'wpcoreuvigo'),
+			'new_item'           => __('New milestone', 'wpcoreuvigo'),
+			'edit_item'          => __('Edit milestone', 'wpcoreuvigo'),
+			'view_item'          => __('View milestone', 'wpcoreuvigo'),
+			'all_items'          => __('All milestones', 'wpcoreuvigo'),
+			'search_items'       => __('Search milestones', 'wpcoreuvigo'),
+			'parent_item_colon'  => __('Parent milestone:', 'wpcoreuvigo'),
+			'not_found'          => __('Milestones not found.', 'wpcoreuvigo'),
+			'not_found_in_trash' => __('Milestones not found in trash.', 'wpcoreuvigo'),
+		);
+
+		$args = array(
+			'labels'             => $labels,
+			'description'        => __('Milestones', 'wpcoreuvigo'),
+			'public'             => true,
+			'publicly_queryable' => true,
+			'show_ui'            => true,
+			'show_in_menu'       => true,
+			'query_var'          => true,
+			'rewrite'            => array('slug' => 'fitos', 'with_front' => false),
+			'capability_type'    => 'post',
+			'map_meta_cap'       => true,
+			'has_archive'        => false,
+			'hierarchical'       => false,
+			'menu_position'      => 5,
+			'menu_icon'          => 'dashicons-admin-site-alt3',
+			'show_in_rest'       => true,
+			'supports'           => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields', 'author'),
+		);
+
+		register_post_type(self::UV_POST_TYPE_MILESTONE, $args);
+	}
+
+	/**
+	 * Register Form Type taxonomy.
+	 *
+	 * @since    1.0.0
+	 */
+	public function register_milestone_category_taxonomy()
+	{
+		if (!taxonomy_exists(self::UV_TAXONOMY_MILESTONE_CATEGORY)) {
+			$labels = array(
+				'name'              => _x('Milestone category', 'taxonomy general name', 'wpcoreuvigo'),
+				'singular_name'     => _x('Milestone category', 'taxonomy singular name', 'wpcoreuvigo'),
+				'search_items'      => __('Search milestone category', 'wpcoreuvigo'),
+				'all_items'         => __('All milestone category', 'wpcoreuvigo'),
+				'parent_item'       => __('Parent milestone category', 'wpcoreuvigo'),
+				'parent_item_colon' => __('Parent milestone category:', 'wpcoreuvigo'),
+				'edit_item'         => __('Edit milestone category', 'wpcoreuvigo'),
+				'update_item'       => __('Update milestone category', 'wpcoreuvigo'),
+				'add_new_item'      => __('Add New milestone category', 'wpcoreuvigo'),
+				'new_item_name'     => __('New milestone category Name', 'wpcoreuvigo'),
+				'menu_name'         => __('Milestone category', 'wpcoreuvigo'),
+			);
+
+			$args = array(
+				'hierarchical'       => true,
+				'labels'             => $labels,
+				'show_ui'            => true,
+				'show_in_menu'       => true,
+				'show_in_nav_menus'  => true,
+				'show_admin_column'  => true,
+				'show_in_quick_edit' => true,
+				'meta_box_cb'        => false,
+				'show_in_rest'       => true,
+				'query_var'          => 'milestone-category',
+				'rewrite'            => array('slug' => 'milestone-category'),
+			);
+
+			$ob = register_taxonomy(
+				self::UV_TAXONOMY_MILESTONE_CATEGORY,
+				array(
+					self::UV_POST_TYPE_MILESTONE,
+				),
+				$args
+			);
+		}
+	}
 
 	/**
 	 * ACF
