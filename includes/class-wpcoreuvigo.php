@@ -154,6 +154,11 @@ class Wpcoreuvigo {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wpcoreuvigo-public.php';
 
 		/**
+		 * The class responsible for defining all gutenberg blocks
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wpcoreuvigo-public-blocks.php';
+
+		/**
 		 * The class responsible for defining shortcodes of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wpcoreuvigo-public-shortcodes.php';
@@ -344,6 +349,11 @@ class Wpcoreuvigo {
 		// if ( self::is_active_uvigo_feedsreader() ) {
 		// Feeds readers shortcodes
 		// }
+
+		$plugin_blocks = new Wpcoreuvigo_Public_Blocks( $this->get_plugin_name(), $this->get_version() );
+
+		$this->loader->add_action( 'acf/init', $plugin_blocks, 'register_blocks' );
+
 	}
 
 	private function load_updater() {
