@@ -90,7 +90,7 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 		?>
 		<form action="<?php echo esc_url( $blog_url ); ?>" class="widget-filter__form" method="get">
 			<div class="widget-filter__search">
-				<input type="search" class="form-control" placeholder="<?php echo _x( 'Insert text...', 'Widget filter news: search input', 'wpcoreuvigo' ); ?>" value="<?php echo $f_text; ?>" name="<?php echo esc_attr( self::F_KEYWORDS_FIELD_NAME ); ?>">
+				<input type="text" class="form-control" placeholder="<?php echo _x( 'Insert text...', 'Widget filter news: search input', 'wpcoreuvigo' ); ?>" value="<?php echo $f_text; ?>" name="<?php echo esc_attr( self::F_KEYWORDS_FIELD_NAME ); ?>">
 				<button type="submit" class="btn" data-icon="U"><span class="sr-only"><?php esc_html_e( 'Search', 'wpcoreuvigo' ); ?></span></button>
 			</div>
 			<?php if ( $dates || $taxonomies ) : ?>
@@ -135,9 +135,6 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 							<label for="f_edate"><?php echo esc_html_x( 'To:', 'Widget filter news: date', 'wpcoreuvigo' ); ?></label>
 							<input type="text" class="form-control" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" placeholder="<?php echo $end_date; ?>" value="<?php echo $f_edate; ?>" name="<?php echo self::F_EDATE_FIELD_NAME; ?>">
 						</div>
-						<div class="form-group mt-2">
-							<button type="submit" style="min-width: 10px;" class="btn btn-outline-primary btn-icon btn-sm">Aplicar</button>
-						</div>
 					</div>
 				</div>
 			<?php endif; ?>
@@ -178,6 +175,11 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 			}
 			?>
 			<?php do_action( 'wpcoreuvigo_filter_widget_after_filters' ); ?>
+			<div class="widget-filter__buttons">
+				<div class="form-group mt-3 text-right">
+					<button type="submit" class="btn btn-secondary btn-icon w-100">Aplicar</button>
+				</div>
+			</div>
 		</form>
 		<?php
 		echo $args['after_widget'];
