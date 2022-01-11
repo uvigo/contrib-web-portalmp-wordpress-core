@@ -99,7 +99,7 @@ class Wpcoreuvigo_Public_Blocks {
 			// 'order'         => 'DESC',
 			'meta_key'       => 'milestone_date',
 			'orderby'        => 'meta_value',
-			'order'          => 'ASC',
+			'order'          => 'DESC',
 			'posts_per_page' => $milestone_maxitems ? $milestone_maxitems : -1,
 		);
 
