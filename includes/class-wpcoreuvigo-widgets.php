@@ -65,6 +65,8 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 		$blog_url = get_option( 'page_for_posts' );
 		$blog_url = get_permalink( $blog_url );
 
+		$blog_url = apply_filters('wpcoreuvigo_filter_widget_action_url', $blog_url);
+
 		$content_types = array(
 			'post' => get_post_type_object( 'post' ),
 			'uvigo-event' => get_post_type_object( 'uvigo-event' ),
