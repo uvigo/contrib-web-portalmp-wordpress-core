@@ -94,13 +94,14 @@ class Wpcoreuvigo_Public_Blocks {
 
 		// Obtenemos hitos
 		$query_args = array(
-			'post_type'	     => Wpcoreuvigo_Data::UV_POST_TYPE_MILESTONE,
+			'post_type'	       => Wpcoreuvigo_Data::UV_POST_TYPE_MILESTONE,
 			// 'orderby'       => 'date',
 			// 'order'         => 'DESC',
-			'meta_key'       => 'milestone_date',
-			'orderby'        => 'meta_value',
-			'order'          => 'DESC',
-			'posts_per_page' => $milestone_maxitems ? $milestone_maxitems : -1,
+			'meta_key'         => 'milestone_date',
+			'orderby'          => 'meta_value',
+			'order'            => 'DESC',
+			'suppress_filters' => false,
+			'posts_per_page'   => $milestone_maxitems ? $milestone_maxitems : -1,
 		);
 
 		if (!empty($categories)) {
