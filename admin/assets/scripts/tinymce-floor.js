@@ -722,6 +722,10 @@
 								text: 'Centrado'
 							},
 							{
+								value: 'floor__layout--titlefirst',
+								text: 'Título primeiro'
+							},
+							{
 								value: 'floor__layout--columns',
 								text: 'Columnado'
 							},

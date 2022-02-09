@@ -99,6 +99,7 @@ class Wpcoreuvigo_Public_Shortcodes {
 
 		$in_layout   = ( strpos( $args_shortcode['layout'], 'floor__layout--columns' ) !== false ) ? 1 : 0;
 		$image_right = ( strpos( $args_shortcode['layout'], 'floor__layout--imageright' ) !== false ) ? 1 : 0;
+		$title_first = ( strpos( $args_shortcode['layout'], 'floor__layout--titlefirst' ) !== false ) ? 1 : 0;
 
 		$col_xs = intval( $args_shortcode['xs'] );
 		$col_sm = intval( $args_shortcode['sm'] );
@@ -163,7 +164,16 @@ class Wpcoreuvigo_Public_Shortcodes {
 			$output .= '<div class="floor__text container">';
 			$output .= '<div class="row">';
 			// $output .= '<div class="col-11 col-xs-' . $col_xs . ' col-sm-' . $col_sm . ' col-md-' . $col_md . ' col-lg-' . $col_lg . '">';
-			$output .= '<div class="col-11 col-sm-12 col-md-10 col-lg-8">';
+
+			if ($title_first) {
+				$output .= '<div class="col-11 col-sm-12 col-md-12 col-lg-12">';
+			} else {
+				$output .= '<div class="col-11 col-sm-12 col-md-10 col-lg-8">';
+			}
+
+			if ($title_first) {
+				$output .= '<h2 class="floor_element_title">' . $args_shortcode['c_title'] . '</h2>';
+			}
 
 			// Icon
 			if ( isset( $args_shortcode['icon'] ) && $args_shortcode['icon'] ) {
@@ -174,12 +184,14 @@ class Wpcoreuvigo_Public_Shortcodes {
 			// TODO: Use $args_shortcode['image_id']
 			if ( ! empty( $args_shortcode['image'] ) ) {
 				$output .= '<div class="floor__iconimage">';
-				$output .= '<img src="' . $args_shortcode['image'] . '" width="200" alt="">';
+				$output .= '<img src="' . $args_shortcode['image'] . '" alt="">';
 				$output .= '</div>';
 			}
 
 			// Content
-			$output .= '<h2 class="floor_element_title">' . $args_shortcode['c_title'] . '</h2>';
+			if (!$title_first) {
+				$output .= '<h2 class="floor_element_title">' . $args_shortcode['c_title'] . '</h2>';
+			}
 			$output .= '<div class="floor_element_text">' . apply_filters( 'the_content', do_shortcode( $content ) ) . '</div>';
 			if ( isset( $args_shortcode['c_linkurl'] ) && $args_shortcode['c_linkurl'] ) {
 				$output .= '<p><a class="btn floor_element_link" href="' . $args_shortcode['c_linkurl'] . '">' . $args_shortcode['c_linktitle'] . '</a></p>';
