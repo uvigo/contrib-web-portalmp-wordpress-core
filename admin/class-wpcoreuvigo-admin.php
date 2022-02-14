@@ -183,21 +183,6 @@ class Wpcoreuvigo_Admin {
 	}
 
 	/**
-	 * Walker for edit menu
-	 *
-	 * @param [type] $walker
-	 * @return void
-	 */
-	public function wp_edit_nav_menu_walker( $walker ) {
-		$walker = 'Menu_Item_Custom_Fields_Walker';
-		if ( ! class_exists( $walker ) ) {
-			require_once dirname( __FILE__ ) . '/class-wpcoreuvigo-menu-edit-walker.php';
-		}
-
-		return $walker;
-	}
-
-	/**
 	 * Print field
 	 *
 	 * @param object $item  Menu item data object.
