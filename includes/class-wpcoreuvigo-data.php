@@ -373,7 +373,7 @@ class Wpcoreuvigo_Data
 			'show_ui'            => true,
 			'show_in_menu'       => true,
 			'query_var'          => true,
-			'rewrite'            => array( 'slug' => 'documentos', 'with_front' => false ),
+			'rewrite'            => array( 'slug' => 'documentos', 'with_front' => false, 'pages' => false, 'feeds' => false ),
 			'capability_type'    => 'post',
 			'map_meta_cap'       => true,
 			'has_archive'        => true,
@@ -385,6 +385,128 @@ class Wpcoreuvigo_Data
 		);
 		register_post_type(self::UV_DOCUMENT_POST_TYPE, $args);
 	}
+
+
+	/**
+	 * Modifica la url de los tipos de contenido "Documento" para incluir la taxonomía de tipos.
+	 *
+	 * @param mixed $post_link
+	 * @param mixed $post
+	 * @param mixed $leavename
+	 * @param mixed $sample
+	 * @return mixed
+	 */
+	public function document_post_type_link( $post_link, $post, $leavename, $sample ) {
+
+		if ( get_post_type( $post ) == self::UV_DOCUMENT_POST_TYPE ) {
+
+			$terms_path = array();
+
+			$term_id = get_field('uvigo_document_taxonomy', $post->ID);
+
+			if ($term_id) {
+				$term = get_term( $term_id, self::UV_TAXONOMY_DOCUMENT_TYPE_NAME );
+
+				$terms_path[] = $term->slug;
+
+				if ($term->parent) {
+					$term = get_term( $term->parent, self::UV_TAXONOMY_DOCUMENT_TYPE_NAME );
+					if ($term) {
+						$terms_path[] = $term->slug;
+					}
+				}
+
+				$terms_path = array_reverse( $terms_path );
+			}
+
+			if ( !empty( $terms_path ) ) {
+				return str_replace( 'documentos/', 'documentos/' . implode('/', $terms_path) . '/', $post_link );
+			}
+		}
+
+		return $post_link;
+	}
+
+	/**
+	 * Genera las reglas de redirección para los documentos que tienen en la url los tipos de documentos
+	 * -> Solamente para 2 niveles de jerarquía de categorías
+	 *
+	 * @return void
+	 */
+	public function document_rewrite_rules() {
+
+		// Cuando el tipo de documento no tiene jerarquía
+		add_rewrite_rule(
+			'documentos/([^/]+)/([^/]+)/?$',
+			'index.php?post_type=uvigo-document&uvigo-document=$matches[2]',
+			'top'
+		);
+
+		// Cuando el tipo de documento es jerárquico (2 niveles)
+		add_rewrite_rule(
+			'documentos/[^/]+/[^/]+/([^/]+)/?$',
+			'index.php?post_type=uvigo-document&uvigo-document=$matches[1]',
+			'top'
+		);
+	}
+
+	public function document_download_file() {
+
+		if ( is_admin() ) {
+			return;
+		}
+
+		if ( is_singular( self::UV_DOCUMENT_POST_TYPE ) ) {
+
+			$post_id = get_the_ID();
+
+			$origin_type = get_field( 'uvigo_document_origin_type', $post_id );
+
+			if ($origin_type === 'file') {
+				$file = get_field( 'uvigo_document_file', $post_id );
+
+				if (!$file) {
+					return;
+				}
+
+				$file_src = get_attached_file( $file['ID'] );
+
+				if ( file_exists( $file_src ) ) {
+
+					$filename = basename($file_src);
+					$filetype = wp_check_filetype($file_src);
+
+					header('Pragma: public'); // required
+					header('Expires: 0');
+					header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+					header('Cache-Control: private', false); // required for certain browsers
+					header('Content-Description: File Transfer');
+					header('Content-Type: ' . $filetype['type']);
+					header('Content-Disposition: inline; filename="' . $filename . '";');
+					// header('Content-Transfer-Encoding: binary');
+					header('Content-Length: ' . filesize($file_src));
+					ob_clean();
+					flush();
+					readfile($file_src);
+
+					wp_die();
+
+				} else {
+					status_header(404);
+					global $wp_query;
+					$wp_query->set_404();
+					// wp_die();
+				}
+			}
+
+			if ($origin_type === 'url') {
+				$url = get_field( 'uvigo_document_url', $post_id );
+				wp_redirect( $url );
+				exit();
+			}
+		}
+	}
+
 
 	/**
 	 * Register Document Type taxonomy.

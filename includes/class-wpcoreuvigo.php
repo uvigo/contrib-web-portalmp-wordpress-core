@@ -198,6 +198,9 @@ class Wpcoreuvigo {
 
 		$this->loader->add_action( 'init', $plugin_data, 'register_document_post_type' );
 		$this->loader->add_action( 'init', $plugin_data, 'register_document_type_taxonomy', 10 );
+		$this->loader->add_action( 'init', $plugin_data, 'document_rewrite_rules' );
+		$this->loader->add_filter( 'post_type_link', $plugin_data, 'document_post_type_link', 10, 4 );
+		$this->loader->add_action( 'template_redirect', $plugin_data, 'document_download_file', 10 );
 
 		$this->loader->add_action( 'init', $plugin_data, 'register_act_post_type' );
 		$this->loader->add_action( 'init', $plugin_data, 'register_act_type_taxonomy', 10 );

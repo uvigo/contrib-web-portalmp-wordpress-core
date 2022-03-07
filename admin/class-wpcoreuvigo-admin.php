@@ -1056,7 +1056,16 @@ class Wpcoreuvigo_Admin {
 	function manage_uvigo_document_custom_column( $column_name, $post_id ) {
 		if ( $column_name == 'uvigo_document_taxonomy_hierarchy' ) {
 			$term_id = get_field( 'uvigo_document_taxonomy', $post_id, false );
-			echo get_term_parents_list( $term_id, Wpcoreuvigo_Data::UV_TAXONOMY_DOCUMENT_TYPE_NAME, array( 'inclusive' => true ) );
+			echo get_term_parents_list(
+				$term_id,
+				Wpcoreuvigo_Data::UV_TAXONOMY_DOCUMENT_TYPE_NAME,
+				array(
+					'format' => 'name',
+					'separator' => '\\',
+					'inclusive' => true,
+					'link' => false,
+				)
+			);
 		}
 	}
 
