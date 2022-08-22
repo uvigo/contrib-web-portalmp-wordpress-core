@@ -63,7 +63,7 @@ class Wpcoreuvigo_Public_Blocks {
 				'title'             => __('Milestone list', 'wpcoreuvigo'),
 				'description'       => __('A block for milestone list.', 'wpcoreuvigo'),
 				'render_callback'   => array( $this, 'milestone_list_block_render_callback' ),
-				'category'          => 'theme',
+				'category'          => 'uvigo',
 				'icon'              => 'admin-site-alt3',
 				'keywords'          => array( 'milestone' ),
 			));
