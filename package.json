@@ -1,6 +1,6 @@
 {
   "name": "contrib-web-portalmp-wordpress-core",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "WordPress Plugin UVigo with basic and common elements",
   "engines": {
     "node": ">= 6.9.4"

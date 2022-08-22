@@ -1,3 +1,25 @@
+# 2.1.0: ??????
+* Mellora do filtro de novas
+* Cambio de categoría dos milestones
+* Traduccións
+* Cambio do nome dos artigos de WordPress
+* Mejoras funcionamiento de documentos
+* Simplifica el código del menú
+* Establecer o filtro de idioma
+* Novo filtro no Widget de Busca
+* Cambio de funcionamiento de filtros de noticias
+* Orden inversa en Hitos (milestones)
+* Se añaden os fitos históricos (milestones)
+* Añadimos los bloques de gutenberg
+* Filter para personalizar filtro de noticias
+
+# 2.0.0: Sep 2th, 2021
+
+* Elimina a xeración de campos ACF desde código (non funciona por WPML)
+* Elimina a actualización automática desde servidor propio
+* Independiza a creación de tipos de contidos
+* Actualizamos stubs para Visual Code de WordPress
+
 # 1.4.1: May 20th, 2020
 
 * Uso de endpoint "release" en vez de "tags" en updater.
