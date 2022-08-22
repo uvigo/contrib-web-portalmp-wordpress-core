@@ -213,6 +213,9 @@ class Wpcoreuvigo {
 		$this->loader->add_action( 'init', $plugin_data, 'register_milestone_post_type' );
 		$this->loader->add_action( 'init', $plugin_data, 'register_milestone_category_taxonomy', 10 );
 
+		// Cambiamos labels para o tipo de contido 'post'
+		$this->loader->add_filter( 'post_type_labels_post', $plugin_data, 'change_post_type_labels', 10, 1 );
+
 		// Creación de campos ACF (NOTA: No funciona con las versiones actuales de WPML y ACF)
 		// $this->loader->add_action( 'acf/init', $plugin_data, 'wpcoreuvigo_acf_add_local_field_groups' );
 

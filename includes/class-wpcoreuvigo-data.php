@@ -77,6 +77,17 @@ class Wpcoreuvigo_Data
 	}
 
 	/**
+	 * Cambiamos el nombre de los artículos de WordPress 'post'
+	 */
+	public function change_post_type_labels( $labels ) {
+
+		$labels->name          = _x( 'News', 'post_type_labels', 'wpcoreuvigo' );
+		$labels->singular_name = _x( 'New', 'post_type_labels', 'wpcoreuvigo' );
+
+		return $labels;
+	}
+
+	/**
 	 * Register spectator taxonomy.
 	 *
 	 * @since    1.0.0
