@@ -68,11 +68,17 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 		$blog_url = apply_filters('wpcoreuvigo_filter_widget_action_url', $blog_url);
 
 		$content_types = array(
-			'post' => get_post_type_object( 'post' ),
-			'uvigo-event' => get_post_type_object( 'uvigo-event' ),
+			'post'        => (object) array(
+				'name'  => 'post',
+				'title' => _x( 'News', 'filter_posts_widget_types', 'wpcoreuvigo' ),
+			),
+			'uvigo-event' => (object) array(
+				'name'  => 'uvigo-event',
+				'title' => _x( 'Events', 'filter_posts_widget_types', 'wpcoreuvigo' ),
+			),
 		);
 
-		$content_types = apply_filters('wpcoreuvigo_filter_widget_filter_content_types', $content_types);
+		$content_types = apply_filters( 'wpcoreuvigo_filter_widget_filter_content_types', $content_types );
 
 		// Filtro Fechas
 		$dates = ! empty( $instance['dates'] ) ? $instance['dates'] : false;
@@ -90,13 +96,15 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 		// Filtro Taxonomias
 		$taxonomies = $instance['taxonomies'];
 		?>
+		<div class="widget-filter__pretitle"><?php echo __( 'Search', 'wpcoreuvigo' ); ?></div>
 		<form action="<?php echo esc_url( $blog_url ); ?>" class="widget-filter__form" method="get">
 			<div class="widget-filter__search">
 				<input type="text" class="form-control" placeholder="<?php echo _x( 'Insert text...', 'Widget filter news: search input', 'wpcoreuvigo' ); ?>" value="<?php echo $f_text; ?>" name="<?php echo esc_attr( self::F_KEYWORDS_FIELD_NAME ); ?>">
 				<button type="submit" class="btn" data-icon="U"><span class="sr-only"><?php esc_html_e( 'Search', 'wpcoreuvigo' ); ?></span></button>
+				<?php /* <button type="button" class="btn" data-icon="M"><span class="sr-only"><?php esc_html_e( 'Clear text', 'wpcoreuvigo' ); ?></span></button> */?>
 			</div>
 			<?php if ( $dates || $taxonomies ) : ?>
-				<h3 class="mt-8 mb-2"><?php echo esc_html_x( 'Filter', 'Widget filter news: filter titles', 'wpcoreuvigo' ); ?></h3>
+				<div class="widget-filter__pretitle mt-8 mb-2"><?php echo esc_html_x( 'Filter', 'Widget filter news: filter titles', 'wpcoreuvigo' ); ?></div>
 				<div class="widget-filter__title"><?php echo esc_html_x( 'Apply filters', 'Widget filter news: filter help', 'wpcoreuvigo' ); ?></div>
 			<?php endif; ?>
 			<?php do_action( 'wpcoreuvigo_filter_widget_before_filters' ); ?>
@@ -114,10 +122,10 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 						<?php foreach ($content_types as $key => $content_type) : ?>
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" name="<?php echo esc_attr( self::F_TYPE_FIELD_NAME ); ?>[]"
-									value="<?php echo esc_html( $content_type->name ); ?>"
-									<?php echo in_array( $content_type->name, $f_type ) ? 'checked' : ''; ?>
-									id="widget-filter-post">
-								<label class="form-check-label" for="widget-filter-post"><?php echo esc_html( $content_type->labels->name ); ?></label>
+									value="<?php echo esc_attr( $key ); ?>"
+									<?php echo in_array( $key, $f_type ) ? 'checked' : ''; ?>
+									id="widget-filter-type-<?php echo esc_attr( $key ); ?>">
+								<label class="form-check-label" for="widget-filter-type-<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $content_type->title ); ?></label>
 							</div>
 						<?php endforeach; ?>
 					</div>
@@ -165,8 +173,8 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 										<input class="form-check-input" type="checkbox" name="<?php echo esc_attr( $query_var_tax_name ); ?>[]"
 											value="<?php echo esc_html( $term->slug ); ?>"
 											<?php echo ( in_array( $term->slug, $query_var_array_tax_selected ) ? 'checked' : '' ); ?>
-											id="<?php echo esc_attr( $term->term_id ); ?>">
-										<label class="form-check-label" for="<?php echo esc_attr( $term->term_id ); ?>"><?php echo esc_html( $term->name ); ?></label>
+											id="widget-filter-term-<?php echo esc_attr( $term->term_id ); ?>">
+										<label class="form-check-label" for="widget-filter-term-<?php echo esc_attr( $term->term_id ); ?>"><?php echo esc_html( $term->name ); ?></label>
 									</div>
 								<?php endforeach; ?>
 							</div>
@@ -179,7 +187,7 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 			<?php do_action( 'wpcoreuvigo_filter_widget_after_filters' ); ?>
 			<div class="widget-filter__buttons">
 				<div class="form-group mt-3 text-right">
-					<button type="submit" class="btn btn-secondary btn-icon w-100">Aplicar</button>
+					<button type="submit" class="btn btn-secondary btn-icon w-100"><?php esc_html_e( 'Apply', 'wpcoreuvigo' ); ?></button>
 				</div>
 			</div>
 		</form>
@@ -287,7 +295,7 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 		}
 
 		if ( $query->is_home() ) {
-			write_log('pre_get_posts ------> WIDGET FILTER');
+			// write_log('pre_get_posts ------> WIDGET FILTER');
 
 			$f_categories = get_query_var( self::F_CATEGORIES_FIELD_NAME );
 			if ( ! empty( $f_categories ) ) {
@@ -342,6 +350,8 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 				} else {
 					$query->set( 'post_type', array( $f_type ) );
 				}
+
+				do_action( 'wpcoreuvigo_filter_widget_pre_get_posts_type', $query, $f_type );
 			}
 		}
 	}
