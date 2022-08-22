@@ -192,10 +192,6 @@ class Wpcoreuvigo {
 
 		$plugin_data = new Wpcoreuvigo_Data( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'init', $plugin_data, 'register_spectator_taxonomy', 10 );
-		$this->loader->add_action( 'init', $plugin_data, 'register_universe_taxonomy', 10 );
-		$this->loader->add_action( 'init', $plugin_data, 'register_geographic_taxonomy', 10 );
-
 		$this->loader->add_action( 'init', $plugin_data, 'register_document_post_type' );
 		$this->loader->add_action( 'init', $plugin_data, 'register_document_type_taxonomy', 10 );
 		$this->loader->add_action( 'init', $plugin_data, 'document_rewrite_rules' );
@@ -207,8 +203,6 @@ class Wpcoreuvigo {
 
 		$this->loader->add_action( 'init', $plugin_data, 'register_form_post_type' );
 		$this->loader->add_action( 'init', $plugin_data, 'register_form_type_taxonomy', 10 );
-
-		$this->loader->add_action( 'wp_loaded', $plugin_data, 'register_taxonomies_terms', 10 );
 
 		$this->loader->add_action( 'init', $plugin_data, 'register_milestone_post_type' );
 		$this->loader->add_action( 'init', $plugin_data, 'register_milestone_category_taxonomy', 10 );

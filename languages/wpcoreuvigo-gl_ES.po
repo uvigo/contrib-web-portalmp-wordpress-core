@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: wpcoreuvigo\n"
-"POT-Creation-Date: 2022-07-13 11:40+0200\n"
-"PO-Revision-Date: 2022-07-13 11:41+0200\n"
+"POT-Creation-Date: 2022-08-22 18:46+0200\n"
+"PO-Revision-Date: 2022-08-22 18:48+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: gl_ES\n"
@@ -41,643 +41,495 @@ msgstr ""
 msgid "Hide page title"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:287 admin/class-wpcoreuvigo-admin.php:310
-#: admin/class-wpcoreuvigo-admin.php:353 admin/class-wpcoreuvigo-admin.php:377
-msgid "Id"
-msgstr ""
-
-#: admin/class-wpcoreuvigo-admin.php:292 admin/class-wpcoreuvigo-admin.php:317
-#: admin/class-wpcoreuvigo-admin.php:358 admin/class-wpcoreuvigo-admin.php:384
-msgid "Internal code"
-msgstr "Código interno"
-
-#: admin/class-wpcoreuvigo-admin.php:463
+#: admin/class-wpcoreuvigo-admin.php:329
 msgid "Video url:"
 msgstr "Vídeo url:"
 
-#: admin/class-wpcoreuvigo-admin.php:521
+#: admin/class-wpcoreuvigo-admin.php:387
 msgid "Hide image in single view"
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:819
+#: admin/class-wpcoreuvigo-admin.php:685
 msgid "Non se pode modificar o tipo de documento."
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:820
+#: admin/class-wpcoreuvigo-admin.php:686
 msgid ""
 "Sentímolo, pero non se pode modificar o tipo de documento, para evitar "
 "problemas co acceso os ficheiros en disco."
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:837
+#: admin/class-wpcoreuvigo-admin.php:703
 msgid "Non se pode modificar o tipo de acta."
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:838
+#: admin/class-wpcoreuvigo-admin.php:704
 msgid ""
 "Sentímolo, pero non se pode modificar o tipo de acta, para evitar problemas "
 "co acceso os ficheiros en disco."
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:855
+#: admin/class-wpcoreuvigo-admin.php:721
 msgid "Non se pode modificar o tipo de formulario."
 msgstr ""
 
-#: admin/class-wpcoreuvigo-admin.php:856
+#: admin/class-wpcoreuvigo-admin.php:722
 msgid ""
 "Sentímolo, pero non se pode modificar o tipo de formulario, para evitar "
 "problemas co acceso os ficheiros en disco."
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:84
+#: includes/class-wpcoreuvigo-data.php:78
 msgctxt "post_type_labels"
 msgid "News"
 msgstr "Novas"
 
-#: includes/class-wpcoreuvigo-data.php:85
+#: includes/class-wpcoreuvigo-data.php:79
 msgctxt "post_type_labels"
 msgid "New"
 msgstr "Nova"
 
-#: includes/class-wpcoreuvigo-data.php:107
-msgctxt "taxonomy general name"
-msgid "Spectators"
-msgstr "Tipos de públicos"
-
-#: includes/class-wpcoreuvigo-data.php:108
-msgctxt "taxonomy singular name"
-msgid "Spectator"
-msgstr "Tipos de público"
-
-#: includes/class-wpcoreuvigo-data.php:109
-msgid "Search Spectator"
-msgstr "Buscar Tipo de público"
-
-#: includes/class-wpcoreuvigo-data.php:110
-msgid "All Spectators"
-msgstr "Todos os tipos de públicos"
-
-#: includes/class-wpcoreuvigo-data.php:111
-msgid "Parent Spectator"
-msgstr ""
-
-#: includes/class-wpcoreuvigo-data.php:112
-msgid "Parent Spectator:"
-msgstr ""
-
-#: includes/class-wpcoreuvigo-data.php:113
-msgid "Edit Spectator"
-msgstr "Editar tipo de público"
-
-#: includes/class-wpcoreuvigo-data.php:114
-msgid "Update Spectator"
-msgstr "Actualizar tipo de público"
-
-#: includes/class-wpcoreuvigo-data.php:115
-msgid "Add New Spectator"
-msgstr "Engadir novo tipo de público"
-
-#: includes/class-wpcoreuvigo-data.php:116
-msgid "New Spectator Name"
-msgstr "Novo tipo de público"
-
-#: includes/class-wpcoreuvigo-data.php:117
-msgid "Spectator"
-msgstr "Tipo de público"
-
-#: includes/class-wpcoreuvigo-data.php:167
-msgctxt "taxonomy general name"
-msgid "Universes"
-msgstr "Tipos de universos"
-
-#: includes/class-wpcoreuvigo-data.php:168
-msgctxt "taxonomy singular name"
-msgid "Universe"
-msgstr "Tipo de universo"
-
-#: includes/class-wpcoreuvigo-data.php:169
-msgid "Search Universe"
-msgstr "Buscar Tipo de universo"
-
-#: includes/class-wpcoreuvigo-data.php:170
-msgid "All Universe"
-msgstr "Todos os tipos de universo"
-
-#: includes/class-wpcoreuvigo-data.php:171
-msgid "Parent Universe"
-msgstr ""
-
-#: includes/class-wpcoreuvigo-data.php:172
-msgid "Parent Universe:"
-msgstr ""
-
-#: includes/class-wpcoreuvigo-data.php:173
-msgid "Edit Universe"
-msgstr "Editar tipo de universo"
-
-#: includes/class-wpcoreuvigo-data.php:174
-msgid "Update Universe"
-msgstr "Actualizar tipo de universo"
-
-#: includes/class-wpcoreuvigo-data.php:175
-msgid "Add New Universe"
-msgstr "Engadir novo tipo de universo"
-
-#: includes/class-wpcoreuvigo-data.php:176
-msgid "New Universe Name"
-msgstr "Novo tipo de universo"
-
-#: includes/class-wpcoreuvigo-data.php:177
-msgid "Universe"
-msgstr "Tipo de universo"
-
-#: includes/class-wpcoreuvigo-data.php:227
-msgctxt "taxonomy general name"
-msgid "Geographic"
-msgstr "Ámbitos xeográficos"
-
-#: includes/class-wpcoreuvigo-data.php:228
-msgctxt "taxonomy singular name"
-msgid "Geographic"
-msgstr "Ámbito Xeográfico"
-
-#: includes/class-wpcoreuvigo-data.php:229
-msgid "Search Geographic"
-msgstr "Ámbito xeográfico"
-
-#: includes/class-wpcoreuvigo-data.php:230
-msgid "All Geographic"
-msgstr "Todos os ámbito xeográficos"
-
-#: includes/class-wpcoreuvigo-data.php:231
-msgid "Parent Geographic"
-msgstr ""
-
-#: includes/class-wpcoreuvigo-data.php:232
-msgid "Parent Geographic:"
-msgstr ""
-
-#: includes/class-wpcoreuvigo-data.php:233
-msgid "Edit Geographic"
-msgstr "Editar ámbito xeográfico"
-
-#: includes/class-wpcoreuvigo-data.php:234
-msgid "Update Geographic"
-msgstr "Actualizar ámbito xeográfico"
-
-#: includes/class-wpcoreuvigo-data.php:235
-msgid "Add New Geographic"
-msgstr "Engadir novo ámbito xeográfico"
-
-#: includes/class-wpcoreuvigo-data.php:236
-msgid "New Geographic Name"
-msgstr "Novo ámbito xeográfico"
-
-#: includes/class-wpcoreuvigo-data.php:237
-msgid "Geographic"
-msgstr "Ámbito Xeográfico"
-
-#: includes/class-wpcoreuvigo-data.php:363
+#: includes/class-wpcoreuvigo-data.php:97
 msgctxt "post type general name"
 msgid "Documents"
 msgstr "Documentos"
 
-#: includes/class-wpcoreuvigo-data.php:364
+#: includes/class-wpcoreuvigo-data.php:98
 msgctxt "post type singular name"
 msgid "Document"
 msgstr "Documento"
 
-#: includes/class-wpcoreuvigo-data.php:365
+#: includes/class-wpcoreuvigo-data.php:99
 msgctxt "admin menu"
 msgid "Documents"
 msgstr "Documentos"
 
-#: includes/class-wpcoreuvigo-data.php:366
+#: includes/class-wpcoreuvigo-data.php:100
 msgctxt "add new on admin bar"
 msgid "Documents"
 msgstr "Documentos"
 
-#: includes/class-wpcoreuvigo-data.php:367
+#: includes/class-wpcoreuvigo-data.php:101
 msgctxt "Document"
 msgid "Add new"
 msgstr "Engadir Documento"
 
-#: includes/class-wpcoreuvigo-data.php:368
+#: includes/class-wpcoreuvigo-data.php:102
 msgid "Add new document"
 msgstr "Engadir novo Documento"
 
-#: includes/class-wpcoreuvigo-data.php:369
+#: includes/class-wpcoreuvigo-data.php:103
 msgid "New document"
 msgstr "Novo Documento"
 
-#: includes/class-wpcoreuvigo-data.php:370
+#: includes/class-wpcoreuvigo-data.php:104
 msgid "Edit document"
 msgstr "Editar Documento"
 
-#: includes/class-wpcoreuvigo-data.php:371
+#: includes/class-wpcoreuvigo-data.php:105
 msgid "View document"
 msgstr "Ver Documento"
 
-#: includes/class-wpcoreuvigo-data.php:372
+#: includes/class-wpcoreuvigo-data.php:106
 msgid "All documents"
 msgstr "Todos os Documentos"
 
-#: includes/class-wpcoreuvigo-data.php:373
+#: includes/class-wpcoreuvigo-data.php:107
 msgid "Search documents"
 msgstr "Buscar documentos"
 
-#: includes/class-wpcoreuvigo-data.php:374
+#: includes/class-wpcoreuvigo-data.php:108
 msgid "Parent document:"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:375
+#: includes/class-wpcoreuvigo-data.php:109
 msgid "Documents not found."
 msgstr "Documento non atopado."
 
-#: includes/class-wpcoreuvigo-data.php:376
+#: includes/class-wpcoreuvigo-data.php:110
 msgid "Documents not found in trash."
 msgstr "Documento non atopado."
 
-#: includes/class-wpcoreuvigo-data.php:381
+#: includes/class-wpcoreuvigo-data.php:115
 msgid "Documents"
 msgstr "Documentos"
 
-#: includes/class-wpcoreuvigo-data.php:531
+#: includes/class-wpcoreuvigo-data.php:265
 msgctxt "taxonomy general name"
 msgid "Documents Types"
 msgstr "Tipos de Documentos"
 
-#: includes/class-wpcoreuvigo-data.php:532
+#: includes/class-wpcoreuvigo-data.php:266
 msgctxt "taxonomy singular name"
 msgid "Document Type"
 msgstr "Tipo de Documento"
 
-#: includes/class-wpcoreuvigo-data.php:533
+#: includes/class-wpcoreuvigo-data.php:267
 msgid "Search Document Type"
 msgstr "Buscar Tipo de Documento"
 
-#: includes/class-wpcoreuvigo-data.php:534
+#: includes/class-wpcoreuvigo-data.php:268
 msgid "All Documents Types"
 msgstr "Todos os tipos de Documentos"
 
-#: includes/class-wpcoreuvigo-data.php:535
+#: includes/class-wpcoreuvigo-data.php:269
 msgid "Parent Document Type"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:536
+#: includes/class-wpcoreuvigo-data.php:270
 msgid "Parent Document Type:"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:537
+#: includes/class-wpcoreuvigo-data.php:271
 msgid "Edit Document Type"
 msgstr "Editar tipo de Documento"
 
-#: includes/class-wpcoreuvigo-data.php:538
+#: includes/class-wpcoreuvigo-data.php:272
 msgid "Update Document Type"
 msgstr "Actualizar tipo de Documento"
 
-#: includes/class-wpcoreuvigo-data.php:539
+#: includes/class-wpcoreuvigo-data.php:273
 msgid "Add New Document Type"
 msgstr "Engadir novo tipo de Documento"
 
-#: includes/class-wpcoreuvigo-data.php:540
+#: includes/class-wpcoreuvigo-data.php:274
 msgid "New Document Type Name"
 msgstr "Nome"
 
-#: includes/class-wpcoreuvigo-data.php:541
+#: includes/class-wpcoreuvigo-data.php:275
 msgid "Document Type"
 msgstr "Tipo Documento"
 
-#: includes/class-wpcoreuvigo-data.php:580
+#: includes/class-wpcoreuvigo-data.php:314
 msgctxt "post type general name"
 msgid "Acts"
 msgstr "Actas"
 
-#: includes/class-wpcoreuvigo-data.php:581
+#: includes/class-wpcoreuvigo-data.php:315
 msgctxt "post type singular name"
 msgid "Act"
 msgstr "Acta"
 
-#: includes/class-wpcoreuvigo-data.php:582
+#: includes/class-wpcoreuvigo-data.php:316
 msgctxt "admin menu"
 msgid "Acts"
 msgstr "Actas"
 
-#: includes/class-wpcoreuvigo-data.php:583
+#: includes/class-wpcoreuvigo-data.php:317
 msgctxt "add new on admin bar"
 msgid "Acts"
 msgstr "Actas"
 
-#: includes/class-wpcoreuvigo-data.php:584
+#: includes/class-wpcoreuvigo-data.php:318
 msgctxt "Act"
 msgid "Add new"
 msgstr "Engadir Acta"
 
-#: includes/class-wpcoreuvigo-data.php:585
+#: includes/class-wpcoreuvigo-data.php:319
 msgid "Add new act"
 msgstr "Engadir nova Acta"
 
-#: includes/class-wpcoreuvigo-data.php:586
+#: includes/class-wpcoreuvigo-data.php:320
 msgid "New act"
 msgstr "Nova Acta"
 
-#: includes/class-wpcoreuvigo-data.php:587
+#: includes/class-wpcoreuvigo-data.php:321
 msgid "Edit act"
 msgstr "Editar Acta"
 
-#: includes/class-wpcoreuvigo-data.php:588
+#: includes/class-wpcoreuvigo-data.php:322
 msgid "View act"
 msgstr "Ver Acta"
 
-#: includes/class-wpcoreuvigo-data.php:589
+#: includes/class-wpcoreuvigo-data.php:323
 msgid "All acts"
 msgstr "Todas as Actas"
 
-#: includes/class-wpcoreuvigo-data.php:590
+#: includes/class-wpcoreuvigo-data.php:324
 msgid "Search acts"
 msgstr "Buscar Actas"
 
-#: includes/class-wpcoreuvigo-data.php:591
+#: includes/class-wpcoreuvigo-data.php:325
 msgid "Parent act:"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:592
+#: includes/class-wpcoreuvigo-data.php:326
 msgid "Acts not found."
 msgstr "Non se atopo Acta."
 
-#: includes/class-wpcoreuvigo-data.php:593
+#: includes/class-wpcoreuvigo-data.php:327
 msgid "Acts not found in trash."
 msgstr "Non se atopo Acta."
 
-#: includes/class-wpcoreuvigo-data.php:598
+#: includes/class-wpcoreuvigo-data.php:332
 msgid "Acts"
 msgstr "Actas"
 
-#: includes/class-wpcoreuvigo-data.php:626
+#: includes/class-wpcoreuvigo-data.php:360
 msgctxt "taxonomy general name"
 msgid "Acts Types"
 msgstr "Tipos de Actas"
 
-#: includes/class-wpcoreuvigo-data.php:627
+#: includes/class-wpcoreuvigo-data.php:361
 msgctxt "taxonomy singular name"
 msgid "Act Type"
 msgstr "Tipo de Acta"
 
-#: includes/class-wpcoreuvigo-data.php:628
+#: includes/class-wpcoreuvigo-data.php:362
 msgid "Search Act Type"
 msgstr "Buscar tipo de Acta"
 
-#: includes/class-wpcoreuvigo-data.php:629
+#: includes/class-wpcoreuvigo-data.php:363
 msgid "All Acts Types"
 msgstr "Todos os tipos de Actas"
 
-#: includes/class-wpcoreuvigo-data.php:630
+#: includes/class-wpcoreuvigo-data.php:364
 msgid "Parent Act Type"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:631
+#: includes/class-wpcoreuvigo-data.php:365
 msgid "Parent Act Type:"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:632
+#: includes/class-wpcoreuvigo-data.php:366
 msgid "Edit Act Type"
 msgstr "Editar tipo de Acta"
 
-#: includes/class-wpcoreuvigo-data.php:633
+#: includes/class-wpcoreuvigo-data.php:367
 msgid "Update Act Type"
 msgstr "Actualizar tipo de Acta"
 
-#: includes/class-wpcoreuvigo-data.php:634
+#: includes/class-wpcoreuvigo-data.php:368
 msgid "Add New Act Type"
 msgstr "Engadir novo tipo de Acta"
 
-#: includes/class-wpcoreuvigo-data.php:635
+#: includes/class-wpcoreuvigo-data.php:369
 msgid "New Act Type Name"
 msgstr "Novo tipo de Acta"
 
-#: includes/class-wpcoreuvigo-data.php:636
+#: includes/class-wpcoreuvigo-data.php:370
 msgid "Act Type"
 msgstr "Tipo de Acta"
 
-#: includes/class-wpcoreuvigo-data.php:674
+#: includes/class-wpcoreuvigo-data.php:408
 msgctxt "post type general name"
 msgid "Forms"
 msgstr "Formularios"
 
-#: includes/class-wpcoreuvigo-data.php:675
+#: includes/class-wpcoreuvigo-data.php:409
 msgctxt "post type singular name"
 msgid "Form"
 msgstr "Formulario"
 
-#: includes/class-wpcoreuvigo-data.php:676
+#: includes/class-wpcoreuvigo-data.php:410
 msgctxt "admin menu"
 msgid "Forms"
 msgstr "Formularios"
 
-#: includes/class-wpcoreuvigo-data.php:677
+#: includes/class-wpcoreuvigo-data.php:411
 msgctxt "add new on admin bar"
 msgid "Forms"
 msgstr "Formularios"
 
-#: includes/class-wpcoreuvigo-data.php:678
+#: includes/class-wpcoreuvigo-data.php:412
 msgctxt "Form"
 msgid "Add new"
 msgstr "Engadir Formulario"
 
-#: includes/class-wpcoreuvigo-data.php:679
+#: includes/class-wpcoreuvigo-data.php:413
 msgid "Add new form"
 msgstr "Engadir novo Formulario"
 
-#: includes/class-wpcoreuvigo-data.php:680
+#: includes/class-wpcoreuvigo-data.php:414
 msgid "New form"
 msgstr "Novo Formulario"
 
-#: includes/class-wpcoreuvigo-data.php:681
+#: includes/class-wpcoreuvigo-data.php:415
 msgid "Edit form"
 msgstr "Editar Formulario"
 
-#: includes/class-wpcoreuvigo-data.php:682
+#: includes/class-wpcoreuvigo-data.php:416
 msgid "View form"
 msgstr "Ver Formulario"
 
-#: includes/class-wpcoreuvigo-data.php:683
+#: includes/class-wpcoreuvigo-data.php:417
 msgid "All forms"
 msgstr "Todos os Formularios"
 
-#: includes/class-wpcoreuvigo-data.php:684
+#: includes/class-wpcoreuvigo-data.php:418
 msgid "Search forms"
 msgstr "Buscar formularios"
 
-#: includes/class-wpcoreuvigo-data.php:685
+#: includes/class-wpcoreuvigo-data.php:419
 msgid "Parent form:"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:686
+#: includes/class-wpcoreuvigo-data.php:420
 msgid "Forms not found."
 msgstr "Formulario non atopado."
 
-#: includes/class-wpcoreuvigo-data.php:687
+#: includes/class-wpcoreuvigo-data.php:421
 msgid "Forms not found in trash."
 msgstr "Non se atopou Formulario."
 
-#: includes/class-wpcoreuvigo-data.php:692
+#: includes/class-wpcoreuvigo-data.php:426
 msgid "Forms"
 msgstr "Formularios"
 
-#: includes/class-wpcoreuvigo-data.php:720
+#: includes/class-wpcoreuvigo-data.php:454
 msgctxt "taxonomy general name"
 msgid "Forms Types"
 msgstr "Tipos de Formularios"
 
-#: includes/class-wpcoreuvigo-data.php:721
+#: includes/class-wpcoreuvigo-data.php:455
 msgctxt "taxonomy singular name"
 msgid "Form Type"
 msgstr "Tipo de Formulario"
 
-#: includes/class-wpcoreuvigo-data.php:722
+#: includes/class-wpcoreuvigo-data.php:456
 msgid "Search Form Type"
 msgstr "Buscar Tipo de Formulario"
 
-#: includes/class-wpcoreuvigo-data.php:723
+#: includes/class-wpcoreuvigo-data.php:457
 msgid "All Forms Types"
 msgstr "Todos os tipos de Formularios"
 
-#: includes/class-wpcoreuvigo-data.php:724
+#: includes/class-wpcoreuvigo-data.php:458
 msgid "Parent Form Type"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:725
+#: includes/class-wpcoreuvigo-data.php:459
 msgid "Parent Form Type:"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:726
+#: includes/class-wpcoreuvigo-data.php:460
 msgid "Edit Form Type"
 msgstr "Editar tipo de Formulario"
 
-#: includes/class-wpcoreuvigo-data.php:727
+#: includes/class-wpcoreuvigo-data.php:461
 msgid "Update Form Type"
 msgstr "Actualizar tipo de Formulario"
 
-#: includes/class-wpcoreuvigo-data.php:728
+#: includes/class-wpcoreuvigo-data.php:462
 msgid "Add New Form Type"
 msgstr "Engadir novo tipo de Formulario"
 
-#: includes/class-wpcoreuvigo-data.php:729
+#: includes/class-wpcoreuvigo-data.php:463
 msgid "New Form Type Name"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:730
+#: includes/class-wpcoreuvigo-data.php:464
 msgid "Form Type"
 msgstr "Tipo Formulario"
 
-#: includes/class-wpcoreuvigo-data.php:764
+#: includes/class-wpcoreuvigo-data.php:498
 msgctxt "post type general name"
 msgid "Milestones"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:765
+#: includes/class-wpcoreuvigo-data.php:499
 msgctxt "post type singular name"
 msgid "Milestone"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:766
+#: includes/class-wpcoreuvigo-data.php:500
 msgctxt "admin menu"
 msgid "Milestones"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:767
+#: includes/class-wpcoreuvigo-data.php:501
 msgctxt "add new on admin bar"
 msgid "Milestones"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:768
+#: includes/class-wpcoreuvigo-data.php:502
 msgctxt "Milestone"
 msgid "Add new"
 msgstr "Engadir novo"
 
-#: includes/class-wpcoreuvigo-data.php:769
+#: includes/class-wpcoreuvigo-data.php:503
 msgid "Add new milestone"
 msgstr "Engadir novo fito"
 
-#: includes/class-wpcoreuvigo-data.php:770
+#: includes/class-wpcoreuvigo-data.php:504
 msgid "New milestone"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:771
+#: includes/class-wpcoreuvigo-data.php:505
 msgid "Edit milestone"
 msgstr "Editar fito"
 
-#: includes/class-wpcoreuvigo-data.php:772
+#: includes/class-wpcoreuvigo-data.php:506
 msgid "View milestone"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:773
+#: includes/class-wpcoreuvigo-data.php:507
 msgid "All milestones"
 msgstr "Todos os fitos"
 
-#: includes/class-wpcoreuvigo-data.php:774
+#: includes/class-wpcoreuvigo-data.php:508
 msgid "Search milestones"
 msgstr "Buscar fitos"
 
-#: includes/class-wpcoreuvigo-data.php:775
+#: includes/class-wpcoreuvigo-data.php:509
 msgid "Parent milestone:"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:776
+#: includes/class-wpcoreuvigo-data.php:510
 msgid "Milestones not found."
 msgstr "Fitos non atopados."
 
-#: includes/class-wpcoreuvigo-data.php:777
+#: includes/class-wpcoreuvigo-data.php:511
 msgid "Milestones not found in trash."
 msgstr "Non se atopan fitos no lixo."
 
-#: includes/class-wpcoreuvigo-data.php:782
+#: includes/class-wpcoreuvigo-data.php:516
 msgid "Milestones"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:811
+#: includes/class-wpcoreuvigo-data.php:545
 msgctxt "taxonomy general name"
 msgid "Milestone category"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:812
+#: includes/class-wpcoreuvigo-data.php:546
 msgctxt "taxonomy singular name"
 msgid "Milestone category"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:813
+#: includes/class-wpcoreuvigo-data.php:547
 msgid "Search milestone category"
 msgstr "Buscar categoría de fito"
 
-#: includes/class-wpcoreuvigo-data.php:814
+#: includes/class-wpcoreuvigo-data.php:548
 msgid "All milestone category"
 msgstr "Todas as categorías dos fitos"
 
-#: includes/class-wpcoreuvigo-data.php:815
+#: includes/class-wpcoreuvigo-data.php:549
 msgid "Parent milestone category"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:816
+#: includes/class-wpcoreuvigo-data.php:550
 msgid "Parent milestone category:"
 msgstr ""
 
-#: includes/class-wpcoreuvigo-data.php:817
+#: includes/class-wpcoreuvigo-data.php:551
 msgid "Edit milestone category"
 msgstr "Editar categoría de fito"
 
-#: includes/class-wpcoreuvigo-data.php:818
+#: includes/class-wpcoreuvigo-data.php:552
 msgid "Update milestone category"
 msgstr "Buscar categoría de fito"
 
-#: includes/class-wpcoreuvigo-data.php:819
+#: includes/class-wpcoreuvigo-data.php:553
 msgid "Add New milestone category"
 msgstr "Engadir nova categoría de fito"
 
-#: includes/class-wpcoreuvigo-data.php:820
+#: includes/class-wpcoreuvigo-data.php:554
 msgid "New milestone category Name"
 msgstr "Novo nome de categoría de fito"
 
-#: includes/class-wpcoreuvigo-data.php:821
+#: includes/class-wpcoreuvigo-data.php:555
 msgid "Milestone category"
 msgstr ""
 
@@ -814,12 +666,3 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://ideit.es"
 msgstr ""
-
-#~ msgid "An unknown error occurred"
-#~ msgstr "Aconteceu un erro descoñecido"
-
-#~ msgid "wpcoreuvigo"
-#~ msgstr "WP Core UVigo"
-
-#~ msgid "Plugin UVigo with common elements"
-#~ msgstr "Plugin UVigo con elementos comunes"
