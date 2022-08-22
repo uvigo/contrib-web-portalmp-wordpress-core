@@ -1,0 +1,126 @@
+[
+    {
+        "key": "group_5d15d1458734e",
+        "title": "Formularios",
+        "fields": [
+            {
+                "key": "field_5d15d14aa8747",
+                "label": "Taxonomía",
+                "name": "uvigo_form_taxonomy",
+                "type": "taxonomy",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "wpml_cf_preferences": 2,
+                "taxonomy": "uvigo-tax-form",
+                "field_type": "select",
+                "allow_null": 1,
+                "add_term": 1,
+                "save_terms": 1,
+                "load_terms": 0,
+                "return_format": "object",
+                "multiple": 0
+            },
+            {
+                "key": "field_5d15d1e6a8748",
+                "label": "Doc",
+                "name": "uvigo_form_document_doc",
+                "type": "file",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "wpml_cf_preferences": 3,
+                "return_format": "array",
+                "library": "all",
+                "min_size": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_5d15d210a8749",
+                "label": "Pdf",
+                "name": "uvigo_form_document_pdf",
+                "type": "file",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "wpml_cf_preferences": 3,
+                "return_format": "array",
+                "library": "all",
+                "min_size": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_5d15d222a874a",
+                "label": "Odt",
+                "name": "uvigo_form_document_odt",
+                "type": "file",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "wpml_cf_preferences": 3,
+                "return_format": "array",
+                "library": "all",
+                "min_size": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_5d8507b8ea6c1",
+                "label": "Url",
+                "name": "uvigo_form_url",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "wpml_cf_preferences": 3,
+                "default_value": "",
+                "placeholder": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "uvigo-form"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "acf_after_title",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Formularios (wpcoreuvigo)",
+        "show_in_rest": false
+    }
+]

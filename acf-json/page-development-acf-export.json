@@ -1,0 +1,92 @@
+[
+    {
+        "key": "group_5c5dcb2fb102d",
+        "title": "Desarrollo",
+        "fields": [
+            {
+                "key": "field_5c5dcb40373b1",
+                "label": "Revisión",
+                "name": "dev_revision",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "wpml_cf_preferences": 2,
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "basic",
+                "media_upload": 0,
+                "delay": 0
+            },
+            {
+                "key": "field_6193eaeac0b5c",
+                "label": "Estado",
+                "name": "dev_status",
+                "type": "select",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "wpml_cf_preferences": 2,
+                "choices": {
+                    "default": "Sen estado",
+                    "warning": "Atención",
+                    "review": "Para revisar",
+                    "complete": "Rematado"
+                },
+                "default_value": "default",
+                "allow_null": 0,
+                "multiple": 0,
+                "ui": 0,
+                "return_format": "value",
+                "ajax": 0,
+                "placeholder": ""
+            },
+            {
+                "key": "field_6193ee1b03ddb",
+                "label": "Última actualización",
+                "name": "dev_lastupdate",
+                "type": "date_time_picker",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "display_format": "d\/m\/Y H:i",
+                "return_format": "Y-m-d H:i:s",
+                "first_day": 1,
+                "wpml_cf_preferences": 2
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "page"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "side",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Páxina desenvolvemento (wpcoreuvigo)",
+        "show_in_rest": false
+    }
+]

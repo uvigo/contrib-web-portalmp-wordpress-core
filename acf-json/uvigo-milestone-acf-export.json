@@ -1,0 +1,109 @@
+[
+    {
+        "key": "group_6194427d5341d",
+        "title": "Milestone",
+        "fields": [
+            {
+                "key": "field_619442d4f9d33",
+                "label": "Data",
+                "name": "milestone_date",
+                "type": "date_picker",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "40",
+                    "class": "",
+                    "id": ""
+                },
+                "display_format": "d\/m\/Y",
+                "return_format": "Ymd",
+                "first_day": 1,
+                "wpml_cf_preferences": 1
+            },
+            {
+                "key": "field_6194438af9d34",
+                "label": "Data en texto",
+                "name": "milestone_date_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "60",
+                    "class": "",
+                    "id": ""
+                },
+                "wpml_cf_preferences": 2,
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_61ca37db24aa0",
+                "label": "Imaxe secundaria",
+                "name": "milestone_image",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "array",
+                "preview_size": "medium",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": "",
+                "wpml_cf_preferences": 1
+            },
+            {
+                "key": "field_61d49abaaffb0",
+                "label": "Imaxe destacada",
+                "name": "use_border_thumbnail_post",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "Debuxar borde ao redor",
+                "default_value": 0,
+                "ui": 0,
+                "wpml_cf_preferences": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "uvigo-milestone"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "side",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Fitos (wpcoreuvigo)",
+        "show_in_rest": 0
+    }
+]

@@ -1,0 +1,128 @@
+[
+    {
+        "key": "group_5b8e42f3be05a",
+        "title": "Documentos",
+        "fields": [
+            {
+                "key": "field_5c6ffaf011690",
+                "label": "Taxonomia",
+                "name": "uvigo_document_taxonomy",
+                "type": "taxonomy",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "wpml_cf_preferences": 2,
+                "taxonomy": "uvigo-tax-document",
+                "field_type": "select",
+                "allow_null": 0,
+                "add_term": 1,
+                "save_terms": 1,
+                "load_terms": 1,
+                "return_format": "object",
+                "multiple": 0
+            },
+            {
+                "key": "field_5b8e3e4639624",
+                "label": "Origen de datos",
+                "name": "uvigo_document_origin_type",
+                "type": "select",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "wpml_cf_preferences": 0,
+                "choices": {
+                    "file": "Document",
+                    "url": "Url"
+                },
+                "default_value": false,
+                "allow_null": 0,
+                "multiple": 0,
+                "ui": 0,
+                "return_format": "value",
+                "ajax": 0,
+                "placeholder": ""
+            },
+            {
+                "key": "field_5b8e3eb639625",
+                "label": "Documento",
+                "name": "uvigo_document_file",
+                "type": "file",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_5b8e3e4639624",
+                            "operator": "==",
+                            "value": "file"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "wpml_cf_preferences": 3,
+                "return_format": "array",
+                "library": "all",
+                "min_size": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_5b8e3ef539626",
+                "label": "Url",
+                "name": "uvigo_document_url",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_5b8e3e4639624",
+                            "operator": "==",
+                            "value": "url"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "wpml_cf_preferences": 3,
+                "default_value": "",
+                "placeholder": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "uvigo-document"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "acf_after_title",
+        "style": "seamless",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Documentos (wpcoreuvigo)",
+        "show_in_rest": false
+    }
+]

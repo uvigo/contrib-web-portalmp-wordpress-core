@@ -210,9 +210,6 @@ class Wpcoreuvigo {
 		// Cambiamos labels para o tipo de contido 'post'
 		$this->loader->add_filter( 'post_type_labels_post', $plugin_data, 'change_post_type_labels', 10, 1 );
 
-		// Creación de campos ACF (NOTA: No funciona con las versiones actuales de WPML y ACF)
-		// $this->loader->add_action( 'acf/init', $plugin_data, 'wpcoreuvigo_acf_add_local_field_groups' );
-
 	}
 
 	/**

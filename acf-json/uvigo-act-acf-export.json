@@ -1,0 +1,129 @@
+[
+    {
+        "key": "group_5c6aa1928cca5",
+        "title": "Acta",
+        "fields": [
+            {
+                "key": "field_5c6d5bf24af0a",
+                "label": "Taxonomía",
+                "name": "uvigo_act_taxonomy",
+                "type": "taxonomy",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "wpml_cf_preferences": 2,
+                "taxonomy": "uvigo-tax-act",
+                "field_type": "select",
+                "allow_null": 1,
+                "add_term": 1,
+                "save_terms": 1,
+                "load_terms": 0,
+                "return_format": "object",
+                "multiple": 0
+            },
+            {
+                "key": "field_5c6aa19c140b0",
+                "label": "Data",
+                "name": "uvigo_act_date",
+                "type": "date_picker",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "wpml_cf_preferences": 1,
+                "display_format": "d\/m\/Y",
+                "return_format": "d\/m\/Y",
+                "first_day": 1
+            },
+            {
+                "key": "field_5c6aa206140b1",
+                "label": "Documentos",
+                "name": "uvigo_act_documents",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "wpml_cf_preferences": 2,
+                "collapsed": "field_5c6aa242140b2",
+                "min": 0,
+                "max": 0,
+                "layout": "row",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_5c6aa242140b2",
+                        "label": "Titulo",
+                        "name": "uvigo_act_document_title",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "wpml_cf_preferences": 2,
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_5c6aa254140b3",
+                        "label": "Documento",
+                        "name": "uvigo_act_document_file",
+                        "type": "file",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "wpml_cf_preferences": 2,
+                        "return_format": "array",
+                        "library": "all",
+                        "min_size": "",
+                        "max_size": "",
+                        "mime_types": ""
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "uvigo-act"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "acf_after_title",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Actas (wpcoreuvigo)",
+        "show_in_rest": false
+    }
+]
