@@ -54,47 +54,75 @@ class Wpcoreuvigo_Public_Blocks {
 	 */
 	public function register_blocks() {
 
-		if (function_exists('acf_register_block_type')) {
+		if ( function_exists( 'acf_register_block_type' ) ) {
 
-			// Bloque de listaxe de actualidade
+			// Bloque de listaxe de Milestones.
+			acf_register_block_type(
+				array(
+					'name'            => 'milestone-list',
+					'title'           => __( 'Milestone list', 'wpcoreuvigo' ),
+					'description'     => __( 'A block for milestone list.', 'wpcoreuvigo' ),
+					'render_callback' => array( $this, 'milestone_list_block_render_callback' ),
+					'category'        => 'uvigo',
+					'icon'            => 'admin-site-alt3',
+					'keywords'        => array( 'milestone' ),
+				)
+			);
 
-			acf_register_block_type(array(
-				'name'              => 'milestone-list',
-				'title'             => __('Milestone list', 'wpcoreuvigo'),
-				'description'       => __('A block for milestone list.', 'wpcoreuvigo'),
-				'render_callback'   => array( $this, 'milestone_list_block_render_callback' ),
-				'category'          => 'uvigo',
-				'icon'              => 'admin-site-alt3',
-				'keywords'          => array( 'milestone' ),
-			));
+			// Bloque de slider de Milestones.
+			acf_register_block_type(
+				array(
+					'name'            => 'milestone-slider',
+					'title'           => __( 'Milestone slider list', 'wpcoreuvigo' ),
+					'description'     => __( 'A block for milestone slider list.', 'wpcoreuvigo' ),
+					'render_callback' => array( $this, 'milestone_slider_block_render_callback' ),
+					'category'        => 'uvigo',
+					'icon'            => 'admin-site-alt3',
+					'keywords'        => array( 'milestone' ),
+				)
+			);
 
+			if ( ! WP_Block_Type_Registry::get_instance()->is_registered( 'acf/counters' ) ) {
 
+				// Bloque para contadores.
+				acf_register_block_type(
+					array(
+						'name'            => 'counters',
+						'title'           => __( 'Counters', 'wpcoreuvigo' ),
+						'description'     => __( 'A block for counters.', 'wpcoreuvigo' ),
+						'render_callback' => array( $this, 'counter_block_render_callback' ),
+						'category'        => 'uvigo',
+						'icon'            => 'info-outline',
+						'keywords'        => array( 'counter' ),
+					)
+				);
+			}
 		}
 	}
 
-	public function milestone_list_block_render_callback($block, $content = '', $is_preview = false, $post_id = 0) {
+	public function milestone_list_block_render_callback( $block, $content = '', $is_preview = false, $post_id = 0 ) {
 
 		$id = 'milestone-list-' . $block['id'];
-		if ( !empty($block['anchor']) ) {
+		if ( ! empty( $block['anchor'] ) ) {
 			$id = $block['anchor'];
 		}
 
 		$classname = 'milestone-list';
-		if ( !empty($block['className']) ) {
+		if ( ! empty( $block['className'] ) ) {
 			$classname .= ' ' . $block['className'];
 		}
 
-		$categories = get_field('milestone_category');
-		$show_filter = get_field('milestone_filter_show');
-		$milestone_maxitems = get_field('milestone_maxitems');
+		$categories                    = get_field( 'milestone_category' );
+		$show_filter                   = get_field( 'milestone_filter_show' );
+		$milestone_maxitems            = get_field( 'milestone_maxitems' );
 		$milestone_categories_selected = [];
 
-		// Para los elementos
+		// Para los elementos.
 		$items = array();
 
-		// Obtenemos hitos
+		// Obtenemos hitos.
 		$query_args = array(
-			'post_type'	       => Wpcoreuvigo_Data::UV_POST_TYPE_MILESTONE,
+			'post_type'        => Wpcoreuvigo_Data::UV_POST_TYPE_MILESTONE,
 			// 'orderby'       => 'date',
 			// 'order'         => 'DESC',
 			'meta_key'         => 'milestone_date',
@@ -104,8 +132,8 @@ class Wpcoreuvigo_Public_Blocks {
 			'posts_per_page'   => $milestone_maxitems ? $milestone_maxitems : -1,
 		);
 
-		if (!empty($categories)) {
-			$show_filter = false;
+		if ( ! empty( $categories ) ) {
+			$show_filter             = false;
 			$query_args['tax_query'] = array(
 				array(
 					'taxonomy' => Wpcoreuvigo_Data::UV_TAXONOMY_MILESTONE_CATEGORY,
@@ -115,10 +143,10 @@ class Wpcoreuvigo_Public_Blocks {
 			);
 		}
 
-		if ($show_filter) {
-			if (!empty($_POST['milestone_category'])){
+		if ( $show_filter ) {
+			if ( ! empty( $_POST['milestone_category'] ) ) {
 				$milestone_categories_selected = $_POST['milestone_category'];
-				write_log($milestone_categories_selected);
+				write_log( $milestone_categories_selected );
 				$query_args['tax_query'] = array(
 					array(
 						'taxonomy' => Wpcoreuvigo_Data::UV_TAXONOMY_MILESTONE_CATEGORY,
@@ -131,15 +159,15 @@ class Wpcoreuvigo_Public_Blocks {
 
 		$items = get_posts( $query_args );
 
-		// Agrupamos en años
+		// Agrupamos en años.
 		$milestones_grouped = [];
-		foreach ($items as $milestone) {
-			$milestone_date = get_field('milestone_date', $milestone->ID);
-			$year = 'empty';
-			if ($milestone_date) {
-				$year = date('Y', strtotime($milestone_date));
+		foreach ( $items as $milestone ) {
+			$milestone_date = get_field( 'milestone_date', $milestone->ID );
+			$year           = 'empty';
+			if ( $milestone_date ) {
+				$year = date( 'Y', strtotime( $milestone_date ) );
 			}
-			$milestones_grouped[$year][] = $milestone;
+			$milestones_grouped[ $year ][] = $milestone;
 		}
 
 		$data = array(
@@ -151,25 +179,110 @@ class Wpcoreuvigo_Public_Blocks {
 			'milestone_maxitems' => $milestone_maxitems,
 		);
 
-		if ($show_filter) {
-			$data['categories'] = get_terms( array(
-				'taxonomy' => Wpcoreuvigo_Data::UV_TAXONOMY_MILESTONE_CATEGORY,
-				'hide_empty' => true,
-			) );
+		if ( $show_filter ) {
+			$data['categories']                    = get_terms(
+				array(
+					'taxonomy'   => Wpcoreuvigo_Data::UV_TAXONOMY_MILESTONE_CATEGORY,
+					'hide_empty' => true,
+				)
+			);
 			$data['milestone_categories_selected'] = $milestone_categories_selected;
 		}
 
-		$template = \App\locate_template('blocks/milestone-list');
+		$template = \App\locate_template( 'blocks/milestone-list' );
 
 		$output = '';
 
-		if ($template) {
-			$output = \App\template($template, $data);
+		if ( $template ) {
+			$output = \App\template( $template, $data );
 		} else {
-			$output = __('No template found', 'wpcoreuvigo');
+			$output = __( 'No template found', 'wpcoreuvigo' );
 		}
 
 		echo $output;
 	}
 
+	public function milestone_slider_block_render_callback( $block, $content = '', $is_preview = false, $post_id = 0 ) {
+
+		$id = 'milestone-slider-' . $block['id'];
+		if ( ! empty( $block['anchor'] ) ) {
+			$id = $block['anchor'];
+		}
+
+		$classname = 'milestone-slider';
+		if ( ! empty( $block['className'] ) ) {
+			$classname .= ' ' . $block['className'];
+		}
+
+		// Para los elementos.
+		$items = array();
+
+		// Obtenemos hitos.
+		$query_args = array(
+			'post_type'        => Wpcoreuvigo_Data::UV_POST_TYPE_MILESTONE,
+			'meta_key'         => 'milestone_date',
+			'orderby'          => 'meta_value',
+			'order'            => 'ASC',
+			'suppress_filters' => false,
+		);
+
+		$items = get_posts( $query_args );
+
+		$data = array(
+			'id'         => $id,
+			'classname'  => $classname,
+			'milestones' => $items,
+		);
+
+		$template = \App\locate_template( 'blocks/milestone-slider' );
+
+		$output = '';
+
+		if ( $template ) {
+			$output = \App\template( $template, $data );
+		} else {
+			$output = __( 'No template found', 'wpcoreuvigo' );
+		}
+
+		echo $output;
+	}
+
+	public function counter_block_render_callback( $block, $content = '', $is_preview = false, $post_id = 0 ) {
+
+		$id = 'counters-' . $block['id'];
+		if ( ! empty( $block['anchor'] ) ) {
+			$id = $block['anchor'];
+		}
+
+		$classname = 'counters';
+		if ( ! empty( $block['className'] ) ) {
+			$classname .= ' ' . $block['className'];
+		}
+
+		// Para los elementos.
+		$items = array();
+
+		$background = get_field( 'counters_background' );
+		$items      = get_field( 'counters_items' );
+
+		$data = array(
+			'items'      => $items,
+			'id'         => $id,
+			'classname'  => $classname,
+			'background' => $background,
+		);
+
+		$template = \App\locate_template( 'blocks/counters' );
+
+		$output = '';
+
+		if ( $template ) {
+			$output = \App\template( $template, $data );
+		} else {
+			$output = __( 'No template found', 'wpcoreuvigo' );
+		}
+
+		echo $output;
+	}
 }
+

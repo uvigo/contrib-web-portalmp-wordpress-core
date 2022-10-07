@@ -1,0 +1,139 @@
+[
+    {
+        "key": "group_62874ccdade3a",
+        "title": "Bloque Contadores",
+        "fields": [
+            {
+                "key": "field_62874cf163d0a",
+                "label": "Imaxe de fondo",
+                "name": "counters_background",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "wpml_cf_preferences": 0,
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_62874d25b6270",
+                "label": "Contadores",
+                "name": "counters_items",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "wpml_cf_preferences": 3,
+                "collapsed": "field_62874d70b6272",
+                "min": 0,
+                "max": 0,
+                "layout": "block",
+                "button_label": "Novo contador",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_62874d3fb6271",
+                        "label": "Número",
+                        "name": "counters_items_number",
+                        "type": "number",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "min": "",
+                        "max": "",
+                        "step": "",
+                        "wpml_cf_preferences": 0,
+                        "parent_repeater": "field_62874d25b6270"
+                    },
+                    {
+                        "key": "field_62874d70b6272",
+                        "label": "Título",
+                        "name": "counters_items_title",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "wpml_cf_preferences": 3,
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": "",
+                        "parent_repeater": "field_62874d25b6270"
+                    },
+                    {
+                        "key": "field_62874d81b6273",
+                        "label": "Descrición",
+                        "name": "counters_items_description",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "wpml_cf_preferences": 3,
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": "",
+                        "parent_repeater": "field_62874d25b6270"
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "block",
+                    "operator": "==",
+                    "value": "acf\/counters"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Bloque Contadores (wpcoreuvigo)",
+        "show_in_rest": 0
+    }
+]
