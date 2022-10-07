@@ -295,7 +295,7 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 		}
 
 		if ( $query->is_home() ) {
-			// write_log('pre_get_posts ------> WIDGET FILTER');
+			write_log('pre_get_posts ------> WIDGET FILTER');
 
 			$f_categories = get_query_var( self::F_CATEGORIES_FIELD_NAME );
 			if ( ! empty( $f_categories ) ) {

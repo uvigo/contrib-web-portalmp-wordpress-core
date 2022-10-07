@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="WordPress Project">
+<ruleset name="WordPress Project" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/phpcs.xsd">
 	<description>A custom set of rules to check for a WPized WordPress project</description>
 
 	<!-- Exclude WP Core folders and files from being checked.
@@ -55,14 +55,26 @@
 	-->
 	<config name="minimum_supported_wp_version" value="4.9"/>
 
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="wpcoreuvigo"/>
+			</property>
+		</properties>
+	</rule>
+
   	<!-- Allow braces on same line for named functions -->
+	<!--
  	<rule ref="Squiz.Functions.MultiLineFunctionDeclaration">
 		<exclude name="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine"/>
  	</rule>
+	-->
 
+	<!--
 	<rule ref="Squiz.Commenting.InlineComment">
 		<exclude name="Squiz.Commenting.InlineComment.InvalidEndChar"/>
 	</rule>
+	-->
 
 	<rule ref="Squiz.Commenting.FunctionComment">
 		<exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop"/>
