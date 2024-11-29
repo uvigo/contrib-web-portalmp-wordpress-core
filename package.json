@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "autoprefixer": "~8.2.0",
-    "bestzip": "^2.1.1",
+    "bestzip": "^2.1.7",
     "browser-sync": "^2.26.7",
     "browsersync-webpack-plugin": "^0.6.0",
     "bs-html-injector": "~3.0",
