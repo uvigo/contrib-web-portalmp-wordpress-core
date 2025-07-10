@@ -147,16 +147,16 @@ class Wpcoreuvigo_Data
 
 			$terms_path = array();
 
-			$term_id = get_field('uvigo_document_taxonomy', $post->ID);
+			$term_id = get_field( 'uvigo_document_taxonomy', $post->ID );
 
-			if ($term_id) {
+			if ( $term_id ) {
 				$term = get_term( $term_id, self::UV_TAXONOMY_DOCUMENT_TYPE_NAME );
 
 				$terms_path[] = $term->slug;
 
-				if ($term->parent) {
+				if ( $term->parent ) {
 					$term = get_term( $term->parent, self::UV_TAXONOMY_DOCUMENT_TYPE_NAME );
-					if ($term) {
+					if ( $term ) {
 						$terms_path[] = $term->slug;
 					}
 				}
@@ -164,13 +164,30 @@ class Wpcoreuvigo_Data
 				$terms_path = array_reverse( $terms_path );
 			}
 
-			if ( !empty( $terms_path ) ) {
-				return str_replace( 'documentos/', 'documentos/' . implode('/', $terms_path) . '/', $post_link );
+			if ( ! empty( $terms_path ) ) {
+
+				$url_path        = implode( '/', $terms_path );
+				$url_replacement = 'documentos/' . $url_path . '/';
+
+				// Chequeamos si la url que queremos editar ya contiene la ruta de las taxonomías.
+				$pattern = '#documentos/([a-z0-9\-]+(?:/[a-z0-9\-]+)?)/' . $post->post_name . '/?$#';
+
+				if ( preg_match( $pattern, $post_link, $matches ) ) {
+					$segment_taxonomy = $matches[1];
+					if ( $segment_taxonomy === $url_path ) {
+						return $post_link;
+					}
+				}
+
+				$link = str_replace( 'documentos/', $url_replacement, $post_link );
+
+				return $link;
 			}
 		}
 
 		return $post_link;
 	}
+
 
 	/**
 	 * Genera las reglas de redirección para los documentos que tienen en la url los tipos de documentos
