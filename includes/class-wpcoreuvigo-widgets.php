@@ -344,6 +344,7 @@ class Wpcoreuvigo_Filter_Widget extends WP_Widget {
 				}
 			}
 		}
+
 	}
 
 	/**
