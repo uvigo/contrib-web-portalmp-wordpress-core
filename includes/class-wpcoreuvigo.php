@@ -77,7 +77,6 @@ class Wpcoreuvigo {
 		$this->define_data_hooks();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-		$this->load_updater();
 
 	}
 
@@ -112,14 +111,6 @@ class Wpcoreuvigo {
 		 * core plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wpcoreuvigo-loader.php';
-
-		/**
-		 * Updater
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'updater/class-wpcoreuvigo-updater.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'updater/class-wpcoreuvigo-updater-boot.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'updater/class-wpcoreuvigo-updater-plugin.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'updater/class-wpcoreuvigo-updater-theme.php';
 
 		/**
 		 * The class responsible for defining data custom post
@@ -361,15 +352,6 @@ class Wpcoreuvigo {
 
 		$this->loader->add_action( 'acf/init', $plugin_blocks, 'register_blocks' );
 
-	}
-
-	private function load_updater() {
-		$plugin_updater = new WpcoreuvigoBoot(
-			[
-				'type'   => 'plugin',
-				'source' => 'https://github.com/uvigo/contrib-web-portalmp-wordpress-core',
-			]
-		);
 	}
 
 	/**
