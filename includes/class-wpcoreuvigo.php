@@ -322,6 +322,8 @@ class Wpcoreuvigo {
 		// Filtro Tipo de File
 		$this->loader->add_filter( 'wpcoreuvigo_acf_file_subtype_alias', $plugin_admin, 'wpcoreuvigo_acf_file_subtype_alias' );
 
+		// Añade una configuración de WP en la sección "reading"
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'add_wpcoreuvigo_reading_settings_field' );
 	}
 
 	/**

@@ -1240,4 +1240,53 @@ class Wpcoreuvigo_Admin {
 		return $file_type_alias;
 	}
 
+	/**
+	 * Añadir campo de configuración en Reading Settings
+	 *
+	 * @return void
+	 */
+	public function add_wpcoreuvigo_reading_settings_field() {
+
+		// Registrar la opción de configuración
+		register_setting( 'reading', 'wpcoreuvigo_page_events', array(
+			'type' => 'integer',
+			'sanitize_callback' => 'absint',
+			'default' => 10,
+		) );
+
+		// Añadir una nueva sección a la página de ajustes Reading
+		add_settings_section(
+			'wpcoreuvigo_pages_reading_section',
+			__('Pages for contents', 'wpcorethemewp'),
+			function() {
+				echo '<p>' . __('Sets the pages that display content.', 'wpcorethemewp') . '</p>';
+			},
+			'reading'
+		);
+
+		// Añadir el campo de configuración
+		add_settings_field(
+			'wpcoreuvigo_page_events',
+			__('Page for list Events', 'wpcorethemewp'),
+			function() {
+
+				// Obtener el valor de la opción de configuración
+				$value = get_option('wpcoreuvigo_page_events');
+
+				// Mostrar el selector de páginas
+				wp_dropdown_pages(array(
+					'name' => 'wpcoreuvigo_page_events',
+					'echo' => 1,
+					'show_option_none' => __('-- Select a page --', 'wpcorethemewp'),
+					'option_none_value' => '',
+					'selected' => $value
+				));
+
+			},
+			'reading',
+			'wpcoreuvigo_pages_reading_section'
+		);
+
+	}
+
 }
