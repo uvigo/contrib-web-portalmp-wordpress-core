@@ -68,7 +68,7 @@ class Wpcoreuvigo_Admin {
 		$this->menu_fields = array(
 			'openchild' => array(
 				'type'  => 'checkbox',
-				'label' => __( 'Link to first child item', 'wpcoreuvigo' ),
+				'label' => 'Link to first child item',
 				'value' => 'parent',
 			),
 		);
@@ -1257,9 +1257,9 @@ class Wpcoreuvigo_Admin {
 		// Añadir una nueva sección a la página de ajustes Reading
 		add_settings_section(
 			'wpcoreuvigo_pages_reading_section',
-			__('Pages for contents', 'wpcorethemewp'),
+			__('Pages for contents', 'wpcoreuvigo'),
 			function() {
-				echo '<p>' . __('Sets the pages that display content.', 'wpcorethemewp') . '</p>';
+				echo '<p>' . __('Sets the pages that display content.', 'wpcoreuvigo') . '</p>';
 			},
 			'reading'
 		);
@@ -1267,7 +1267,7 @@ class Wpcoreuvigo_Admin {
 		// Añadir el campo de configuración
 		add_settings_field(
 			'wpcoreuvigo_page_events',
-			__('Page for list Events', 'wpcorethemewp'),
+			__('Page for list Events', 'wpcoreuvigo'),
 			function() {
 
 				// Obtener el valor de la opción de configuración
@@ -1277,7 +1277,7 @@ class Wpcoreuvigo_Admin {
 				wp_dropdown_pages(array(
 					'name' => 'wpcoreuvigo_page_events',
 					'echo' => 1,
-					'show_option_none' => __('-- Select a page --', 'wpcorethemewp'),
+					'show_option_none' => __('-- Select a page --', 'wpcoreuvigo'),
 					'option_none_value' => '',
 					'selected' => $value
 				));
