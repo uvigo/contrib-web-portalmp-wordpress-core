@@ -1247,8 +1247,17 @@ class Wpcoreuvigo_Admin {
 	 */
 	public function add_wpcoreuvigo_reading_settings_field() {
 
+		// Obtener idioma actual de WPML
+		$current_language = apply_filters( 'wpml_current_language', null );
+
+		// Crear nombre de opción específico por idioma
+		$option_name = 'wpcoreuvigo_page_events';
+		if ($current_language) {
+			$option_name .= '_' . $current_language;
+		}
+
 		// Registrar la opción de configuración
-		register_setting( 'reading', 'wpcoreuvigo_page_events', array(
+		register_setting( 'reading', $option_name, array(
 			'type' => 'integer',
 			'sanitize_callback' => 'absint',
 			'default' => 10,
@@ -1266,16 +1275,16 @@ class Wpcoreuvigo_Admin {
 
 		// Añadir el campo de configuración
 		add_settings_field(
-			'wpcoreuvigo_page_events',
-			__('Page for list Events', 'wpcoreuvigo'),
-			function() {
+			$option_name,
+			__('Page for list Events', 'wpcoreuvigo') . ' (' . strtoupper($current_language) . ')',
+			function() use ($option_name) {
 
 				// Obtener el valor de la opción de configuración
-				$value = get_option('wpcoreuvigo_page_events');
+				$value = get_option($option_name);
 
 				// Mostrar el selector de páginas
 				wp_dropdown_pages(array(
-					'name' => 'wpcoreuvigo_page_events',
+					'name' => $option_name,
 					'echo' => 1,
 					'show_option_none' => __('-- Select a page --', 'wpcoreuvigo'),
 					'option_none_value' => '',
